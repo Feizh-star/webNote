@@ -627,7 +627,7 @@ $ git push origin master
 
 ##### (1) git pull
 
-1. 使用`git pull`之前，要先设置本地dev分支和远程dev分支的链接
+1. 使用`git pull`之前，要先设置本地dev分支和远程dev分支的链接（如果已经建立链接（即本来就可以git push origin dev），则忽略这一步）
 
    ```
    $ git branch --set-upstream-to=origin/dev dev
