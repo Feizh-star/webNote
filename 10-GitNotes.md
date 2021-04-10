@@ -137,7 +137,7 @@ $ git commit -m "wrote a readme file"
 $ git reset --hard HEAD^
 ```
 
-  `--hard`参数：
+  `--hard`参数：回退到指定版本后，用其内容更新 缓冲区和工作区（没有--hard的话，只会更新缓冲区）
 
   也可以通过版本号跳到指定的版本，版本号没必要写全，前几位就可以了，Git会自动去找。：
 
