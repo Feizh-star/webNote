@@ -1,0 +1,668 @@
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.9.0">
+    <title>Vue.js</title>
+    <meta charset=utf-8"utf-8">
+    <meta name="description" content="Vue.js - The Progressive JavaScript Framework">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="alternate" hreflang="x-default" href="https://vuejs.org/support-vuejs/index.html">
+    <link rel="alternate" hreflang="zh" href="https://cn.vuejs.org/support-vuejs/index.html">
+    <link rel="alternate" hreflang="ja" href="https://jp.vuejs.org/support-vuejs/index.html">
+    <link rel="alternate" hreflang="ru" href="https://ru.vuejs.org/support-vuejs/index.html">
+    <link rel="alternate" hreflang="ko" href="https://kr.vuejs.org/support-vuejs/index.html">
+    <link rel="alternate" hreflang="pt-BR" href="https://br.vuejs.org/support-vuejs/index.html">
+    <link rel="alternate" hreflang="fr" href="https://fr.vuejs.org/support-vuejs/index.html">
+    <link rel="alternate" hreflang="es" href="https://es.vuejs.org/support-vuejs/index.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Vue.js">
+    <meta property="og:description" content="Vue.js - The Progressive JavaScript Framework">
+    <meta property="og:image" content="https://cn.vuejs.org//images/logo.png">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Vue.js">
+    <meta name="twitter:description" content="Vue.js - The Progressive JavaScript Framework">
+    <meta name="twitter:image" content="https://cn.vuejs.org/images/logo.png">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/images/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/images/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+    <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
+    <link rel="icon" href="/images/logo.png" type="image/png">
+
+    <meta name="msapplication-TileColor" content="#4fc08d">
+    <meta name="theme-color" content="#4fc08d">
+
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- <link href="https://fonts.googleapis.com" rel="preconnect" crossorigin> -->
+    <!-- <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin> -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com" rel="preconnect" crossorigin> -->
+
+    <!-- <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono" rel="stylesheet"> -->
+    <!-- <link href="//fonts.googleapis.com/css?family=Dosis:500&text=Vue.js" rel="stylesheet"> -->
+
+    <link href="../../code.bdstatic.com/npm/font-awesome@4.7.0/css/font-awesome.min.css" tppabs="https://code.bdstatic.com/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- main page styles -->
+    <link rel="stylesheet" href="../css/page.css" tppabs="https://cn.vuejs.org/css/page.css">
+
+    <!-- this needs to be loaded before guide's inline scripts -->
+    <script src="../js/vue.js" tppabs="https://cn.vuejs.org/js/vue.js"></script>
+
+    
+
+    <script>
+      Vue.config.productionTip = false
+      window.PAGE_TYPE = "sponsors"
+    </script>
+
+    <!-- ga -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-46852172-3', 'https://cn.vuejs.org/support-vuejs/cn.vuejs.org');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body class="docs">
+    <div id="mobile-bar">
+      <a class="menu-button"></a>
+      <a class="logo" href="../index-1.htm" tppabs="https://cn.vuejs.org/"></a>
+    </div>
+    <header id="header">
+  <a id="logo" href="../index-1.htm" tppabs="https://cn.vuejs.org/">
+    <img src="../images/logo.png" tppabs="https://cn.vuejs.org/images/logo.png" alt="vue logo">
+    <span>Vue.js</span>
+  </a>
+  <ul id="nav">
+    <li>
+  <form id="search-form">
+    <input type="text" id="search-query-nav" class="search-query st-default-search-input" aria-label="æœç´¢">
+  </form>
+</li>
+<li class="nav-dropdown-container learn">
+  <a class="nav-link">å­¦ä¹ </a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><h4>æ–‡æ¡£</h4></li>
+    <li>
+      <ul>
+        <li><a href="../v2/guide/index.htm" tppabs="https://cn.vuejs.org/v2/guide/" class="nav-link">æ•™ç¨‹</a></li>
+        <li><a href="../v2/api/index.htm" tppabs="https://cn.vuejs.org/v2/api/" class="nav-link">API</a></li>
+        <li><a href="../v2/style-guide/index.htm" tppabs="https://cn.vuejs.org/v2/style-guide/" class="nav-link">é£æ ¼æŒ‡å—</a></li>
+        <li><a href="javascript:if(confirm('https://cn.vuejs.org/v2/examples/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ²»¿ÉÓÃ, »ò·ÅÆúÁËÏÂÔØ, »òÏîÄ¿¼´½«Í£Ö¹¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://cn.vuejs.org/v2/examples/'" tppabs="https://cn.vuejs.org/v2/examples/" class="nav-link">ç¤ºä¾‹</a></li>
+        <li><a href="../v2/cookbook/index.htm" tppabs="https://cn.vuejs.org/v2/cookbook/" class="nav-link">Cookbook</a></li>
+      </ul>
+    </li>
+    <li><h4>è§†é¢‘æ•™ç¨‹</h4></li>
+    <li>
+      <ul>
+        <li><a href="javascript:if(confirm('https://www.vuemastery.com/courses/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://www.vuemastery.com/courses/'" tppabs="https://www.vuemastery.com/courses/" class="nav-link" target="_blank" rel="sponsored noopener">Vue Mastery (è‹±æ–‡)</a></li>
+        <li><a href="javascript:if(confirm('https://vueschool.io/?friend=vuejs&utm_source=Vuejs.org&utm_medium=Link&utm_content=Navbar%20Dropdown  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://vueschool.io/?friend=vuejs&utm_source=Vuejs.org&utm_medium=Link&utm_content=Navbar%20Dropdown'" tppabs="https://vueschool.io/?friend=vuejs&utm_source=Vuejs.org&utm_medium=Link&utm_content=Navbar%20Dropdown" class="nav-link" target="_blank" rel="noopener">Vue School (è‹±æ–‡)</a></li>
+        <li><a href="javascript:if(confirm('https://learning.dcloud.io/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://learning.dcloud.io/'" tppabs="https://learning.dcloud.io/" class="nav-link" target="_blank" rel="sponsored noopener">DCloud è§†é¢‘æ•™ç¨‹</a></li>
+      </ul>
+    </li>
+  </ul>
+</li>
+
+<li class="nav-dropdown-container ecosystem">
+  <a class="nav-link">ç”Ÿæ€ç³»ç»Ÿ</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><h4>å¸®åŠ©</h4></li>
+    <li><ul>
+      <li><a href="javascript:if(confirm('https://forum.vuejs.org/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://forum.vuejs.org/'" tppabs="https://forum.vuejs.org/" class="nav-link" target="_blank" rel="noopener">è®ºå›</a></li>
+      <li><a href="javascript:if(confirm('https://chat.vuejs.org/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://chat.vuejs.org/'" tppabs="https://chat.vuejs.org/" class="nav-link" target="_blank" rel="noopener">èŠå¤©å®¤</a></li>
+      <li><a href="javascript:if(confirm('https://events.vuejs.org/meetups/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://events.vuejs.org/meetups/'" tppabs="https://events.vuejs.org/meetups/" class="nav-link" target="_blank" rel="noopener">èšä¼š</a></li>
+    </ul></li>
+    <li><h4>å·¥å…·</h4></li>
+    <li>
+      <ul>
+        <li><a href="javascript:if(confirm('https://github.com/vuejs/vue-devtools  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/vuejs/vue-devtools'" tppabs="https://github.com/vuejs/vue-devtools" class="nav-link" target="_blank" rel="noopener">Devtools</a></li>
+        <li><a href="javascript:if(confirm('https://cli.vuejs.org/zh/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://cli.vuejs.org/zh/'" tppabs="https://cli.vuejs.org/zh/" class="nav-link" target="_blank" rel="noopener">Vue CLI</a></li>
+        <li><a href="javascript:if(confirm('https://vue-loader.vuejs.org/zh/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://vue-loader.vuejs.org/zh/'" tppabs="https://vue-loader.vuejs.org/zh/" class="nav-link" target="_blank" rel="noopener">Vue Loader</a></li>
+      </ul>
+    </li>
+    <li><h4>æ ¸å¿ƒæ’ä»¶</h4></li>
+    <li><ul>
+      <li><a href="javascript:if(confirm('https://router.vuejs.org/zh/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://router.vuejs.org/zh/'" tppabs="https://router.vuejs.org/zh/" class="nav-link" target="_blank" rel="noopener">Vue Router</a></li>
+      <li><a href="javascript:if(confirm('https://vuex.vuejs.org/zh/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://vuex.vuejs.org/zh/'" tppabs="https://vuex.vuejs.org/zh/" class="nav-link" target="_blank" rel="noopener">Vuex</a></li>
+      <li><a href="javascript:if(confirm('https://ssr.vuejs.org/zh/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://ssr.vuejs.org/zh/'" tppabs="https://ssr.vuejs.org/zh/" class="nav-link" target="_blank" rel="noopener">Vue æœåŠ¡ç«¯æ¸²æŸ“</a></li>
+    </ul></li>
+    <li><h4>ä¿¡æ¯</h4></li>
+    <li><ul>
+      <li><a href="javascript:if(confirm('https://news.vuejs.org/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://news.vuejs.org/'" tppabs="https://news.vuejs.org/" class="nav-link" target="_blank" rel="noopener">å‘¨åˆŠ</a></li>
+      <li><a href="javascript:if(confirm('https://github.com/vuejs/vue/projects/6  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/vuejs/vue/projects/6'" tppabs="https://github.com/vuejs/vue/projects/6" class="nav-link" target="_blank" rel="noopener">Roadmap</a></li>
+      <li><a href="javascript:if(confirm('https://events.vuejs.org/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://events.vuejs.org/'" tppabs="https://events.vuejs.org/" class="nav-link" target="_blank" rel="noopener">æ´»åŠ¨</a></li>
+      <li><a href="javascript:if(confirm('https://twitter.com/vuejs  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://twitter.com/vuejs'" tppabs="https://twitter.com/vuejs" class="nav-link" target="_blank" rel="noopener">Twitter</a></li>
+      <li><a href="javascript:if(confirm('https://medium.com/the-vue-point  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://medium.com/the-vue-point'" tppabs="https://medium.com/the-vue-point" class="nav-link" target="_blank" rel="noopener">åšå®¢</a></li>
+      <li><a href="javascript:if(confirm('https://vuejobs.com/?ref=vuejs  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://vuejobs.com/?ref=vuejs'" tppabs="https://vuejobs.com/?ref=vuejs" class="nav-link" target="_blank" rel="noopener">å·¥ä½œ</a></li>
+    </ul></li>
+  </ul>
+</li>
+
+<li>
+  <a href="../v2/guide/team.html" tppabs="https://cn.vuejs.org/v2/guide/team.html" class="nav-link team">å›¢é˜Ÿ</a>
+</li>
+<li class="nav-dropdown-container resources">
+  <a href="#" class="nav-link">èµ„æºåˆ—è¡¨</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><a href="../resources/partners.html" tppabs="https://cn.vuejs.org/resources/partners.html" class="nav-link">åˆä½œä¼™ä¼´</a></li>
+    <li><a href="../resources/themes.html" tppabs="https://cn.vuejs.org/resources/themes.html" class="nav-link">ä¸»é¢˜</a></li>
+    <li><a href="javascript:if(confirm('https://github.com/vuejs/awesome-vue  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/vuejs/awesome-vue'" tppabs="https://github.com/vuejs/awesome-vue" class="nav-link" target="_blank" rel="noopener">Awesome Vue</a></li>
+    <li><a href="javascript:if(confirm('https://awesomejs.dev/for/vue/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://awesomejs.dev/for/vue/'" tppabs="https://awesomejs.dev/for/vue/" class="nav-link" target="_blank" rel="noopener">æµè§ˆå’Œ Vue ç›¸å…³çš„åŒ…</a></li>
+  </ul>
+</li>
+
+<!-- <li>
+  <a href="/partners" class="nav-link ">Partners</a>
+</li> -->
+<li class="nav-dropdown-container support-vue">
+  <a href="index.htm" tppabs="https://cn.vuejs.org/support-vuejs/" class="nav-link">æ”¯æŒ Vue</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><a href="index.htm#One-time-Donations" tppabs="https://cn.vuejs.org/support-vuejs/#One-time-Donations" class="nav-link">ä¸€æ¬¡æ€§èµåŠ©</a></li>
+    <li><a href="index.htm#Recurring-Pledges" tppabs="https://cn.vuejs.org/support-vuejs/#Recurring-Pledges" class="nav-link">å‘¨æœŸæ€§èµåŠ©</a></li>
+    <li><a href="javascript:if(confirm('https://www.smallsticker.com/%E8%B4%B4%E7%BA%B8/vue.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://www.smallsticker.com/%E8%B4%B4%E7%BA%B8/vue.html'" tppabs="https://www.smallsticker.com/%E8%B4%B4%E7%BA%B8/vue.html" rel="noopener" class="nav-link">è´´çº¸</a></li>
+    <li><a href="javascript:if(confirm('https://osholic.com/?utm_source=vue&utm_medium=dropdown  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://osholic.com/?utm_source=vue&utm_medium=dropdown'" tppabs="https://osholic.com/?utm_source=vue&utm_medium=dropdown" rel="noopener" class="nav-link">å‘¨è¾¹</a></li>
+    <li><a href="javascript:if(confirm('https://vue.threadless.com/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://vue.threadless.com/'" tppabs="https://vue.threadless.com/" target="_blank" rel="noopener" class="nav-link">T æ¤å•†åº—</a></li>
+  </ul>
+</li>
+
+<li class="nav-dropdown-container language">
+  <a class="nav-link">å¤šè¯­è¨€</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><a href="javascript:if(confirm('https://vuejs.org/support-vuejs/index.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://vuejs.org/support-vuejs/index.html'" tppabs="https://vuejs.org/support-vuejs/index.html" class="nav-link">English</a></li>
+    <li><a href="javascript:if(confirm('https://jp.vuejs.org/support-vuejs/index.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://jp.vuejs.org/support-vuejs/index.html'" tppabs="https://jp.vuejs.org/support-vuejs/index.html" class="nav-link">æ—¥æœ¬èª</a></li>
+    <li><a href="javascript:if(confirm('https://ru.vuejs.org/support-vuejs/index.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://ru.vuejs.org/support-vuejs/index.html'" tppabs="https://ru.vuejs.org/support-vuejs/index.html" class="nav-link">Ğ ÑƒÑÑĞºĞ¸Ğ¹</a></li>
+    <li><a href="javascript:if(confirm('https://kr.vuejs.org/support-vuejs/index.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://kr.vuejs.org/support-vuejs/index.html'" tppabs="https://kr.vuejs.org/support-vuejs/index.html" class="nav-link">í•œêµ­ì–´</a></li>
+    <li><a href="javascript:if(confirm('https://br.vuejs.org/support-vuejs/index.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://br.vuejs.org/support-vuejs/index.html'" tppabs="https://br.vuejs.org/support-vuejs/index.html" class="nav-link">PortuguÃªs</a></li>
+    <li><a href="javascript:if(confirm('https://fr.vuejs.org/support-vuejs/index.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://fr.vuejs.org/support-vuejs/index.html'" tppabs="https://fr.vuejs.org/support-vuejs/index.html" class="nav-link">FranÃ§ais</a></li>
+    <li><a href="javascript:if(confirm('https://vi.vuejs.org/support-vuejs/index.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://vi.vuejs.org/support-vuejs/index.html'" tppabs="https://vi.vuejs.org/support-vuejs/index.html" class="nav-link">Tiáº¿ng Viá»‡t</a></li>
+    <li><a href="javascript:if(confirm('https://es.vuejs.org/support-vuejs/index.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://es.vuejs.org/support-vuejs/index.html'" tppabs="https://es.vuejs.org/support-vuejs/index.html" class="nav-link">EspaÃ±ol</a></li>
+    <li><a href="javascript:if(confirm('https://docs.vuejs.id/support-vuejs/index.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://docs.vuejs.id/support-vuejs/index.html'" tppabs="https://docs.vuejs.id/support-vuejs/index.html" class="nav-link">Bahasa Indonesia</a></li>
+  </ul>
+</li>
+
+<li><a href="javascript:if(confirm('https://github.com/vuejs/cn.vuejs.org/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/vuejs/cn.vuejs.org/'" tppabs="https://github.com/vuejs/cn.vuejs.org/" target="_blank" class="nav-link contribute">å‚ä¸ç¿»è¯‘</a></li>
+
+  </ul>
+</header>
+
+    
+      <div id="main" class="fix-sidebar">
+        
+  
+
+<div class="sidebar">
+  <div class="sidebar-inner">
+    
+    <div class="list">
+      <div id="sidebar-sponsors-special">
+  <div class="main-sponsor">
+    <span>ç‰¹åˆ«èµåŠ©å•†</span>
+    <div>
+    <a href="javascript:if(confirm('http://www.dcloud.io/?hmsr=vuejsorg&hmpl=&hmcu=&hmkw=&hmci=  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.dcloud.io/?hmsr=vuejsorg&hmpl=&hmcu=&hmkw=&hmci='" tppabs="http://www.dcloud.io/?hmsr=vuejsorg&hmpl=&hmcu=&hmkw=&hmci=" target="_blank" rel="sponsored noopener" class="logo">
+      <img id="s-dcloud" alt="dcloud">
+      <script>
+      (function(){
+        var el = document.getElementById("s-dcloud");
+        var adImg = null;
+        var altImg = "../images/dcloud2.png"/*tpa=https://cn.vuejs.org/images/dcloud2.png*/;
+        var img = "../images/dcloud1.png"/*tpa=https://cn.vuejs.org/images/dcloud1.png*/;
+        el.src = adImg || (altImg && Math.random() >= 0.5 ? altImg : img);
+      })()
+      </script>
+    </a>
+    </div>
+    <div>
+    <a href="javascript:if(confirm('https://coding.imooc.com/?c=vuejs&mc_marking=7cf403c3c89d6fccf944791e71e7a959&mc_channel=vuezwsq  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://coding.imooc.com/?c=vuejs&mc_marking=7cf403c3c89d6fccf944791e71e7a959&mc_channel=vuezwsq'" tppabs="https://coding.imooc.com/?c=vuejs&mc_marking=7cf403c3c89d6fccf944791e71e7a959&mc_channel=vuezwsq" target="_blank" rel="sponsored noopener" class="logo">
+      <img id="s-imooc" alt="imooc">
+      <script>
+      (function(){
+        var el = document.getElementById("s-imooc");
+        var adImg = "../images/imooc-sponsor2.png"/*tpa=https://cn.vuejs.org/images/imooc-sponsor2.png*/;
+        var altImg = null;
+        var img = "../images/imooc-sponsor.png"/*tpa=https://cn.vuejs.org/images/imooc-sponsor.png*/;
+        el.src = adImg || (altImg && Math.random() >= 0.5 ? altImg : img);
+      })()
+      </script>
+    </a>
+    </div>
+  </div>
+</div>
+<!--
+
+-->
+
+      
+        <h2>
+          
+          
+          
+            <select class="version-select">
+              <option value="v3">3.x-beta</option>
+              <option value="SELF" selected>2.x</option>
+              <option value="v1">1.0</option>
+              <option value="012">0.12</option>
+              <option value="011">0.11</option>
+            </select>
+          
+        </h2>
+        <ul class="menu-root">
+  
+    
+    
+    <li>
+      <a href="javascript:if(confirm('https://cn.vuejs.org/support-vuejs/index.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ²»¿ÉÓÃ, »ò·ÅÆúÁËÏÂÔØ, »òÏîÄ¿¼´½«Í£Ö¹¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://cn.vuejs.org/support-vuejs/index.html'" tppabs="https://cn.vuejs.org/support-vuejs/index.html" class="sidebar-link current"></a>
+    </li>
+  
+</ul>
+
+      
+    </div>
+  </div>
+</div>
+<!--
+
+-->
+
+
+<div class="content sponsors with-sidebar ">
+  
+    
+      
+
+    
+  
+  
+
+  <div class="ad-pagetop">
+  <a href="javascript:if(confirm('http://www.vueshop.com.cn/index.php?http_referer=vuejs  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.vueshop.com.cn/index.php?http_referer=vuejs'" tppabs="http://www.vueshop.com.cn/index.php?http_referer=vuejs" target="_blank" rel="noopener noreferrer">
+    <span class="name">VUEshop</span>
+    <span class="description">ä¸­å›½å…è´¹å•†åŸç³»ç»Ÿ - æœè±¹å•†åŸç³»ç»Ÿ - å…è´¹50å°æ—¶ Vue è§†é¢‘æ•™ç¨‹</span>
+    <span class="action">ç«‹å³æŸ¥çœ‹ &gt;</span>
+  </a>
+</div>
+
+
+  
+    <h1 id="sponsor-Vue-js-Development">èµåŠ© Vue.js çš„ç ”å‘</h1>
+
+<p>
+Vue.js æ˜¯é‡‡ç”¨ MIT è®¸å¯çš„å¼€æºé¡¹ç›®ï¼Œä½¿ç”¨å®Œå…¨å…è´¹ã€‚
+ä½†æ˜¯éšç€é¡¹ç›®è§„æ¨¡çš„å¢é•¿ï¼Œä¹Ÿéœ€è¦æœ‰ç›¸åº”çš„èµ„é‡‘æ”¯æŒæ‰èƒ½æŒç»­é¡¹ç›®çš„ç»´æŠ¤çš„å¼€å‘ã€‚ä½ å¯ä»¥é€šè¿‡ä¸‹åˆ—çš„æ–¹æ³•æ¥èµåŠ© Vue.js çš„å¼€å‘ã€‚
+</p>
+
+<h2 id="One-time-Donations">ä¸€æ¬¡æ€§èµåŠ©</h2>
+
+<p>æˆ‘ä»¬é€šè¿‡ä»¥ä¸‹æ–¹å¼æ¥å—èµåŠ©ï¼š</p>
+
+<div id="one-time-donations">
+  <a href="javascript:if(confirm('https://www.paypal.me/evanyou  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://www.paypal.me/evanyou'" tppabs="https://www.paypal.me/evanyou" target="_blank" rel="noopener">
+    <img src="../images/paypal.png" tppabs="https://cn.vuejs.org/images/paypal.png" style="width:100px">
+  </a>
+  <a href="#btc"><svg width="38" height="38" viewbox="0 0 38 38" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><circle fill="#FFAD02" cx="19" cy="19" r="19"/><path d="M24.7 19.68a3.63 3.63 0 0 0 1.47-2.06c.74-2.77-.46-4.87-3.2-5.6l.89-3.33a.23.23 0 0 0-.16-.28l-1.32-.35a.23.23 0 0 0-.28.15l-.89 3.33-1.75-.47.88-3.32a.23.23 0 0 0-.16-.28l-1.31-.35a.23.23 0 0 0-.28.15l-.9 3.33-3.73-1a.23.23 0 0 0-.27.16l-.36 1.33c-.03.12.04.25.16.28l.22.06a1.83 1.83 0 0 1 1.28 2.24l-1.9 7.09a1.83 1.83 0 0 1-2.07 1.33.23.23 0 0 0-.24.12l-.69 1.24a.23.23 0 0 0 0 .2c.02.07.07.12.14.13l3.67.99-.89 3.33c-.03.12.04.24.16.27l1.32.35c.12.03.24-.04.28-.16l.89-3.32 1.76.47-.9 3.33c-.02.12.05.24.16.27l1.32.35c.12.03.25-.04.28-.16l.9-3.32.87.23c2.74.74 4.83-.48 5.57-3.25.35-1.3-.05-2.6-.92-3.48zm-5.96-5.95l2.64.7a1.83 1.83 0 0 1 1.28 2.24 1.83 1.83 0 0 1-2.23 1.3l-2.64-.7.95-3.54zm1.14 9.8l-3.51-.95.95-3.54 3.51.94a1.83 1.83 0 0 1 1.28 2.24 1.83 1.83 0 0 1-2.23 1.3z" fill="#FFF"/></g></svg>
+ BTC</a>
+  <a href="#bch"><svg width="38" height="38" viewbox="0 0 38 38" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><circle fill="#8DC451" cx="19" cy="19" r="19"/><path d="M24.5 16.72c.37-.76.48-1.64.25-2.52-.75-2.76-2.84-3.98-5.58-3.25l-.89-3.32a.23.23 0 0 0-.28-.16l-1.32.35a.23.23 0 0 0-.16.27l.9 3.33-1.76.47-.9-3.32a.23.23 0 0 0-.27-.16l-1.32.35a.23.23 0 0 0-.16.28l.9 3.32-3.74 1a.23.23 0 0 0-.16.29l.35 1.32c.04.12.16.2.28.17l.22-.06c.97-.26 1.97.32 2.23 1.3l1.9 7.08c.25.93-.25 1.87-1.13 2.2a.23.23 0 0 0-.14.21l.02 1.43c0 .07.04.13.1.18.05.04.12.05.19.04l3.67-.99.9 3.33c.03.12.15.19.27.15l1.31-.35c.12-.03.2-.16.16-.28l-.88-3.32 1.75-.47.9 3.33c.03.12.15.19.27.15l1.32-.35c.12-.03.19-.16.16-.28l-.9-3.32.88-.24c2.75-.73 3.95-2.83 3.2-5.6a3.63 3.63 0 0 0-2.54-2.56zm-8.13-2.17l2.63-.7c.97-.26 1.97.32 2.23 1.3.27.97-.3 1.98-1.28 2.24l-2.63.7-.95-3.54zm5.88 7.91l-3.5.94-.96-3.54 3.51-.94c.97-.26 1.97.32 2.24 1.3.26.98-.32 1.98-1.29 2.24z" fill="#FFF"/></g></svg>
+ BCH</a>
+  <a href="#eth"><svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewbox="0 0 32 32"><g fill="none" fill-rule="evenodd"><ellipse cx="16" cy="16" fill="#6F7CBA" rx="16" ry="16"/><path fill="#FFF" d="M10.13 17.76c-.1-.15-.06-.2.09-.12l5.49 3.09c.15.08.4.08.56 0l5.58-3.08c.16-.08.2-.03.1.11L16.2 25.9c-.1.15-.28.15-.38 0l-5.7-8.13zm.04-2.03a.3.3 0 0 1-.13-.42l5.74-9.2c.1-.15.25-.15.34 0l5.77 9.19c.1.14.05.33-.12.41l-5.5 2.78a.73.73 0 0 1-.6 0l-5.5-2.76z"/></g></svg>
+ ETH</a>
+  <a href="#ltc"><svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewbox="0 0 38 38"><g fill="none" fill-rule="evenodd"><circle cx="19" cy="19" r="19" fill="#B5B5B5" fill-rule="nonzero"/><path fill="#FFF" d="M12.29 28.04l1.29-5.52-1.58.67.63-2.85 1.64-.68L16.52 10h5.23l-1.52 7.14 2.09-.74-.58 2.7-2.05.8-.9 4.34h8.1l-.99 3.8z"/></g></svg>
+ LTC</a>
+</div>
+
+<div id="coin-details" v-if="type && coins[type]">
+  <p>{{ coins[type].name }} Address:<br>{{ coins[type].address }}</p>
+  <img :src="'/images/coin-' + type + '.png'" tppabs="https://cn.vuejs.org/support-vuejs/'/images/coin-' + type + '.png'">
+</div>
+<script>
+var coins = new Vue({
+  el: '#coin-details',
+  data: {
+    type: window.location.hash.slice(1),
+    coins: {
+      btc: {
+        name: 'Bitcoin',
+        address: '14MEpy5a9MwDZa9CUzrfDhTU8dy2KKJ5mU'
+      },
+      bch: {
+        name: 'Bitcoin Cash',
+        address: '15gftB3fwumFRWGWFhVzTgc4nhM5w1F2Tu'
+      },
+      eth: {
+        name: 'Ethereum',
+        address: '0x3411356C1f0Bf5D859464eD2AC54DD2C222519B7'
+      },
+      ltc: {
+        name: 'Litecoin',
+        address: 'LUcHis3B8SFtEeZtuCaZoqsyN9XFAKmbCP'
+      }
+    }
+  }
+})
+window.addEventListener('hashchange', function () {
+  coins.type = window.location.hash.slice(1)
+})
+</script>
+
+<h2 id="Sticker">è´­ä¹°è´´çº¸</h2>
+
+ä½ ä¹Ÿå¯ä»¥é€šè¿‡ <a href="javascript:if(confirm('https://www.smallsticker.com/%E8%B4%B4%E7%BA%B8/vue.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://www.smallsticker.com/%E8%B4%B4%E7%BA%B8/vue.html'" tppabs="https://www.smallsticker.com/%E8%B4%B4%E7%BA%B8/vue.html" target="_blank" rel="noopener">è´­ä¹°æˆ‘ä»¬å®˜æ–¹æˆæƒçš„è´´çº¸</a> çš„æ–¹å¼æ¥æ”¯æŒ Vue - æ¯å”®å‡ºä¸€å¼ è´´çº¸ï¼Œæˆ‘ä»¬å°†è·å¾— 2 å…ƒçš„æèµ ã€‚
+
+<h2 id="Merchandise">è´­ä¹°å‘¨è¾¹</h2>
+
+åŒæ ·ï¼Œè´­ä¹°æˆ‘ä»¬ <a href="javascript:if(confirm('https://osholic.com/?utm_source=vue&utm_medium=support_page  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://osholic.com/?utm_source=vue&utm_medium=support_page'" tppabs="https://osholic.com/?utm_source=vue&utm_medium=support_page" target="_blank" rel="noopener">å®˜æ–¹æˆæƒçš„å‘¨è¾¹äº§å“</a>ï¼Œä¹Ÿæ˜¯æ”¯æŒ Vue çš„ä¸€ç§æ–¹å¼ - æ¯å”®å‡ºä¸€ä»¶å‘¨è¾¹ï¼Œæˆ‘ä»¬å°†è·å¾—å”®ä»· 10% çš„æèµ ã€‚
+
+<h2 id="Recurring-Pledges">å‘¨æœŸæ€§èµåŠ©</h2>
+
+<p>
+å‘¨æœŸæ€§èµåŠ©å¯ä»¥è·å¾—é¢å¤–çš„å›æŠ¥ï¼Œæ¯”å¦‚ä½ çš„åå­—ä¼šå‡ºç°åœ¨ Vue çš„ GitHub ä»“åº“ä¸­ï¼Œå†æ¯”å¦‚ä½ çš„å…¬å¸ logo ä¼šå‡ºç°åœ¨æˆ‘ä»¬çš„å®˜ç½‘ä¸Šã€‚
+</p>
+
+<ul>
+  <li>
+    <a href="javascript:if(confirm('https://www.patreon.com/evanyou  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://www.patreon.com/evanyou'" tppabs="https://www.patreon.com/evanyou" target="_blank" rel="noopener">é€šè¿‡ Patreon èµåŠ©</a> (ç›´æ¥æ”¯æŒ Evan You å…¨èŒä¸º Vue å·¥ä½œ)
+  </li>
+  <li>
+    <a href="javascript:if(confirm('https://opencollective.com/vuejs  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://opencollective.com/vuejs'" tppabs="https://opencollective.com/vuejs">é€šè¿‡ OpenCollective èµåŠ©</a> (åŠ å…¥ä¸€ä¸ªåŸºé‡‘ä¼šï¼Œé€šè¿‡é€æ˜çš„è´¹ç”¨æ¨¡å‹æ”¯æŒç¤¾åŒºçš„å·¥ä½œå’Œæ´»åŠ¨)
+  </li>
+</ul>
+
+<h2 id="current-premium-sponsors">å½“å‰çš„é¡¶çº§èµåŠ©å•†</h2>
+
+<h3 id="special-sponsors">ç‰¹åˆ«èµåŠ©å•†</h3>
+
+<p class="platinum">
+  <a href="javascript:if(confirm('https://autocode.com/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://autocode.com/'" tppabs="https://autocode.com/" target="_blank" rel="noopener">
+    <img src="../images/autocode.svg" tppabs="https://cn.vuejs.org/images/autocode.svg">
+  </a>
+</p>
+
+<h3 id="special-sponsor-china">ä¸­å›½åŒºç‰¹åˆ«èµåŠ©å•†</h3>
+
+
+<p class="platinum">
+  <a href="javascript:if(confirm('http://www.dcloud.io/?hmsr=vuejsorg&hmpl=&hmcu=&hmkw=&hmci=  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.dcloud.io/?hmsr=vuejsorg&hmpl=&hmcu=&hmkw=&hmci='" tppabs="http://www.dcloud.io/?hmsr=vuejsorg&hmpl=&hmcu=&hmkw=&hmci=" target="_blank">
+    <img src="../images/dcloud1.png" tppabs="https://cn.vuejs.org/images/dcloud1.png">
+  </a>
+  <a href="javascript:if(confirm('https://coding.imooc.com/?c=vuejs&mc_marking=7cf403c3c89d6fccf944791e71e7a959&mc_channel=vuezwsq  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://coding.imooc.com/?c=vuejs&mc_marking=7cf403c3c89d6fccf944791e71e7a959&mc_channel=vuezwsq'" tppabs="https://coding.imooc.com/?c=vuejs&mc_marking=7cf403c3c89d6fccf944791e71e7a959&mc_channel=vuezwsq" target="_blank">
+    <img src="../images/imooc-sponsor.png" tppabs="https://cn.vuejs.org/images/imooc-sponsor.png">
+  </a>
+</p>
+
+
+<h3 id="platinum">Patreon ç™½é‡‘èµåŠ©å•†</h3>
+
+<p class="platinum">
+  <a href="javascript:if(confirm('https://vueschool.io/?utm_source=Vuejs.org&utm_medium=Banner&utm_campaign=Sponsored%20Banner&utm_content=V1  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://vueschool.io/?utm_source=Vuejs.org&utm_medium=Banner&utm_campaign=Sponsored%20Banner&utm_content=V1'" tppabs="https://vueschool.io/?utm_source=Vuejs.org&utm_medium=Banner&utm_campaign=Sponsored%20Banner&utm_content=V1" target="_blank" rel="noopener">
+    <img src="../images/vueschool.png" tppabs="https://cn.vuejs.org/images/vueschool.png">
+  </a>
+  <a href="javascript:if(confirm('https://vehikl.com/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://vehikl.com/'" tppabs="https://vehikl.com/" target="_blank" rel="noopener">
+    <img src="../images/vehikl.png" tppabs="https://cn.vuejs.org/images/vehikl.png">
+  </a>
+  <a href="javascript:if(confirm('https://retool.com/?utm_source=sponsor&utm_campaign=vue  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://retool.com/?utm_source=sponsor&utm_campaign=vue'" tppabs="https://retool.com/?utm_source=sponsor&utm_campaign=vue" target="_blank" rel="noopener">
+    <img src="../images/retool.png" tppabs="https://cn.vuejs.org/images/retool.png">
+  </a>
+  <a href="javascript:if(confirm('https://passionatepeople.io/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://passionatepeople.io/'" tppabs="https://passionatepeople.io/" target="_blank" rel="noopener">
+    <img src="../images/passionate_people.png" tppabs="https://cn.vuejs.org/images/passionate_people.png">
+  </a>
+  <a href="javascript:if(confirm('https://www.storyblok.com/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://www.storyblok.com/'" tppabs="https://www.storyblok.com/" target="_blank" rel="noopener">
+    <img src="../images/storyblok.png" tppabs="https://cn.vuejs.org/images/storyblok.png">
+  </a>
+</p>
+
+<h3 id="open-collective-platinum">OpenCollective ç™½é‡‘èµåŠ©å•†</h3>
+
+<p class="open-collective-sponsors sponsor-section">
+  <a href="javascript:if(confirm('https://opencollective.com/vuejs/tiers/platinum-sponsors/0/website  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://opencollective.com/vuejs/tiers/platinum-sponsors/0/website'" tppabs="https://opencollective.com/vuejs/tiers/platinum-sponsors/0/website" target="_blank" rel="noopener">
+    <img src="../../images.opencollective.com/static/images/become_sponsor.svg" tppabs="https://opencollective.com/vuejs/tiers/platinum-sponsors/0/avatar.svg">
+  </a>
+  <a href="javascript:if(confirm('https://opencollective.com/vuejs/tiers/platinum-sponsors/1/website  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://opencollective.com/vuejs/tiers/platinum-sponsors/1/website'" tppabs="https://opencollective.com/vuejs/tiers/platinum-sponsors/1/website" target="_blank" rel="noopener">
+    <img src="../../images.opencollective.com/static/images/1px.png" tppabs="https://opencollective.com/vuejs/tiers/platinum-sponsors/1/avatar.svg">
+  </a>
+  <a href="javascript:if(confirm('https://opencollective.com/vuejs/tiers/platinum-sponsors/2/website  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://opencollective.com/vuejs/tiers/platinum-sponsors/2/website'" tppabs="https://opencollective.com/vuejs/tiers/platinum-sponsors/2/website" target="_blank" rel="noopener">
+    <img src="../../images.opencollective.com/static/images/1px.png" tppabs="https://opencollective.com/vuejs/tiers/platinum-sponsors/2/avatar.svg">
+  </a>
+  <a href="javascript:if(confirm('https://opencollective.com/vuejs/tiers/platinum-sponsors/3/website  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://opencollective.com/vuejs/tiers/platinum-sponsors/3/website'" tppabs="https://opencollective.com/vuejs/tiers/platinum-sponsors/3/website" target="_blank" rel="noopener">
+    <img src="../../images.opencollective.com/static/images/1px.png" tppabs="https://opencollective.com/vuejs/tiers/platinum-sponsors/3/avatar.svg">
+  </a>
+  <a href="javascript:if(confirm('https://opencollective.com/vuejs/tiers/platinum-sponsors/4/website  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://opencollective.com/vuejs/tiers/platinum-sponsors/4/website'" tppabs="https://opencollective.com/vuejs/tiers/platinum-sponsors/4/website" target="_blank" rel="noopener">
+    <img src="../../images.opencollective.com/static/images/1px.png" tppabs="https://opencollective.com/vuejs/tiers/platinum-sponsors/4/avatar.svg">
+  </a>
+  <a href="javascript:if(confirm('https://opencollective.com/vuejs/tiers/platinum-sponsors/5/website  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://opencollective.com/vuejs/tiers/platinum-sponsors/5/website'" tppabs="https://opencollective.com/vuejs/tiers/platinum-sponsors/5/website" target="_blank" rel="noopener">
+    <img src="../../images.opencollective.com/static/images/1px.png" tppabs="https://opencollective.com/vuejs/tiers/platinum-sponsors/5/avatar.svg">
+  </a>
+  <a href="javascript:if(confirm('https://opencollective.com/vuejs/tiers/platinum-sponsors/6/website  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://opencollective.com/vuejs/tiers/platinum-sponsors/6/website'" tppabs="https://opencollective.com/vuejs/tiers/platinum-sponsors/6/website" target="_blank" rel="noopener">
+    <img src="../../images.opencollective.com/static/images/1px.png" tppabs="https://opencollective.com/vuejs/tiers/platinum-sponsors/6/avatar.svg">
+  </a>
+  <a href="javascript:if(confirm('https://opencollective.com/vuejs/tiers/platinum-sponsors/7/website  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://opencollective.com/vuejs/tiers/platinum-sponsors/7/website'" tppabs="https://opencollective.com/vuejs/tiers/platinum-sponsors/7/website" target="_blank" rel="noopener">
+    <img src="../../images.opencollective.com/static/images/1px.png" tppabs="https://opencollective.com/vuejs/tiers/platinum-sponsors/7/avatar.svg">
+  </a>
+  <a href="javascript:if(confirm('https://opencollective.com/vuejs/tiers/platinum-sponsors/8/website  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://opencollective.com/vuejs/tiers/platinum-sponsors/8/website'" tppabs="https://opencollective.com/vuejs/tiers/platinum-sponsors/8/website" target="_blank" rel="noopener">
+    <img src="../../images.opencollective.com/static/images/1px.png" tppabs="https://opencollective.com/vuejs/tiers/platinum-sponsors/8/avatar.svg">
+  </a>
+  <a href="javascript:if(confirm('https://opencollective.com/vuejs/tiers/platinum-sponsors/9/website  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://opencollective.com/vuejs/tiers/platinum-sponsors/9/website'" tppabs="https://opencollective.com/vuejs/tiers/platinum-sponsors/9/website" target="_blank" rel="noopener">
+    <img src="../../images.opencollective.com/static/images/1px.png" tppabs="https://opencollective.com/vuejs/tiers/platinum-sponsors/9/avatar.svg">
+  </a>
+</p>
+
+<h3 id="patreon-gold">Patreon é»„é‡‘èµåŠ©å•†</h3>
+
+<p class="patreon-sponsors sponsor-section">
+  <a href="javascript:if(confirm('https://www.vuemastery.com/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://www.vuemastery.com/'" tppabs="https://www.vuemastery.com/" target="_blank" rel="noopener">
+    <img src="../images/vuemastery.png" tppabs="https://cn.vuejs.org/images/vuemastery.png">
+  </a>
+  <a href="javascript:if(confirm('https://laravel.com/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://laravel.com/'" tppabs="https://laravel.com/" target="_blank" rel="noopener">
+    <img src="../images/laravel.png" tppabs="https://cn.vuejs.org/images/laravel.png">
+  </a>
+  <a href="javascript:if(confirm('https://htmlburger.com/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://htmlburger.com/'" tppabs="https://htmlburger.com/" target="_blank" rel="noopener">
+    <img src="../images/html_burger.png" tppabs="https://cn.vuejs.org/images/html_burger.png">
+  </a>
+  <a href="javascript:if(confirm('https://www.frontenddeveloperlove.com/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://www.frontenddeveloperlove.com/'" tppabs="https://www.frontenddeveloperlove.com/" target="_blank" rel="noopener">
+    <img src="../images/frontendlove.png" tppabs="https://cn.vuejs.org/images/frontendlove.png">
+  </a>
+  <a href="javascript:if(confirm('https://onsen.io/vue/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://onsen.io/vue/'" tppabs="https://onsen.io/vue/" target="_blank" rel="noopener">
+    <img src="../images/onsen_ui.png" tppabs="https://cn.vuejs.org/images/onsen_ui.png">
+  </a>
+  <a href="javascript:if(confirm('https://neds.com.au/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://neds.com.au/'" tppabs="https://neds.com.au/" target="_blank" rel="noopener">
+    <img src="../images/neds.png" tppabs="https://cn.vuejs.org/images/neds.png">
+  </a>
+  <a href="javascript:if(confirm('https://vuejobs.com/?ref=vuejs  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://vuejobs.com/?ref=vuejs'" tppabs="https://vuejobs.com/?ref=vuejs" target="_blank" rel="noopener">
+    <img src="../images/vuejobs.png" tppabs="https://cn.vuejs.org/images/vuejobs.png">
+  </a>
+  <a href="javascript:if(confirm('https://tidelift.com/subscription/npm/vue  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://tidelift.com/subscription/npm/vue'" tppabs="https://tidelift.com/subscription/npm/vue" target="_blank" rel="noopener">
+    <img src="../images/tidelift.png" tppabs="https://cn.vuejs.org/images/tidelift.png">
+  </a>
+  <a href="javascript:if(confirm('https://www.firesticktricks.com/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://www.firesticktricks.com/'" tppabs="https://www.firesticktricks.com/" target="_blank" rel="noopener">
+    <img src="../images/firestick_tricks.png" tppabs="https://cn.vuejs.org/images/firestick_tricks.png">
+  </a>
+  <a href="javascript:if(confirm('https://intygrate.com/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://intygrate.com/'" tppabs="https://intygrate.com/" target="_blank" rel="noopener">
+    <img src="../images/intygrate.png" tppabs="https://cn.vuejs.org/images/intygrate.png">
+  </a>
+  <a href="javascript:if(confirm('http://en.shopware.com/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://en.shopware.com/'" tppabs="http://en.shopware.com/" target="_blank" rel="noopener">
+    <img src="../images/shopware_ag.png" tppabs="https://cn.vuejs.org/images/shopware_ag.png">
+  </a>
+  <a href="javascript:if(confirm('https://www.vpnranks.com/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://www.vpnranks.com/'" tppabs="https://www.vpnranks.com/" target="_blank" rel="noopener">
+    <img src="../images/vpnranks.png" tppabs="https://cn.vuejs.org/images/vpnranks.png">
+  </a>
+  <a href="javascript:if(confirm('https://www.bacancytechnology.com/hire-vuejs-developer  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://www.bacancytechnology.com/hire-vuejs-developer'" tppabs="https://www.bacancytechnology.com/hire-vuejs-developer" target="_blank" rel="noopener">
+    <img src="../images/bacancy_technology.png" tppabs="https://cn.vuejs.org/images/bacancy_technology.png">
+  </a>
+  <a href="javascript:if(confirm('https://www.bestvpn.co/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://www.bestvpn.co/'" tppabs="https://www.bestvpn.co/" target="_blank" rel="noopener">
+    <img src="../images/bestvpn_co.png" tppabs="https://cn.vuejs.org/images/bestvpn_co.png">
+  </a>
+  <a href="javascript:if(confirm('https://www.y8.com/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://www.y8.com/'" tppabs="https://www.y8.com/" target="_blank" rel="noopener">
+    <img src="../images/y8.png" tppabs="https://cn.vuejs.org/images/y8.png">
+  </a>
+  <a href="javascript:if(confirm('https://js.devexpress.com/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://js.devexpress.com/'" tppabs="https://js.devexpress.com/" target="_blank" rel="noopener">
+    <img src="../images/devexpress.png" tppabs="https://cn.vuejs.org/images/devexpress.png">
+  </a>
+  <a href="javascript:if(confirm('https://fastcoding.jp/javascript/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://fastcoding.jp/javascript/'" tppabs="https://fastcoding.jp/javascript/" target="_blank" rel="noopener">
+    <img src="../images/fastcoding_inc.svg" tppabs="https://cn.vuejs.org/images/fastcoding_inc.svg">
+  </a>
+  <a href="javascript:if(confirm('https://usave.co.uk/utilities/broadband  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://usave.co.uk/utilities/broadband'" tppabs="https://usave.co.uk/utilities/broadband" target="_blank" rel="noopener">
+    <img src="../images/usave.png" tppabs="https://cn.vuejs.org/images/usave.png">
+  </a>
+  <a href="javascript:if(confirm('https://www.foo.software/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://www.foo.software/'" tppabs="https://www.foo.software/" target="_blank" rel="noopener">
+    <img src="../images/foo.png" tppabs="https://cn.vuejs.org/images/foo.png">
+  </a>
+  <a href="javascript:if(confirm('https://flatlogic.com/templates  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://flatlogic.com/templates'" tppabs="https://flatlogic.com/templates" target="_blank" rel="noopener">
+    <img src="../images/flatlogic_templates.svg" tppabs="https://cn.vuejs.org/images/flatlogic_templates.svg">
+  </a>
+  <a href="javascript:if(confirm('https://www.moovweb.com/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://www.moovweb.com/'" tppabs="https://www.moovweb.com/" target="_blank" rel="noopener">
+    <img src="../images/moovweb.png" tppabs="https://cn.vuejs.org/images/moovweb.png">
+  </a>
+  <a href="javascript:if(confirm('https://vpn-review.com/netflix-vpn  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://vpn-review.com/netflix-vpn'" tppabs="https://vpn-review.com/netflix-vpn" target="_blank" rel="noopener">
+    <img src="../images/vpn_review.png" tppabs="https://cn.vuejs.org/images/vpn_review.png">
+  </a>
+  <a href="javascript:if(confirm('https://cosmos.network/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://cosmos.network/'" tppabs="https://cosmos.network/" target="_blank" rel="noopener">
+    <img src="../images/tendermint.png" tppabs="https://cn.vuejs.org/images/tendermint.png">
+  </a>
+</p>
+
+<h3 id="open-collective-gold">OpenCollective é»„é‡‘èµåŠ©å•†</h3>
+
+<p class="open-collective-sponsors sponsor-section">
+  <a href="javascript:if(confirm('https://opencollective.com/vuejs/tiers/gold-sponsors/0/website  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://opencollective.com/vuejs/tiers/gold-sponsors/0/website'" tppabs="https://opencollective.com/vuejs/tiers/gold-sponsors/0/website" target="_blank" rel="noopener">
+    <img src="../../opencollective.com/vuejs/tiers/gold-sponsors/0/avatar.svg" tppabs="https://opencollective.com/vuejs/tiers/gold-sponsors/0/avatar.svg">
+  </a>
+  <a href="javascript:if(confirm('https://opencollective.com/vuejs/tiers/gold-sponsors/1/website  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://opencollective.com/vuejs/tiers/gold-sponsors/1/website'" tppabs="https://opencollective.com/vuejs/tiers/gold-sponsors/1/website" target="_blank" rel="noopener">
+    <img src="../../opencollective.com/vuejs/tiers/gold-sponsors/1/avatar.svg" tppabs="https://opencollective.com/vuejs/tiers/gold-sponsors/1/avatar.svg">
+  </a>
+  <a href="javascript:if(confirm('https://opencollective.com/vuejs/tiers/gold-sponsors/2/website  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://opencollective.com/vuejs/tiers/gold-sponsors/2/website'" tppabs="https://opencollective.com/vuejs/tiers/gold-sponsors/2/website" target="_blank" rel="noopener">
+    <img src="../../opencollective.com/vuejs/tiers/gold-sponsors/2/avatar.svg" tppabs="https://opencollective.com/vuejs/tiers/gold-sponsors/2/avatar.svg">
+  </a>
+  <a href="javascript:if(confirm('https://opencollective.com/vuejs/tiers/gold-sponsors/3/website  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://opencollective.com/vuejs/tiers/gold-sponsors/3/website'" tppabs="https://opencollective.com/vuejs/tiers/gold-sponsors/3/website" target="_blank" rel="noopener">
+    <img src="../../images.opencollective.com/static/images/become_sponsor.svg" tppabs="https://opencollective.com/vuejs/tiers/gold-sponsors/3/avatar.svg">
+  </a>
+  <a href="javascript:if(confirm('https://opencollective.com/vuejs/tiers/gold-sponsors/4/website  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://opencollective.com/vuejs/tiers/gold-sponsors/4/website'" tppabs="https://opencollective.com/vuejs/tiers/gold-sponsors/4/website" target="_blank" rel="noopener">
+    <img src="../../images.opencollective.com/static/images/1px.png" tppabs="https://opencollective.com/vuejs/tiers/gold-sponsors/4/avatar.svg">
+  </a>
+  <a href="javascript:if(confirm('https://opencollective.com/vuejs/tiers/gold-sponsors/5/website  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://opencollective.com/vuejs/tiers/gold-sponsors/5/website'" tppabs="https://opencollective.com/vuejs/tiers/gold-sponsors/5/website" target="_blank" rel="noopener">
+    <img src="../../images.opencollective.com/static/images/1px.png" tppabs="https://opencollective.com/vuejs/tiers/gold-sponsors/5/avatar.svg">
+  </a>
+  <a href="javascript:if(confirm('https://opencollective.com/vuejs/tiers/gold-sponsors/6/website  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://opencollective.com/vuejs/tiers/gold-sponsors/6/website'" tppabs="https://opencollective.com/vuejs/tiers/gold-sponsors/6/website" target="_blank" rel="noopener">
+    <img src="../../images.opencollective.com/static/images/1px.png" tppabs="https://opencollective.com/vuejs/tiers/gold-sponsors/6/avatar.svg">
+  </a>
+  <a href="javascript:if(confirm('https://opencollective.com/vuejs/tiers/gold-sponsors/7/website  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://opencollective.com/vuejs/tiers/gold-sponsors/7/website'" tppabs="https://opencollective.com/vuejs/tiers/gold-sponsors/7/website" target="_blank" rel="noopener">
+    <img src="../../images.opencollective.com/static/images/1px.png" tppabs="https://opencollective.com/vuejs/tiers/gold-sponsors/7/avatar.svg">
+  </a>
+  <a href="javascript:if(confirm('https://opencollective.com/vuejs/tiers/gold-sponsors/8/website  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://opencollective.com/vuejs/tiers/gold-sponsors/8/website'" tppabs="https://opencollective.com/vuejs/tiers/gold-sponsors/8/website" target="_blank" rel="noopener">
+    <img src="../../images.opencollective.com/static/images/1px.png" tppabs="https://opencollective.com/vuejs/tiers/gold-sponsors/8/avatar.svg">
+  </a>
+  <a href="javascript:if(confirm('https://opencollective.com/vuejs/tiers/gold-sponsors/9/website  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://opencollective.com/vuejs/tiers/gold-sponsors/9/website'" tppabs="https://opencollective.com/vuejs/tiers/gold-sponsors/9/website" target="_blank" rel="noopener">
+    <img src="../../images.opencollective.com/static/images/1px.png" tppabs="https://opencollective.com/vuejs/tiers/gold-sponsors/9/avatar.svg">
+  </a>
+</p>
+
+<h3 id="patreon-silver">Patreon ç™½é“¶èµåŠ©å•†</h3>
+
+<p class="patreon-sponsors sponsor-section">
+  <a href="javascript:if(confirm('https://roadster.com/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://roadster.com/'" tppabs="https://roadster.com/" target="_blank" rel="noopener">
+    <img src="../images/roadster.png" tppabs="https://cn.vuejs.org/images/roadster.png">
+  </a>
+  <a href="javascript:if(confirm('https://www.inkoop.io/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://www.inkoop.io/'" tppabs="https://www.inkoop.io/" target="_blank" rel="noopener">
+    <img src="../images/inkoop.png" tppabs="https://cn.vuejs.org/images/inkoop.png">
+  </a>
+  <a href="javascript:if(confirm('https://www.thecasinodb.com/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://www.thecasinodb.com/'" tppabs="https://www.thecasinodb.com/" target="_blank" rel="noopener">
+    <img src="../images/isolutions_uk_limited.png" tppabs="https://cn.vuejs.org/images/isolutions_uk_limited.png">
+  </a>
+</p>
+
+<h3 id="open-collective-silver">OpenCollective ç™½é“¶èµåŠ©å•†</h3>
+
+<p class="open-collective-sponsors sponsor-section">
+  <a href="javascript:if(confirm('https://opencollective.com/vuejs/tiers/silver-sponsors/0/website  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://opencollective.com/vuejs/tiers/silver-sponsors/0/website'" tppabs="https://opencollective.com/vuejs/tiers/silver-sponsors/0/website" target="_blank" rel="noopener">
+    <img src="../../opencollective.com/vuejs/tiers/silver-sponsors/0/avatar.svg" tppabs="https://opencollective.com/vuejs/tiers/silver-sponsors/0/avatar.svg">
+  </a>
+  <a href="javascript:if(confirm('https://opencollective.com/vuejs/tiers/silver-sponsors/1/website  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://opencollective.com/vuejs/tiers/silver-sponsors/1/website'" tppabs="https://opencollective.com/vuejs/tiers/silver-sponsors/1/website" target="_blank" rel="noopener">
+    <img src="../../opencollective.com/vuejs/tiers/silver-sponsors/1/avatar.svg" tppabs="https://opencollective.com/vuejs/tiers/silver-sponsors/1/avatar.svg">
+  </a>
+  <a href="javascript:if(confirm('https://opencollective.com/vuejs/tiers/silver-sponsors/2/website  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://opencollective.com/vuejs/tiers/silver-sponsors/2/website'" tppabs="https://opencollective.com/vuejs/tiers/silver-sponsors/2/website" target="_blank" rel="noopener">
+    <img src="../../opencollective.com/vuejs/tiers/silver-sponsors/2/avatar.svg" tppabs="https://opencollective.com/vuejs/tiers/silver-sponsors/2/avatar.svg">
+  </a>
+  <a href="javascript:if(confirm('https://opencollective.com/vuejs/tiers/silver-sponsors/3/website  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://opencollective.com/vuejs/tiers/silver-sponsors/3/website'" tppabs="https://opencollective.com/vuejs/tiers/silver-sponsors/3/website" target="_blank" rel="noopener">
+    <img src="../../opencollective.com/vuejs/tiers/silver-sponsors/3/avatar.svg" tppabs="https://opencollective.com/vuejs/tiers/silver-sponsors/3/avatar.svg">
+  </a>
+  <a href="javascript:if(confirm('https://opencollective.com/vuejs/tiers/silver-sponsors/4/website  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://opencollective.com/vuejs/tiers/silver-sponsors/4/website'" tppabs="https://opencollective.com/vuejs/tiers/silver-sponsors/4/website" target="_blank" rel="noopener">
+    <img src="../../images.opencollective.com/static/images/become_sponsor.svg" tppabs="https://opencollective.com/vuejs/tiers/silver-sponsors/4/avatar.svg">
+  </a>
+</p>
+
+<h3>ä¸­å›½åŒºè§†é¢‘æ‰˜ç®¡èµåŠ©å•†</h3>
+
+<p class="video-sponsors-china sponsor-section">
+  <a href="javascript:if(confirm('https://cloud.youku.com/index.php?source=vuejs  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://cloud.youku.com/index.php?source=vuejs'" tppabs="https://cloud.youku.com/index.php?source=vuejs" target="_blank" rel="noopener">
+    <img src="../images/youku.png" tppabs="https://cn.vuejs.org/images/youku.png">
+  </a>
+</p>
+
+<p>
+å¦‚æœä½ æ˜¯ä¼ä¸šç»è¥è€…å¹¶ä¸”å°† Vue ç”¨åœ¨å•†ä¸šäº§å“ä¸­ï¼Œé‚£ä¹ˆèµåŠ© Vue æœ‰å•†ä¸šä¸Šçš„ç›Šå¤„ï¼š<b>å¯ä»¥è®©ä½ çš„äº§å“æ‰€ä¾èµ–çš„æ¡†æ¶ä¿æŒå¥åº·å¹¶å¾—åˆ°ç§¯æçš„ç»´æŠ¤</b>ï¼Œä¹Ÿèƒ½å¸®åŠ©ä½ åœ¨ Vue ç¤¾åŒºé‡Œè·å¾—æ›´é«˜çš„æ›å…‰åº¦ï¼Œä»è€Œæ›´å®¹æ˜“åœ°å¸å¼•åˆ° Vue å¼€å‘è€…ã€‚
+</p>
+
+<p>
+å¦‚æœä½ æ˜¯ä¸ªäººå¼€å‘è€…å¹¶ä¸”äº«å— Vue å¸¦æ¥çš„é«˜å¼€å‘æ•ˆç‡ï¼Œå¯ä»¥ç”¨æåŠ©æ¥è¡¨ç¤ºä½ çš„è°¢æ„ â€”â€” å°±å¥½åƒå¶å°”ç»™æˆ‘ä¹°æ¯å’–å•¡ :)
+</p>
+
+  
+  
+  <div class="footer">
+    å‘ç°é”™è¯¯ï¼Ÿæƒ³å‚ä¸ç¼–è¾‘ï¼Ÿ
+    <a href="javascript:if(confirm('https://github.com/vuejs/cn.vuejs.org/blob/master/src/support-vuejs/index.md  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/vuejs/cn.vuejs.org/blob/master/src/support-vuejs/index.md'" tppabs="https://github.com/vuejs/cn.vuejs.org/blob/master/src/support-vuejs/index.md" rel="noopener" target="_blank">
+      åœ¨ GitHub ä¸Šç¼–è¾‘æ­¤é¡µï¼
+    </a>
+  </div>
+</div>
+
+      </div>
+      <script src="../js/smooth-scroll.min.js" tppabs="https://cn.vuejs.org/js/smooth-scroll.min.js"></script>
+    
+
+    <!-- main custom script for sidebars, version selects etc. -->
+    <script src="../js/css.escape.js" tppabs="https://cn.vuejs.org/js/css.escape.js"></script>
+    <script src="../js/common.js" tppabs="https://cn.vuejs.org/js/common.js"></script>
+
+    <!-- search -->
+    <link href="../../code.bdstatic.com/npm/docsearch.js@1.5.0/dist/cdn/docsearch.min.css" tppabs="https://code.bdstatic.com/npm/docsearch.js@1.5.0/dist/cdn/docsearch.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../css/search.css" tppabs="https://cn.vuejs.org/css/search.css">
+    <script src="../../code.bdstatic.com/npm/docsearch.js@1.5.0/dist/cdn/docsearch.min.js" tppabs="https://code.bdstatic.com/npm/docsearch.js@1.5.0/dist/cdn/docsearch.min.js"></script>
+    <script>
+    [
+      '#search-query-nav',
+      '#search-query-sidebar',
+      '#search-query-menu'
+    ].forEach(function (selector) {
+      if (!document.querySelector(selector)) return
+      // search index defaults to v2
+      var match = window.location.pathname.match(/^\/(v\d+)/)
+      var version = match ? match[1] : 'v2'
+      docsearch({
+      appId: 'BH4D9OD16A',
+      apiKey: '5638280abff9d207417bb03be05f0b25',
+      indexName: 'vuejs_cn2',
+      inputSelector: selector,
+      algoliaOptions: { facetFilters: ["version:" + version] },
+      autocompleteOptions: { hint: false, appendTo: 'body'}
+      })
+    })
+    </script>
+  </body>
+</html>

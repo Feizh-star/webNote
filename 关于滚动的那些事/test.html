@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./bscroll.js"></script>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    html,body {
+      width: 100%;
+      height: 100%;
+    }
+    ul {
+      list-style: none;
+    }
+    hr {
+      margin: 20px 0;
+      width: 100vw;
+    }
+    .use-bscroll {
+      width: 98vw;
+      margin: 0 1vw;
+      height: 80vh;
+      border: 3px solid #aaa;
+      text-align: center;
+      overflow-y: hidden;
+    }
+    .use-bscroll 
+    li {
+      line-height: 50px;
+    }
+    .use-bscroll 
+    li:nth-of-type(2n-1) {
+      background-color: red;
+      
+    }
+    .use-bscroll 
+    li:nth-of-type(2n) {
+      background-color: green;
+    }
+    .page {
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div>
+      <hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
+      <div class="use-bscroll">
+        <ul>
+          <li>1</li>
+          <li>2</li>
+          <li>3</li>
+          <li>4</li>
+          <li>5</li>
+          <li>6</li>
+          <li>7</li>
+          <li>8</li>
+          <li>9</li>
+          <li>10</li>
+          <li>11</li>
+          <li>12</li>
+          <li>13</li>
+          <li>14</li>
+          <li>15</li>
+          <li>16</li>
+          <li>17</li>
+          <li>18</li>
+          <li>19</li>
+          <li>20</li>
+        </ul>
+      </div>
+      <hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
+    </div>
+  </div>
+  <script>
+    const myScrollOutside = new BScroll('.page', {
+      click: true,
+      probeType: 3,
+      bounce: false,
+      // preventDefault: false
+    })
+    const myScrollInside = new BScroll('.use-bscroll', {
+      click: true,
+      probeType: 3,
+      bounce: false,
+      stopPropagation: true
+      // preventDefault: false
+    })
+    myScrollInside.on('scroll', () => {
+      console.log(myScrollInside.y)
+      if (myScrollInside.y > -5) {
+        myScrollInside.disable()
+      }
+    })
+    // 页面的最大滚动距离
+    // myScroll.on('scrollStart', () => {
+    //   console.log('即将开始滚动')
+    //   if (document.documentElement.scrollTop < maxScrollYOfDoc) {
+    //     myScroll.disable()
+    //   }
+    // })
+    // myScroll.on('disable', () => {
+    //   console.log('dis')
+    // })
+    // const hooks = myScroll.scroller.actionsHandler.hooks
+    // hooks.on('beforeStart', (event) => { 
+    //   // console.log(myScroll.directionY) 
+    //   // console.log(myScroll.enabled) 
+    //   console.log(direction)
+    //   // if (document.documentElement.scrollTop < maxScrollYOfDoc && direction === -1) {
+    //   //   myScroll.disable()
+    //   // } else {
+    //   //   myScroll.enable()
+    //   // }
+    //   if (direction === -1) {
+    //     myScroll.enable()
+    //   } else {
+    //     myScroll.disable()
+    //   }
+    // })
+  </script>
+</body>
+</html>

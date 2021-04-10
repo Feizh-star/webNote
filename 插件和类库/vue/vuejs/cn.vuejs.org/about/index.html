@@ -1,0 +1,798 @@
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.9.0">
+    <title>è´¡çŒ®è€… â€” Vue.js</title>
+    <meta charset=utf-8"utf-8">
+    <meta name="description" content="Vue.js - The Progressive JavaScript Framework">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="alternate" hreflang="x-default" href="https://vuejs.org/about/index.html">
+    <link rel="alternate" hreflang="zh" href="https://cn.vuejs.org/about/index.html">
+    <link rel="alternate" hreflang="ja" href="https://jp.vuejs.org/about/index.html">
+    <link rel="alternate" hreflang="ru" href="https://ru.vuejs.org/about/index.html">
+    <link rel="alternate" hreflang="ko" href="https://kr.vuejs.org/about/index.html">
+    <link rel="alternate" hreflang="pt-BR" href="https://br.vuejs.org/about/index.html">
+    <link rel="alternate" hreflang="fr" href="https://fr.vuejs.org/about/index.html">
+    <link rel="alternate" hreflang="es" href="https://es.vuejs.org/about/index.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="è´¡çŒ®è€… â€” Vue.js">
+    <meta property="og:description" content="Vue.js - The Progressive JavaScript Framework">
+    <meta property="og:image" content="https://cn.vuejs.org//images/logo.png">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="è´¡çŒ®è€… â€” Vue.js">
+    <meta name="twitter:description" content="Vue.js - The Progressive JavaScript Framework">
+    <meta name="twitter:image" content="https://cn.vuejs.org/images/logo.png">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/images/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/images/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+    <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
+    <link rel="icon" href="/images/logo.png" type="image/png">
+
+    <meta name="msapplication-TileColor" content="#4fc08d">
+    <meta name="theme-color" content="#4fc08d">
+
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- <link href="https://fonts.googleapis.com" rel="preconnect" crossorigin> -->
+    <!-- <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin> -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com" rel="preconnect" crossorigin> -->
+
+    <!-- <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono" rel="stylesheet"> -->
+    <!-- <link href="//fonts.googleapis.com/css?family=Dosis:500&text=Vue.js" rel="stylesheet"> -->
+
+    <link href="../../code.bdstatic.com/npm/font-awesome@4.7.0/css/font-awesome.min.css" tppabs="https://code.bdstatic.com/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- main page styles -->
+    <link rel="stylesheet" href="../css/page.css" tppabs="https://cn.vuejs.org/css/page.css">
+
+    <!-- this needs to be loaded before guide's inline scripts -->
+    <script src="../js/vue.js" tppabs="https://cn.vuejs.org/js/vue.js"></script>
+
+    
+
+    <script>
+      Vue.config.productionTip = false
+      window.PAGE_TYPE = "about"
+    </script>
+
+    <!-- ga -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-46852172-3', 'https://cn.vuejs.org/about/cn.vuejs.org');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body class="docs">
+    <div id="mobile-bar">
+      <a class="menu-button"></a>
+      <a class="logo" href="../index-1.htm" tppabs="https://cn.vuejs.org/"></a>
+    </div>
+    <header id="header">
+  <a id="logo" href="../index-1.htm" tppabs="https://cn.vuejs.org/">
+    <img src="../images/logo.png" tppabs="https://cn.vuejs.org/images/logo.png" alt="vue logo">
+    <span>Vue.js</span>
+  </a>
+  <ul id="nav">
+    <li>
+  <form id="search-form">
+    <input type="text" id="search-query-nav" class="search-query st-default-search-input" aria-label="æœç´¢">
+  </form>
+</li>
+<li class="nav-dropdown-container learn">
+  <a class="nav-link">å­¦ä¹ </a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><h4>æ–‡æ¡£</h4></li>
+    <li>
+      <ul>
+        <li><a href="../v2/guide/index.htm" tppabs="https://cn.vuejs.org/v2/guide/" class="nav-link">æ•™ç¨‹</a></li>
+        <li><a href="../v2/api/index.htm" tppabs="https://cn.vuejs.org/v2/api/" class="nav-link">API</a></li>
+        <li><a href="../v2/style-guide/index.htm" tppabs="https://cn.vuejs.org/v2/style-guide/" class="nav-link">é£æ ¼æŒ‡å—</a></li>
+        <li><a href="javascript:if(confirm('https://cn.vuejs.org/v2/examples/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ²»¿ÉÓÃ, »ò·ÅÆúÁËÏÂÔØ, »òÏîÄ¿¼´½«Í£Ö¹¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://cn.vuejs.org/v2/examples/'" tppabs="https://cn.vuejs.org/v2/examples/" class="nav-link">ç¤ºä¾‹</a></li>
+        <li><a href="../v2/cookbook/index.htm" tppabs="https://cn.vuejs.org/v2/cookbook/" class="nav-link">Cookbook</a></li>
+      </ul>
+    </li>
+    <li><h4>è§†é¢‘æ•™ç¨‹</h4></li>
+    <li>
+      <ul>
+        <li><a href="javascript:if(confirm('https://www.vuemastery.com/courses/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://www.vuemastery.com/courses/'" tppabs="https://www.vuemastery.com/courses/" class="nav-link" target="_blank" rel="sponsored noopener">Vue Mastery (è‹±æ–‡)</a></li>
+        <li><a href="javascript:if(confirm('https://vueschool.io/?friend=vuejs&utm_source=Vuejs.org&utm_medium=Link&utm_content=Navbar%20Dropdown  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://vueschool.io/?friend=vuejs&utm_source=Vuejs.org&utm_medium=Link&utm_content=Navbar%20Dropdown'" tppabs="https://vueschool.io/?friend=vuejs&utm_source=Vuejs.org&utm_medium=Link&utm_content=Navbar%20Dropdown" class="nav-link" target="_blank" rel="noopener">Vue School (è‹±æ–‡)</a></li>
+        <li><a href="javascript:if(confirm('https://learning.dcloud.io/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://learning.dcloud.io/'" tppabs="https://learning.dcloud.io/" class="nav-link" target="_blank" rel="sponsored noopener">DCloud è§†é¢‘æ•™ç¨‹</a></li>
+      </ul>
+    </li>
+  </ul>
+</li>
+
+<li class="nav-dropdown-container ecosystem">
+  <a class="nav-link">ç”Ÿæ€ç³»ç»Ÿ</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><h4>å¸®åŠ©</h4></li>
+    <li><ul>
+      <li><a href="javascript:if(confirm('https://forum.vuejs.org/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://forum.vuejs.org/'" tppabs="https://forum.vuejs.org/" class="nav-link" target="_blank" rel="noopener">è®ºå›</a></li>
+      <li><a href="javascript:if(confirm('https://chat.vuejs.org/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://chat.vuejs.org/'" tppabs="https://chat.vuejs.org/" class="nav-link" target="_blank" rel="noopener">èŠå¤©å®¤</a></li>
+      <li><a href="javascript:if(confirm('https://events.vuejs.org/meetups/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://events.vuejs.org/meetups/'" tppabs="https://events.vuejs.org/meetups/" class="nav-link" target="_blank" rel="noopener">èšä¼š</a></li>
+    </ul></li>
+    <li><h4>å·¥å…·</h4></li>
+    <li>
+      <ul>
+        <li><a href="javascript:if(confirm('https://github.com/vuejs/vue-devtools  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/vuejs/vue-devtools'" tppabs="https://github.com/vuejs/vue-devtools" class="nav-link" target="_blank" rel="noopener">Devtools</a></li>
+        <li><a href="javascript:if(confirm('https://cli.vuejs.org/zh/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://cli.vuejs.org/zh/'" tppabs="https://cli.vuejs.org/zh/" class="nav-link" target="_blank" rel="noopener">Vue CLI</a></li>
+        <li><a href="javascript:if(confirm('https://vue-loader.vuejs.org/zh/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://vue-loader.vuejs.org/zh/'" tppabs="https://vue-loader.vuejs.org/zh/" class="nav-link" target="_blank" rel="noopener">Vue Loader</a></li>
+      </ul>
+    </li>
+    <li><h4>æ ¸å¿ƒæ’ä»¶</h4></li>
+    <li><ul>
+      <li><a href="javascript:if(confirm('https://router.vuejs.org/zh/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://router.vuejs.org/zh/'" tppabs="https://router.vuejs.org/zh/" class="nav-link" target="_blank" rel="noopener">Vue Router</a></li>
+      <li><a href="javascript:if(confirm('https://vuex.vuejs.org/zh/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://vuex.vuejs.org/zh/'" tppabs="https://vuex.vuejs.org/zh/" class="nav-link" target="_blank" rel="noopener">Vuex</a></li>
+      <li><a href="javascript:if(confirm('https://ssr.vuejs.org/zh/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://ssr.vuejs.org/zh/'" tppabs="https://ssr.vuejs.org/zh/" class="nav-link" target="_blank" rel="noopener">Vue æœåŠ¡ç«¯æ¸²æŸ“</a></li>
+    </ul></li>
+    <li><h4>ä¿¡æ¯</h4></li>
+    <li><ul>
+      <li><a href="javascript:if(confirm('https://news.vuejs.org/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://news.vuejs.org/'" tppabs="https://news.vuejs.org/" class="nav-link" target="_blank" rel="noopener">å‘¨åˆŠ</a></li>
+      <li><a href="javascript:if(confirm('https://github.com/vuejs/vue/projects/6  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/vuejs/vue/projects/6'" tppabs="https://github.com/vuejs/vue/projects/6" class="nav-link" target="_blank" rel="noopener">Roadmap</a></li>
+      <li><a href="javascript:if(confirm('https://events.vuejs.org/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://events.vuejs.org/'" tppabs="https://events.vuejs.org/" class="nav-link" target="_blank" rel="noopener">æ´»åŠ¨</a></li>
+      <li><a href="javascript:if(confirm('https://twitter.com/vuejs  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://twitter.com/vuejs'" tppabs="https://twitter.com/vuejs" class="nav-link" target="_blank" rel="noopener">Twitter</a></li>
+      <li><a href="javascript:if(confirm('https://medium.com/the-vue-point  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://medium.com/the-vue-point'" tppabs="https://medium.com/the-vue-point" class="nav-link" target="_blank" rel="noopener">åšå®¢</a></li>
+      <li><a href="javascript:if(confirm('https://vuejobs.com/?ref=vuejs  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://vuejobs.com/?ref=vuejs'" tppabs="https://vuejobs.com/?ref=vuejs" class="nav-link" target="_blank" rel="noopener">å·¥ä½œ</a></li>
+    </ul></li>
+  </ul>
+</li>
+
+<li>
+  <a href="../v2/guide/team.html" tppabs="https://cn.vuejs.org/v2/guide/team.html" class="nav-link team">å›¢é˜Ÿ</a>
+</li>
+<li class="nav-dropdown-container resources">
+  <a href="#" class="nav-link">èµ„æºåˆ—è¡¨</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><a href="../resources/partners.html" tppabs="https://cn.vuejs.org/resources/partners.html" class="nav-link">åˆä½œä¼™ä¼´</a></li>
+    <li><a href="../resources/themes.html" tppabs="https://cn.vuejs.org/resources/themes.html" class="nav-link">ä¸»é¢˜</a></li>
+    <li><a href="javascript:if(confirm('https://github.com/vuejs/awesome-vue  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/vuejs/awesome-vue'" tppabs="https://github.com/vuejs/awesome-vue" class="nav-link" target="_blank" rel="noopener">Awesome Vue</a></li>
+    <li><a href="javascript:if(confirm('https://awesomejs.dev/for/vue/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://awesomejs.dev/for/vue/'" tppabs="https://awesomejs.dev/for/vue/" class="nav-link" target="_blank" rel="noopener">æµè§ˆå’Œ Vue ç›¸å…³çš„åŒ…</a></li>
+  </ul>
+</li>
+
+<!-- <li>
+  <a href="/partners" class="nav-link ">Partners</a>
+</li> -->
+<li class="nav-dropdown-container support-vue">
+  <a href="../support-vuejs/index.htm" tppabs="https://cn.vuejs.org/support-vuejs/" class="nav-link">æ”¯æŒ Vue</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><a href="../support-vuejs/index.htm#One-time-Donations" tppabs="https://cn.vuejs.org/support-vuejs/#One-time-Donations" class="nav-link">ä¸€æ¬¡æ€§èµåŠ©</a></li>
+    <li><a href="../support-vuejs/index.htm#Recurring-Pledges" tppabs="https://cn.vuejs.org/support-vuejs/#Recurring-Pledges" class="nav-link">å‘¨æœŸæ€§èµåŠ©</a></li>
+    <li><a href="javascript:if(confirm('https://www.smallsticker.com/%E8%B4%B4%E7%BA%B8/vue.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://www.smallsticker.com/%E8%B4%B4%E7%BA%B8/vue.html'" tppabs="https://www.smallsticker.com/%E8%B4%B4%E7%BA%B8/vue.html" rel="noopener" class="nav-link">è´´çº¸</a></li>
+    <li><a href="javascript:if(confirm('https://osholic.com/?utm_source=vue&utm_medium=dropdown  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://osholic.com/?utm_source=vue&utm_medium=dropdown'" tppabs="https://osholic.com/?utm_source=vue&utm_medium=dropdown" rel="noopener" class="nav-link">å‘¨è¾¹</a></li>
+    <li><a href="javascript:if(confirm('https://vue.threadless.com/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://vue.threadless.com/'" tppabs="https://vue.threadless.com/" target="_blank" rel="noopener" class="nav-link">T æ¤å•†åº—</a></li>
+  </ul>
+</li>
+
+<li class="nav-dropdown-container language">
+  <a class="nav-link">å¤šè¯­è¨€</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><a href="javascript:if(confirm('https://vuejs.org/about/index.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://vuejs.org/about/index.html'" tppabs="https://vuejs.org/about/index.html" class="nav-link">English</a></li>
+    <li><a href="javascript:if(confirm('https://jp.vuejs.org/about/index.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://jp.vuejs.org/about/index.html'" tppabs="https://jp.vuejs.org/about/index.html" class="nav-link">æ—¥æœ¬èª</a></li>
+    <li><a href="javascript:if(confirm('https://ru.vuejs.org/about/index.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://ru.vuejs.org/about/index.html'" tppabs="https://ru.vuejs.org/about/index.html" class="nav-link">Ğ ÑƒÑÑĞºĞ¸Ğ¹</a></li>
+    <li><a href="javascript:if(confirm('https://kr.vuejs.org/about/index.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://kr.vuejs.org/about/index.html'" tppabs="https://kr.vuejs.org/about/index.html" class="nav-link">í•œêµ­ì–´</a></li>
+    <li><a href="javascript:if(confirm('https://br.vuejs.org/about/index.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://br.vuejs.org/about/index.html'" tppabs="https://br.vuejs.org/about/index.html" class="nav-link">PortuguÃªs</a></li>
+    <li><a href="javascript:if(confirm('https://fr.vuejs.org/about/index.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://fr.vuejs.org/about/index.html'" tppabs="https://fr.vuejs.org/about/index.html" class="nav-link">FranÃ§ais</a></li>
+    <li><a href="javascript:if(confirm('https://vi.vuejs.org/about/index.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://vi.vuejs.org/about/index.html'" tppabs="https://vi.vuejs.org/about/index.html" class="nav-link">Tiáº¿ng Viá»‡t</a></li>
+    <li><a href="javascript:if(confirm('https://es.vuejs.org/about/index.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://es.vuejs.org/about/index.html'" tppabs="https://es.vuejs.org/about/index.html" class="nav-link">EspaÃ±ol</a></li>
+    <li><a href="javascript:if(confirm('https://docs.vuejs.id/about/index.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://docs.vuejs.id/about/index.html'" tppabs="https://docs.vuejs.id/about/index.html" class="nav-link">Bahasa Indonesia</a></li>
+  </ul>
+</li>
+
+<li><a href="javascript:if(confirm('https://github.com/vuejs/cn.vuejs.org/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/vuejs/cn.vuejs.org/'" tppabs="https://github.com/vuejs/cn.vuejs.org/" target="_blank" class="nav-link contribute">å‚ä¸ç¿»è¯‘</a></li>
+
+  </ul>
+</header>
+
+    
+      <div id="main" class="fix-sidebar">
+        
+  
+
+<div class="sidebar">
+  <div class="sidebar-inner">
+    
+    <div class="list">
+      <div id="sidebar-sponsors-special">
+  <div class="main-sponsor">
+    <span>ç‰¹åˆ«èµåŠ©å•†</span>
+    <div>
+    <a href="javascript:if(confirm('http://www.dcloud.io/?hmsr=vuejsorg&hmpl=&hmcu=&hmkw=&hmci=  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.dcloud.io/?hmsr=vuejsorg&hmpl=&hmcu=&hmkw=&hmci='" tppabs="http://www.dcloud.io/?hmsr=vuejsorg&hmpl=&hmcu=&hmkw=&hmci=" target="_blank" rel="sponsored noopener" class="logo">
+      <img id="s-dcloud" alt="dcloud">
+      <script>
+      (function(){
+        var el = document.getElementById("s-dcloud");
+        var adImg = null;
+        var altImg = "../images/dcloud2.png"/*tpa=https://cn.vuejs.org/images/dcloud2.png*/;
+        var img = "../images/dcloud1.png"/*tpa=https://cn.vuejs.org/images/dcloud1.png*/;
+        el.src = adImg || (altImg && Math.random() >= 0.5 ? altImg : img);
+      })()
+      </script>
+    </a>
+    </div>
+    <div>
+    <a href="javascript:if(confirm('https://coding.imooc.com/?c=vuejs&mc_marking=7cf403c3c89d6fccf944791e71e7a959&mc_channel=vuezwsq  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://coding.imooc.com/?c=vuejs&mc_marking=7cf403c3c89d6fccf944791e71e7a959&mc_channel=vuezwsq'" tppabs="https://coding.imooc.com/?c=vuejs&mc_marking=7cf403c3c89d6fccf944791e71e7a959&mc_channel=vuezwsq" target="_blank" rel="sponsored noopener" class="logo">
+      <img id="s-imooc" alt="imooc">
+      <script>
+      (function(){
+        var el = document.getElementById("s-imooc");
+        var adImg = "../images/imooc-sponsor2.png"/*tpa=https://cn.vuejs.org/images/imooc-sponsor2.png*/;
+        var altImg = null;
+        var img = "../images/imooc-sponsor.png"/*tpa=https://cn.vuejs.org/images/imooc-sponsor.png*/;
+        el.src = adImg || (altImg && Math.random() >= 0.5 ? altImg : img);
+      })()
+      </script>
+    </a>
+    </div>
+  </div>
+</div>
+<!--
+
+<div id="sidebar-sponsors-platinum-left">
+  <div class="main-sponsor">
+    <span>ç™½é‡‘èµåŠ©å•†</span>
+    <div>
+    <a href="https://vueschool.io/?utm_source=Vuejs.org&utm_medium=Banner&utm_campaign=Sponsored%20Banner&utm_content=V1" target="_blank" rel="sponsored noopener" class="logo">
+      <img src="/images/vueschool.png" alt="VueSchool">
+    </a>
+    <a href="https://vehikl.com/" target="_blank" rel="sponsored noopener" class="logo">
+      <img src="/images/vehikl.png" alt="Vehikl">
+    </a>
+    <a href="https://retool.com/?utm_source=sponsor&utm_campaign=vue" target="_blank" rel="sponsored noopener" class="logo">
+      <img src="/images/retool.png" alt="Retool">
+    </a>
+    <a href="https://passionatepeople.io/" target="_blank" rel="sponsored noopener" class="logo">
+      <img src="/images/passionate_people.png" alt="Passionate People">
+    </a>
+    <a href="https://www.storyblok.com" target="_blank" rel="sponsored noopener" class="logo">
+      <img src="/images/storyblok.png" alt="Storyblok">
+    </a>
+    </div>
+  </div>
+  <a class="become-backer" href="/support-vuejs">
+    æˆä¸ºèµåŠ©è€…
+  </a>
+</div>
+
+
+-->
+
+      
+        <h2>
+          
+          
+          
+            <select class="version-select">
+              <option value="v3">3.x-beta</option>
+              <option value="SELF" selected>2.x</option>
+              <option value="v1">1.0</option>
+              <option value="012">0.12</option>
+              <option value="011">0.11</option>
+            </select>
+          
+        </h2>
+        <ul class="menu-root">
+  
+    
+    
+    <li>
+      <a href="index.html" tppabs="https://cn.vuejs.org/about/index.html" class="sidebar-link current">è´¡çŒ®è€…</a>
+    </li>
+  
+</ul>
+
+      
+    </div>
+  </div>
+</div>
+<!--
+
+<div id="sidebar-sponsors-platinum-right">
+  <div class="main-sponsor">
+    <span>ç™½é‡‘èµåŠ©å•†</span>
+    <div>
+    <a href="https://vueschool.io/?utm_source=Vuejs.org&utm_medium=Banner&utm_campaign=Sponsored%20Banner&utm_content=V1" target="_blank" rel="sponsored noopener" class="logo">
+      <img src="/images/vueschool.png" alt="VueSchool">
+    </a>
+    <a href="https://vehikl.com/" target="_blank" rel="sponsored noopener" class="logo">
+      <img src="/images/vehikl.png" alt="Vehikl">
+    </a>
+    <a href="https://retool.com/?utm_source=sponsor&utm_campaign=vue" target="_blank" rel="sponsored noopener" class="logo">
+      <img src="/images/retool.png" alt="Retool">
+    </a>
+    <a href="https://passionatepeople.io/" target="_blank" rel="sponsored noopener" class="logo">
+      <img src="/images/passionate_people.png" alt="Passionate People">
+    </a>
+    <a href="https://www.storyblok.com" target="_blank" rel="sponsored noopener" class="logo">
+      <img src="/images/storyblok.png" alt="Storyblok">
+    </a>
+    </div>
+  </div>
+  <a class="become-backer" href="/support-vuejs">
+    æˆä¸ºèµåŠ©è€…
+  </a>
+</div>
+
+
+-->
+
+
+<div class="content about with-sidebar ">
+  
+    
+      
+<div id="ad">
+  <span style="float: right;">å¹¿å‘Š</span>
+  <a href="javascript:if(confirm('https://coding.imooc.com/?c=vuejs&mc_marking=2243e4b1af42da32ee6e9f088e646c7c&mc_channel=vuezwsq  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://coding.imooc.com/?c=vuejs&mc_marking=2243e4b1af42da32ee6e9f088e646c7c&mc_channel=vuezwsq'" tppabs="https://coding.imooc.com/?c=vuejs&mc_marking=2243e4b1af42da32ee6e9f088e646c7c&mc_channel=vuezwsq" target="_blank" rel="nofollow">
+    <img src="../images/imooc-ad3.png" tppabs="https://cn.vuejs.org/images/imooc-ad3.png" alt="Vue.jså®æˆ˜é¡¹ç›®å¼€å‘æ•™ç¨‹">
+  </a>
+  <!-- <script
+    async
+    type="text/javascript"
+    src="//cdn.carbonads.com/carbon.js?serve=CEBDT27Y&placement=vuejsorg"
+    id="_carbonads_js">
+  </script> -->
+</div>
+
+
+    
+  
+  
+    <h1>è´¡çŒ®è€…</h1>
+  
+
+  <div class="ad-pagetop">
+  <a href="javascript:if(confirm('http://www.vueshop.com.cn/index.php?http_referer=vuejs  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.vueshop.com.cn/index.php?http_referer=vuejs'" tppabs="http://www.vueshop.com.cn/index.php?http_referer=vuejs" target="_blank" rel="noopener noreferrer">
+    <span class="name">VUEshop</span>
+    <span class="description">ä¸­å›½å…è´¹å•†åŸç³»ç»Ÿ - æœè±¹å•†åŸç³»ç»Ÿ - å…è´¹50å°æ—¶ Vue è§†é¢‘æ•™ç¨‹</span>
+    <span class="action">ç«‹å³æŸ¥çœ‹ &gt;</span>
+  </a>
+</div>
+
+
+  
+    <h2 id="Guide-ç¿»è¯‘è´¡çŒ®"><a href="#Guide-ç¿»è¯‘è´¡çŒ®" class="headerlink" title="Guide ç¿»è¯‘è´¡çŒ®"></a>Guide ç¿»è¯‘è´¡çŒ®</h2><h3 id="Essentials-åŸºç¡€"><a href="#Essentials-åŸºç¡€" class="headerlink" title="Essentials  åŸºç¡€"></a>Essentials  åŸºç¡€</h3><table>
+<thead>
+<tr>
+<th>åºå·</th>
+<th>å¯¹åº”æ–‡æ¡£æ–‡ä»¶å</th>
+<th>ä¸­æ–‡æ ‡é¢˜</th>
+<th>ç¿»è¯‘è´¡çŒ®è€…</th>
+<th>æ ¡å¯¹ä¸»è¦è´¡çŒ®è€…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>installation.md</td>
+<td>å®‰è£…</td>
+<td><a href="javascript:if(confirm('https://github.com/dingyiming  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/dingyiming'" tppabs="https://github.com/dingyiming" target="_blank" rel="noopener">dingyiming</a></td>
+<td><a href="javascript:if(confirm('https://github.com/ATLgo  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/ATLgo'" tppabs="https://github.com/ATLgo" target="_blank" rel="noopener">ATLgo</a> <a href="javascript:if(confirm('https://github.com/70data  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/70data'" tppabs="https://github.com/70data" target="_blank" rel="noopener">70data</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td>index.md</td>
+<td>ä»‹ç»</td>
+<td><a href="javascript:if(confirm('https://github.com/hijiangtao  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/hijiangtao'" tppabs="https://github.com/hijiangtao" target="_blank" rel="noopener">hijiangtao</a></td>
+<td><a href="javascript:if(confirm('https://github.com/70data  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/70data'" tppabs="https://github.com/70data" target="_blank" rel="noopener">70data</a> <a href="javascript:if(confirm('https://github.com/ATLgo  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/ATLgo'" tppabs="https://github.com/ATLgo" target="_blank" rel="noopener">ATLgo</a></td>
+</tr>
+<tr>
+<td>3</td>
+<td>instance.md</td>
+<td>å®ä¾‹</td>
+<td><a href="javascript:if(confirm('https://github.com/dingyiming  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/dingyiming'" tppabs="https://github.com/dingyiming" target="_blank" rel="noopener">dingyiming</a></td>
+<td><a href="javascript:if(confirm('https://github.com/70data  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/70data'" tppabs="https://github.com/70data" target="_blank" rel="noopener">70data</a> <a href="javascript:if(confirm('https://github.com/ATLgo  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/ATLgo'" tppabs="https://github.com/ATLgo" target="_blank" rel="noopener">ATLgo</a></td>
+</tr>
+<tr>
+<td>4</td>
+<td>syntax.md</td>
+<td>æ¨¡æ¿è¯­æ³•</td>
+<td><a href="javascript:if(confirm('https://github.com/daix6  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/daix6'" tppabs="https://github.com/daix6" target="_blank" rel="noopener">daix6</a></td>
+<td><a href="javascript:if(confirm('https://github.com/70data  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/70data'" tppabs="https://github.com/70data" target="_blank" rel="noopener">70data</a></td>
+</tr>
+<tr>
+<td>5</td>
+<td>computed.md</td>
+<td>è®¡ç®—å± æ€§</td>
+<td><a href="javascript:if(confirm('https://github.com/dingyiming  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/dingyiming'" tppabs="https://github.com/dingyiming" target="_blank" rel="noopener">dingyiming</a> <a href="javascript:if(confirm('https://github.com/70data  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/70data'" tppabs="https://github.com/70data" target="_blank" rel="noopener">70data</a></td>
+<td><a href="javascript:if(confirm('https://github.com/70data  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/70data'" tppabs="https://github.com/70data" target="_blank" rel="noopener">70data</a></td>
+</tr>
+<tr>
+<td>6</td>
+<td>class-and-style.md</td>
+<td>Class ä¸ Style ç»‘å®š</td>
+<td><a href="javascript:if(confirm('https://github.com/595074187  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/595074187'" tppabs="https://github.com/595074187" target="_blank" rel="noopener">595074187</a></td>
+<td><a href="javascript:if(confirm('https://github.com/70data  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/70data'" tppabs="https://github.com/70data" target="_blank" rel="noopener">70data</a></td>
+</tr>
+<tr>
+<td>7</td>
+<td>conditional.md</td>
+<td>æ¡ä»¶æ¸²æŸ“</td>
+<td><a href="javascript:if(confirm('https://github.com/dingyiming  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/dingyiming'" tppabs="https://github.com/dingyiming" target="_blank" rel="noopener">dingyiming</a></td>
+<td><a href="javascript:if(confirm('https://github.com/hgcoder  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/hgcoder'" tppabs="https://github.com/hgcoder" target="_blank" rel="noopener">hgcoder</a></td>
+</tr>
+<tr>
+<td>8</td>
+<td>list.md</td>
+<td>åˆ—è¡¨æ¸²æŸ“</td>
+<td><a href="javascript:if(confirm('https://github.com/tingtien  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/tingtien'" tppabs="https://github.com/tingtien" target="_blank" rel="noopener">tingtien</a></td>
+<td><a href="javascript:if(confirm('https://github.com/hgcoder  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/hgcoder'" tppabs="https://github.com/hgcoder" target="_blank" rel="noopener">hgcoder</a></td>
+</tr>
+<tr>
+<td>9</td>
+<td>events.md</td>
+<td>äº‹ä»¶å¤„ç†å™¨</td>
+<td><a href="javascript:if(confirm('https://github.com/dingyiming  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/dingyiming'" tppabs="https://github.com/dingyiming" target="_blank" rel="noopener">dingyiming</a></td>
+<td><a href="javascript:if(confirm('https://github.com/yangzj1992  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/yangzj1992'" tppabs="https://github.com/yangzj1992" target="_blank" rel="noopener">yangzj1992</a></td>
+</tr>
+<tr>
+<td>10</td>
+<td>forms.md</td>
+<td>è¡¨å•æ§ä»¶ç»‘å®š</td>
+<td><a href="javascript:if(confirm('https://github.com/dingyiming  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/dingyiming'" tppabs="https://github.com/dingyiming" target="_blank" rel="noopener">dingyiming</a></td>
+<td><a href="javascript:if(confirm('https://github.com/yangzj1992  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/yangzj1992'" tppabs="https://github.com/yangzj1992" target="_blank" rel="noopener">yangzj1992</a></td>
+</tr>
+<tr>
+<td>11</td>
+<td>components.md</td>
+<td>ç»„ä»¶</td>
+<td><a href="javascript:if(confirm('https://github.com/ezreally  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/ezreally'" tppabs="https://github.com/ezreally" target="_blank" rel="noopener">ezreally</a></td>
+<td><a href="javascript:if(confirm('https://github.com/cuiyongjian  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/cuiyongjian'" tppabs="https://github.com/cuiyongjian" target="_blank" rel="noopener">cuiyongjian</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="Advanced-è¿›é˜¶"><a href="#Advanced-è¿›é˜¶" class="headerlink" title="Advanced  è¿›é˜¶"></a>Advanced  è¿›é˜¶</h3><table>
+<thead>
+<tr>
+<th>åºå·</th>
+<th>å¯¹åº”æ–‡æ¡£æ–‡ä»¶å</th>
+<th>ä¸­æ–‡æ ‡é¢˜</th>
+<th>ç¿»è¯‘è´¡çŒ®è€…</th>
+<th>æ ¡å¯¹ä¸»è¦è´¡çŒ®è€…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>12</td>
+<td>transitions.md</td>
+<td>è¿‡æ¸¡: è¿›å…¥, ç¦»å¼€, å’Œ åˆ—è¡¨</td>
+<td><a href="javascript:if(confirm('https://github.com/hilongjw  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/hilongjw'" tppabs="https://github.com/hilongjw" target="_blank" rel="noopener">awe</a></td>
+<td><a href="javascript:if(confirm('https://github.com/bhnddowinf  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/bhnddowinf'" tppabs="https://github.com/bhnddowinf" target="_blank" rel="noopener">bhnddowinf</a> <a href="javascript:if(confirm('https://github.com/StoneQI  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/StoneQI'" tppabs="https://github.com/StoneQI" target="_blank" rel="noopener">StoneQI</a></td>
+</tr>
+<tr>
+<td>13</td>
+<td>transitioning-state.md</td>
+<td>è¿‡æ¸¡çŠ¶æ€</td>
+<td><a href="javascript:if(confirm('https://github.com/hilongjw  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/hilongjw'" tppabs="https://github.com/hilongjw" target="_blank" rel="noopener">awe</a></td>
+<td><a href="javascript:if(confirm('https://github.com/bhnddowinf  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/bhnddowinf'" tppabs="https://github.com/bhnddowinf" target="_blank" rel="noopener">bhnddowinf</a></td>
+</tr>
+<tr>
+<td>14</td>
+<td>render-function.md</td>
+<td>Render å‡½æ•°</td>
+<td><a href="javascript:if(confirm('https://github.com/hilongjw  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/hilongjw'" tppabs="https://github.com/hilongjw" target="_blank" rel="noopener">awe</a></td>
+<td><a href="javascript:if(confirm('https://github.com/bhnddowinf  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/bhnddowinf'" tppabs="https://github.com/bhnddowinf" target="_blank" rel="noopener">bhnddowinf</a></td>
+</tr>
+<tr>
+<td>15</td>
+<td>reactivity.md</td>
+<td>æ·±å…¥å“åº”å¼åŸç†</td>
+<td><a href="javascript:if(confirm('https://github.com/veaba  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/veaba'" tppabs="https://github.com/veaba" target="_blank" rel="noopener">veaba</a></td>
+<td><a href="javascript:if(confirm('https://github.com/yangzj1992  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/yangzj1992'" tppabs="https://github.com/yangzj1992" target="_blank" rel="noopener">yangzj1992</a></td>
+</tr>
+<tr>
+<td>16</td>
+<td>custom-directive.md</td>
+<td>è‡ªå®šä¹‰æŒ‡ä»¤</td>
+<td><a href="javascript:if(confirm('https://github.com/hurrytospring  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/hurrytospring'" tppabs="https://github.com/hurrytospring" target="_blank" rel="noopener">hurrytospring</a></td>
+<td><a href="javascript:if(confirm('https://github.com/yangzj1992  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/yangzj1992'" tppabs="https://github.com/yangzj1992" target="_blank" rel="noopener">yangzj1992</a></td>
+</tr>
+<tr>
+<td>17</td>
+<td>mixins.md</td>
+<td>æ··åˆ</td>
+<td><a href="javascript:if(confirm('https://github.com/hurrytospring  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/hurrytospring'" tppabs="https://github.com/hurrytospring" target="_blank" rel="noopener">hurrytospring</a></td>
+<td><a href="javascript:if(confirm('https://github.com/bhnddowinf  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/bhnddowinf'" tppabs="https://github.com/bhnddowinf" target="_blank" rel="noopener">bhnddowinf</a></td>
+</tr>
+<tr>
+<td>18</td>
+<td>plugins.md</td>
+<td>æ’ä»¶</td>
+<td><a href="javascript:if(confirm('https://github.com/hgcoder  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/hgcoder'" tppabs="https://github.com/hgcoder" target="_blank" rel="noopener">hgcoder</a></td>
+<td><a href="javascript:if(confirm('https://github.com/hgcoder  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/hgcoder'" tppabs="https://github.com/hgcoder" target="_blank" rel="noopener">hgcoder</a></td>
+</tr>
+<tr>
+<td>19</td>
+<td>single-file-components.md</td>
+<td>å•æ–‡ä»¶ç»„ä»¶</td>
+<td><a href="javascript:if(confirm('https://github.com/ATLgo  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/ATLgo'" tppabs="https://github.com/ATLgo" target="_blank" rel="noopener">ATLgo</a></td>
+<td><a href="javascript:if(confirm('https://github.com/zhouzihanntu  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/zhouzihanntu'" tppabs="https://github.com/zhouzihanntu" target="_blank" rel="noopener">zhouzihanntu</a></td>
+</tr>
+<tr>
+<td>20</td>
+<td>routing.md</td>
+<td>è·¯ç”±</td>
+<td><a href="javascript:if(confirm('https://github.com/dingyiming  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/dingyiming'" tppabs="https://github.com/dingyiming" target="_blank" rel="noopener">dingyiming</a></td>
+<td><a href="javascript:if(confirm('https://github.com/mlyknown  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/mlyknown'" tppabs="https://github.com/mlyknown" target="_blank" rel="noopener">mlyknown</a></td>
+</tr>
+<tr>
+<td>21</td>
+<td>state-management.md</td>
+<td>çŠ¶æ€ç®¡ç†</td>
+<td><a href="javascript:if(confirm('https://github.com/dear-lizhihua  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/dear-lizhihua'" tppabs="https://github.com/dear-lizhihua" target="_blank" rel="noopener">dear-lizhihua</a></td>
+<td><a href="javascript:if(confirm('https://github.com/mlyknown  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/mlyknown'" tppabs="https://github.com/mlyknown" target="_blank" rel="noopener">mlyknown</a></td>
+</tr>
+<tr>
+<td>22</td>
+<td>unit-testing.md</td>
+<td>å•å…ƒæµ‹è¯•</td>
+<td><a href="javascript:if(confirm('https://github.com/70data  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/70data'" tppabs="https://github.com/70data" target="_blank" rel="noopener">70data</a></td>
+<td><a href="javascript:if(confirm('https://github.com/mlyknown  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/mlyknown'" tppabs="https://github.com/mlyknown" target="_blank" rel="noopener">mlyknown</a></td>
+</tr>
+<tr>
+<td>23</td>
+<td>ssr.md</td>
+<td>æœåŠ¡ç«¯æ¸²æŸ“</td>
+<td><a href="javascript:if(confirm('https://github.com/dingyiming  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/dingyiming'" tppabs="https://github.com/dingyiming" target="_blank" rel="noopener">dingyiming</a></td>
+<td><a href="javascript:if(confirm('https://github.com/yongbolv  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/yongbolv'" tppabs="https://github.com/yongbolv" target="_blank" rel="noopener">yongbolv</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="Migration-è¿ç§»"><a href="#Migration-è¿ç§»" class="headerlink" title="Migration  è¿ç§»"></a>Migration  è¿ç§»</h3><table>
+<thead>
+<tr>
+<th>åºå·</th>
+<th>å¯¹åº”æ–‡æ¡£æ–‡ä»¶å</th>
+<th>ä¸­æ–‡æ ‡é¢˜</th>
+<th>ç¿»è¯‘è´¡çŒ®è€…</th>
+<th>æ ¡å¯¹ä¸»è¦è´¡çŒ®è€…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>24</td>
+<td>migration.md</td>
+<td>1.xè¿ç§»</td>
+<td><a href="javascript:if(confirm('https://github.com/hurrytospring  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/hurrytospring'" tppabs="https://github.com/hurrytospring" target="_blank" rel="noopener">hurrytospring</a></td>
+<td><a href="javascript:if(confirm('https://github.com/yongbolv  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/yongbolv'" tppabs="https://github.com/yongbolv" target="_blank" rel="noopener">yongbolv</a></td>
+</tr>
+<tr>
+<td>27</td>
+<td>migration-vue-router.md</td>
+<td>vue-router 0.7.x è¿ç§»</td>
+<td><a href="javascript:if(confirm('https://github.com/forzajuve10  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/forzajuve10'" tppabs="https://github.com/forzajuve10" target="_blank" rel="noopener">forzajuve10</a></td>
+<td><a href="javascript:if(confirm('https://github.com/yizhixiaolongxia  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/yizhixiaolongxia'" tppabs="https://github.com/yizhixiaolongxia" target="_blank" rel="noopener">yizhixiaolongxia</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="Meta-æ›´å¤š"><a href="#Meta-æ›´å¤š" class="headerlink" title="Meta  æ›´å¤š"></a>Meta  æ›´å¤š</h3><table>
+<thead>
+<tr>
+<th>åºå·</th>
+<th>å¯¹åº”æ–‡æ¡£æ–‡ä»¶å</th>
+<th>ä¸­æ–‡æ ‡é¢˜</th>
+<th>ç¿»è¯‘è´¡çŒ®è€…</th>
+<th>æ ¡å¯¹ä¸»è¦è´¡çŒ®è€…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>25</td>
+<td>comparison.md</td>
+<td>å¯¹æ¯”å…¶ä»–æ¡†æ¶</td>
+<td><a href="javascript:if(confirm('https://github.com/yongbolv  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/yongbolv'" tppabs="https://github.com/yongbolv" target="_blank" rel="noopener">yongbolv</a></td>
+<td><a href="javascript:if(confirm('https://github.com/yangzj1992  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/yangzj1992'" tppabs="https://github.com/yangzj1992" target="_blank" rel="noopener">yangzj1992</a></td>
+</tr>
+<tr>
+<td>26</td>
+<td>join.md</td>
+<td>åŠ å…¥ Vue.js ç¤¾åŒº</td>
+<td><a href="javascript:if(confirm('https://github.com/daix6  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/daix6'" tppabs="https://github.com/daix6" target="_blank" rel="noopener">daix6</a></td>
+<td><a href="javascript:if(confirm('https://github.com/zhouzihanntu  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/zhouzihanntu'" tppabs="https://github.com/zhouzihanntu" target="_blank" rel="noopener">zhouzihanntu</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="APIç¿»è¯‘è´¡çŒ®"><a href="#APIç¿»è¯‘è´¡çŒ®" class="headerlink" title="APIç¿»è¯‘è´¡çŒ®"></a>APIç¿»è¯‘è´¡çŒ®</h2><table>
+<thead>
+<tr>
+<th>åºå·</th>
+<th>å¯¹åº”å°èŠ‚åç§°</th>
+<th>ä¸­æ–‡æ ‡é¢˜</th>
+<th>ç¿»è¯‘è´¡çŒ®è€…</th>
+<th>æ ¡å¯¹ä¸»è¦è´¡çŒ®è€…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Global Config</td>
+<td>å…¨å±€é…ç½®</td>
+<td><a href="javascript:if(confirm('https://github.com/dear-lizhihua  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/dear-lizhihua'" tppabs="https://github.com/dear-lizhihua" target="_blank" rel="noopener">dear-lizhihua</a></td>
+<td><a href="javascript:if(confirm('https://github.com/bhnddowinf  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/bhnddowinf'" tppabs="https://github.com/bhnddowinf" target="_blank" rel="noopener">bhnddowinf</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td>Global API</td>
+<td>å…¨å±€ API</td>
+<td><a href="javascript:if(confirm('https://github.com/dear-lizhihua  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/dear-lizhihua'" tppabs="https://github.com/dear-lizhihua" target="_blank" rel="noopener">dear-lizhihua</a></td>
+<td><a href="javascript:if(confirm('https://github.com/bhnddowinf  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/bhnddowinf'" tppabs="https://github.com/bhnddowinf" target="_blank" rel="noopener">bhnddowinf</a></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Options / Data</td>
+<td>é€‰é¡¹ / æ•°æ®</td>
+<td><a href="javascript:if(confirm('https://github.com/dear-lizhihua  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/dear-lizhihua'" tppabs="https://github.com/dear-lizhihua" target="_blank" rel="noopener">dear-lizhihua</a></td>
+<td><a href="javascript:if(confirm('https://github.com/bhnddowinf  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/bhnddowinf'" tppabs="https://github.com/bhnddowinf" target="_blank" rel="noopener">bhnddowinf</a></td>
+</tr>
+<tr>
+<td>4</td>
+<td>Options / DOM</td>
+<td>é€‰é¡¹ / DOM</td>
+<td><a href="javascript:if(confirm('https://github.com/ATLgo  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/ATLgo'" tppabs="https://github.com/ATLgo" target="_blank" rel="noopener">ATLgo</a></td>
+<td><a href="javascript:if(confirm('https://github.com/bhnddowinf  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/bhnddowinf'" tppabs="https://github.com/bhnddowinf" target="_blank" rel="noopener">bhnddowinf</a></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Options / Lifecycle Hooks</td>
+<td>é€‰é¡¹ / ç”Ÿå‘½å‘¨æœŸé’©å­</td>
+<td><a href="javascript:if(confirm('https://github.com/ATLgo  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/ATLgo'" tppabs="https://github.com/ATLgo" target="_blank" rel="noopener">ATLgo</a></td>
+<td><a href="javascript:if(confirm('https://github.com/bhnddowinf  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/bhnddowinf'" tppabs="https://github.com/bhnddowinf" target="_blank" rel="noopener">bhnddowinf</a></td>
+</tr>
+<tr>
+<td>6</td>
+<td>Options / Assets</td>
+<td>é€‰é¡¹ / èµ„æº</td>
+<td><a href="javascript:if(confirm('https://github.com/dingyiming  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/dingyiming'" tppabs="https://github.com/dingyiming" target="_blank" rel="noopener">dingyiming</a></td>
+<td><a href="javascript:if(confirm('https://github.com/bhnddowinf  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/bhnddowinf'" tppabs="https://github.com/bhnddowinf" target="_blank" rel="noopener">bhnddowinf</a></td>
+</tr>
+<tr>
+<td>7</td>
+<td>Options / Misc</td>
+<td>é€‰é¡¹ / æ‚é¡¹</td>
+<td><a href="javascript:if(confirm('https://github.com/dingyiming  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/dingyiming'" tppabs="https://github.com/dingyiming" target="_blank" rel="noopener">dingyiming</a></td>
+<td><a href="javascript:if(confirm('https://github.com/bhnddowinf  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/bhnddowinf'" tppabs="https://github.com/bhnddowinf" target="_blank" rel="noopener">bhnddowinf</a></td>
+</tr>
+<tr>
+<td>8</td>
+<td>Instance Properties</td>
+<td>å®ä¾‹å±æ€§</td>
+<td><a href="javascript:if(confirm('https://github.com/coolzjy  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/coolzjy'" tppabs="https://github.com/coolzjy" target="_blank" rel="noopener">coolzjy</a></td>
+<td><a href="javascript:if(confirm('https://github.com/bhnddowinf  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/bhnddowinf'" tppabs="https://github.com/bhnddowinf" target="_blank" rel="noopener">bhnddowinf</a></td>
+</tr>
+<tr>
+<td>9</td>
+<td>Instance Methods / Data</td>
+<td>å®ä¾‹æ–¹æ³• / æ•°æ®</td>
+<td><a href="javascript:if(confirm('https://github.com/dingyiming  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/dingyiming'" tppabs="https://github.com/dingyiming" target="_blank" rel="noopener">dingyiming</a></td>
+<td><a href="javascript:if(confirm('https://github.com/bhnddowinf  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/bhnddowinf'" tppabs="https://github.com/bhnddowinf" target="_blank" rel="noopener">bhnddowinf</a></td>
+</tr>
+<tr>
+<td>10</td>
+<td>Instance Methods / Events</td>
+<td>å®ä¾‹æ–¹æ³• / äº‹ä»¶</td>
+<td><a href="javascript:if(confirm('https://github.com/mlyknown  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/mlyknown'" tppabs="https://github.com/mlyknown" target="_blank" rel="noopener">mlyknown</a></td>
+<td><a href="javascript:if(confirm('https://github.com/bhnddowinf  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/bhnddowinf'" tppabs="https://github.com/bhnddowinf" target="_blank" rel="noopener">bhnddowinf</a></td>
+</tr>
+<tr>
+<td>11</td>
+<td>Instance Methods / Lifecycle</td>
+<td>å®ä¾‹æ–¹æ³• / ç”Ÿå‘½å‘¨æœŸ</td>
+<td><a href="javascript:if(confirm('https://github.com/mlyknown  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/mlyknown'" tppabs="https://github.com/mlyknown" target="_blank" rel="noopener">mlyknown</a></td>
+<td><a href="javascript:if(confirm('https://github.com/bhnddowinf  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/bhnddowinf'" tppabs="https://github.com/bhnddowinf" target="_blank" rel="noopener">bhnddowinf</a></td>
+</tr>
+<tr>
+<td>12</td>
+<td>Directives</td>
+<td>æŒ‡ä»¤</td>
+<td><a href="javascript:if(confirm('https://github.com/dingyiming  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/dingyiming'" tppabs="https://github.com/dingyiming" target="_blank" rel="noopener">dingyiming</a></td>
+<td><a href="javascript:if(confirm('https://github.com/bhnddowinf  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/bhnddowinf'" tppabs="https://github.com/bhnddowinf" target="_blank" rel="noopener">bhnddowinf</a></td>
+</tr>
+<tr>
+<td>13</td>
+<td>Special Attributes</td>
+<td>ç‰¹æ®Šå…ƒç´ </td>
+<td><a href="javascript:if(confirm('https://github.com/70data  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/70data'" tppabs="https://github.com/70data" target="_blank" rel="noopener">70data</a></td>
+<td><a href="javascript:if(confirm('https://github.com/bhnddowinf  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/bhnddowinf'" tppabs="https://github.com/bhnddowinf" target="_blank" rel="noopener">bhnddowinf</a></td>
+</tr>
+<tr>
+<td>14</td>
+<td>Built-In Components</td>
+<td>å†…ç½®çš„ç»„ä»¶</td>
+<td><a href="javascript:if(confirm('https://github.com/dear-lizhihua  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/dear-lizhihua'" tppabs="https://github.com/dear-lizhihua" target="_blank" rel="noopener">dear-lizhihua</a></td>
+<td><a href="javascript:if(confirm('https://github.com/bhnddowinf  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/bhnddowinf'" tppabs="https://github.com/bhnddowinf" target="_blank" rel="noopener">bhnddowinf</a></td>
+</tr>
+<tr>
+<td>15</td>
+<td>VNode Interface</td>
+<td>VNode æ¥å£</td>
+<td><a href="javascript:if(confirm('https://github.com/70data  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/70data'" tppabs="https://github.com/70data" target="_blank" rel="noopener">70data</a></td>
+<td><a href="javascript:if(confirm('https://github.com/dear-lizhihua  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/dear-lizhihua'" tppabs="https://github.com/dear-lizhihua" target="_blank" rel="noopener">dear-lizhihua</a></td>
+</tr>
+<tr>
+<td>16</td>
+<td>Server-Side Rendering</td>
+<td>æœåŠ¡ç«¯æ¸²æŸ“</td>
+<td><a href="javascript:if(confirm('https://github.com/70data  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/70data'" tppabs="https://github.com/70data" target="_blank" rel="noopener">70data</a></td>
+<td><a href="javascript:if(confirm('https://github.com/dear-lizhihua  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/dear-lizhihua'" tppabs="https://github.com/dear-lizhihua" target="_blank" rel="noopener">dear-lizhihua</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="ç¤ºä¾‹ç¿»è¯‘"><a href="#ç¤ºä¾‹ç¿»è¯‘" class="headerlink" title="ç¤ºä¾‹ç¿»è¯‘"></a>ç¤ºä¾‹ç¿»è¯‘</h2><p>ç¿»è¯‘è´¡çŒ®è€… ï¼š <a href="javascript:if(confirm('https://github.com/lindazhang102  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/lindazhang102'" tppabs="https://github.com/lindazhang102" target="_blank" rel="noopener">lindazhang102</a></p>
+<h2 id="æ„Ÿè°¢æ‰€æœ‰å‚ä¸ç¿»è¯‘çš„æœ‹å‹ä»¬ï¼"><a href="#æ„Ÿè°¢æ‰€æœ‰å‚ä¸ç¿»è¯‘çš„æœ‹å‹ä»¬ï¼" class="headerlink" title="æ„Ÿè°¢æ‰€æœ‰å‚ä¸ç¿»è¯‘çš„æœ‹å‹ä»¬ï¼"></a>æ„Ÿè°¢æ‰€æœ‰å‚ä¸ç¿»è¯‘çš„æœ‹å‹ä»¬ï¼</h2>
+  
+  
+  <div class="footer">
+      <script src="../../m.servedby-buysellads.com/monetization.js" tppabs="https://m.servedby-buysellads.com/monetization.js" type="text/javascript"></script>
+<div id="bsa-native"></div>
+<script>
+_bsa.init('custom', 'CKYD62QM', 'placement:vuejsorg',
+  {
+    target: '#bsa-native',
+    template: '<a class="native-box" href="##statlink##"><div class="native-sponsor">Sponsor</div><div class="native-text"><strong>##company##</strong> â€” ##description##</div></a>'
+  }
+);
+</script>
+
+
+    å‘ç°é”™è¯¯ï¼Ÿæƒ³å‚ä¸ç¼–è¾‘ï¼Ÿ
+    <a href="javascript:if(confirm('https://github.com/vuejs/cn.vuejs.org/blob/master/src/about/index.md  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/vuejs/cn.vuejs.org/blob/master/src/about/index.md'" tppabs="https://github.com/vuejs/cn.vuejs.org/blob/master/src/about/index.md" rel="noopener" target="_blank">
+      åœ¨ GitHub ä¸Šç¼–è¾‘æ­¤é¡µï¼
+    </a>
+  </div>
+</div>
+
+      </div>
+      <script src="../js/smooth-scroll.min.js" tppabs="https://cn.vuejs.org/js/smooth-scroll.min.js"></script>
+    
+
+    <!-- main custom script for sidebars, version selects etc. -->
+    <script src="../js/css.escape.js" tppabs="https://cn.vuejs.org/js/css.escape.js"></script>
+    <script src="../js/common.js" tppabs="https://cn.vuejs.org/js/common.js"></script>
+
+    <!-- search -->
+    <link href="../../code.bdstatic.com/npm/docsearch.js@1.5.0/dist/cdn/docsearch.min.css" tppabs="https://code.bdstatic.com/npm/docsearch.js@1.5.0/dist/cdn/docsearch.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../css/search.css" tppabs="https://cn.vuejs.org/css/search.css">
+    <script src="../../code.bdstatic.com/npm/docsearch.js@1.5.0/dist/cdn/docsearch.min.js" tppabs="https://code.bdstatic.com/npm/docsearch.js@1.5.0/dist/cdn/docsearch.min.js"></script>
+    <script>
+    [
+      '#search-query-nav',
+      '#search-query-sidebar',
+      '#search-query-menu'
+    ].forEach(function (selector) {
+      if (!document.querySelector(selector)) return
+      // search index defaults to v2
+      var match = window.location.pathname.match(/^\/(v\d+)/)
+      var version = match ? match[1] : 'v2'
+      docsearch({
+      appId: 'BH4D9OD16A',
+      apiKey: '5638280abff9d207417bb03be05f0b25',
+      indexName: 'vuejs_cn2',
+      inputSelector: selector,
+      algoliaOptions: { facetFilters: ["version:" + version] },
+      autocompleteOptions: { hint: false, appendTo: 'body'}
+      })
+    })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1244 @@
+# ES6
+
+* Babel 默认不转码的 API 非常多，详细清单可以查看`babel-plugin-transform-runtime`模块的[definitions.js](https://github.com/babel/babel/blob/master/packages/babel-plugin-transform-runtime/src/runtime-corejs3-definitions.js)文件。
+
+## 一、let和const
+
+### 1. let
+
+#### 1.1 let的特性
+
+1. `let`声明的变量只在它所在的代码块有效。
+
+2. `for`循环还有一个特别之处，就是设置循环变量的那部分是一个父作用域，而循环体内部是一个单独的子作用域。
+
+   * for循环每次都会执行初始化语句let i = 0
+
+     > 如果每一轮循环的变量`i`都是重新声明的，那它怎么知道上一轮循环的值，从而计算出本轮循环的值？这是因为 JavaScript 引擎内部会记住上一轮循环的值，初始化本轮的变量`i`时，就在上一轮循环的基础上进行计算。
+
+3. 不存在变量提升
+
+4. 存在暂时性死区
+
+   * 在代码块内，使用`let`命令声明变量之前，该变量都是不可用的。（即使在外层作用域通过var声明过）
+
+   * “暂时性死区”也意味着`typeof`不再是一个百分之百安全的操作。
+
+     > 如果在let x 之前使用了typeof x，则报错
+     >
+     > 如果一个变量根本没有被声明，使用`typeof`反而不会报错。
+
+   * 函数的形参默认是let变量
+
+   * 本质：只要一进入当前作用域，所要使用的变量就已经存在了，但是不可获取，只有等到声明变量的那一行代码出现，才可以获取和使用该变量。
+
+5. `let`不允许重复声明
+
+6. `let` 具有块级作用域
+
+7. ES6 函数声明类似与let（具有块级作用域，对比es5只允许在顶级作用域和函数作用域声明函数），但是有些浏览器并不遵守
+
+   * 所以在块级作用域声明函数，最好使用 函数表达式
+
+     > `let a = function(){}`函数表达式没有函数提升
+
+8. ES6 的块级作用域必须有大括号，如果没有大括号，JavaScript 引擎就认为不存在块级作用域。
+
+   > `let`只能出现在当前作用域的顶层
+   >
+   > ```javascript
+   > if (true) let x = 1;// 报错,没有块级作用域，let又不在当前（全局）作用域的顶层
+   > ```
+
+### 2. const
+
+#### 2.1 const的特性
+
+1. 同let
+
+2. `const`保证的是变量 指向的那个内存地址 所保存的数据不得改动。
+
+   * 简单类型：上述内存地址就是储存变量值的空间，就是值不可改动
+
+   * 复杂类型：上述内存地址就是储存变量==指针==的空间，
+
+     * 不可给const变量赋值另一个复杂类型（字面量），因为这修改了const保存的引用
+
+     * 但是改变给这个const复杂类型的属性
+
+       > 如果真的想将对象冻结，应该使用`Object.freeze`方法。
+       >
+       > 除了将对象本身冻结，对象的属性也应该冻结。下面是一个将对象彻底冻结的函数。
+       >
+       > ```javascript
+       > var constantize = (obj) => {
+       >   Object.freeze(obj);
+       >   Object.keys(obj).forEach( (key, i) => {
+       >     if ( typeof obj[key] === 'object' ) {
+       >       constantize( obj[key] );
+       >     }
+       >   });
+       > };
+       > ```
+
+### 3. ES6 声明变量的六种方法
+
+1. var
+2. function
+3. let
+4. const
+5. import
+6. class
+
+### 4. 顶层对象的属性
+
+* 顶层对象指的是：window 或 global
+
+1. `var`命令和`function`命令声明的全局变量，依旧是顶层对象的属性；
+2. let`命令、`const`命令、`class`命令声明的全局变量，不属于顶层对象的属性。
+
+## 二、变量的解构赋值
+
+### 1. 数组解构赋值
+
+#### 1.1 基本用法
+
+```js
+let [a, b, c] = [1, 2, 3];
+
+let [foo, [[bar], baz]] = [1, [[2], 3]];
+foo // 1
+bar // 2
+baz // 3
+
+let [head, ...tail] = [1, 2, 3, 4];
+head // 1
+tail // [2, 3, 4]
+
+let [x, y, z] = new Set(['a', 'b', 'c']);
+x // "a"
+```
+
+1. 本质上，这种写法属于“模式匹配”，只要等号两边的模式相同，左边的变量就会被赋予对应的（右边数组中的）值。
+
+2. 如果解构不成功，变量的值就等于`undefined`。
+
+3. 不完全解构，即等号左边的模式，只匹配一部分的等号右边的数组。这种情况下，解构依然可以成功。
+
+4. 对于 Set 结构，也可以使用数组的解构赋值。
+
+   > 事实上，只要某种数据结构具有 Iterator 接口，都可以采用数组形式的解构赋值。
+
+5. 解构赋值允许指定默认值。
+
+   ```js
+   let [x, y = 'b'] = ['a', undefined]; // x='a', y='b'
+   ```
+
+   > 注意，ES6 内部使用严格相等运算符（`===`），判断一个位置是否有值。所以，只有当一个数组成员严格等于`undefined`，默认值才会生效。
+   >
+   > ```js
+   > let [x = 1] = [null];
+   > x // null
+   > ```
+   >
+   > 上面代码中，如果一个数组成员是`null`，默认值就不会生效，因为`null`不严格等于`undefined`。
+
+6. 惰性求值：如果默认值是一个表达式，那么这个表达式是惰性求值的，即只有在用到的时候，才会求值。
+  
+   * 等价于先声明，用到时才初始化（决定使用解构的值（不是undefined），还是用表达式求默认值）
+7. 默认值可以引用解构赋值的其他变量，但该变量必须已经声明。
+
+### 2. 对象的解构赋值
+
+```js
+// 例一
+let { log, sin, cos } = Math;
+
+// 例二
+const { log } = console;
+log('hello') // hello
+```
+
+1. 主要特性同数组
+
+2. 不同：数组是有序的，所以匹配的模式是位置（索引）；
+
+   * 而对象解构赋值匹配的模式是属性（变量必须与属性同名，才能取到正确的值。）
+
+   * 以下表名了对象解构赋值的实质
+
+     * ==过程==：拿foo去右边对象中找，如果找到了foo属性，就把它的值（'aaa'）赋值给变量baz
+
+     ```js
+     // 常用的方式无非是 模式foo与变量baz同名，所以简写了
+     let { foo: baz } = { foo: 'aaa', bar: 'bbb' };
+     baz // "aaa"
+     foo // error: foo is not defined
+     ```
+
+3. 例子
+
+   ```js
+   const node = {
+     loc: {
+       start: {
+         line: 1,
+         column: 5
+       }
+     }
+   };
+   
+   let { loc, loc: { start }, loc: { start: { line }} } = node;
+   line // 1
+   loc  // Object {start: Object}
+   start // Object {line: 1, column: 5}
+   ```
+
+4. 默认值规则同数组
+
+5. 由于数组本质是特殊的对象，因此可以对数组进行对象属性的解构。
+
+#### 2.1 注意
+
+（1）如果要将一个已经声明的变量用于解构赋值，必须非常小心。
+
+```javascript
+// 错误的写法
+let x;
+{x} = {x: 1};
+// SyntaxError: syntax error
+```
+
+上面代码的写法会报错，因为 JavaScript 引擎会将`{x}`理解成一个代码块，从而发生语法错误。只有不将大括号写在行首，避免 JavaScript 将其解释为代码块，才能解决这个问题。
+
+```javascript
+// 正确的写法
+let x;
+({x} = {x: 1});
+```
+
+上面代码将整个解构赋值语句，放在一个圆括号里面，就可以正确执行。
+
+### 3. 字符串的解构赋值
+
+```js
+const [a, b, c, d, e] = 'hello';
+a // "h"
+b // "e"
+c // "l"
+d // "l"
+e // "o"
+```
+
+1. 字符串也可以解构赋值。这是因为此时，字符串被转换成了一个类似数组的对象。
+
+2. 类似数组的对象都有一个`length`属性，因此还可以对这个属性解构赋值。
+
+   ```javascript
+   let {length : len} = 'hello';
+   len // 5
+   ```
+
+### 4. 数值和布尔值的解构赋值
+
+1. 解构赋值时，如果等号右边是数值和布尔值，则会先转为对象。
+
+```javascript
+// 数值和布尔值的包装对象都有toString属性，因此变量s都能取到值
+let {toString: s} = 123;
+s === Number.prototype.toString // true
+
+let {toString: s} = true;
+s === Boolean.prototype.toString // true
+```
+
+2. 解构赋值的规则是，只要等号右边的值不是对象或数组，就先将其转为对象。由于`undefined`和`null`无法转为对象，所以对它们进行解构赋值，都会报错。
+
+```javascript
+let { prop: x } = undefined; // TypeError
+let { prop: y } = null; // TypeError
+```
+
+### 5. 函数参数的解构赋值
+
+1. 数组形式的解构赋值
+2. 对象形式的结构赋值
+3. 可以使用默认值
+
+### 6. 注意
+
+1. 建议只要有可能，就不要在模式中放置圆括号。
+
+2. ES6 的规则是，只要有可能导致解构的歧义，就不得使用圆括号。
+
+3. 以下情况应该使用圆括号（不用圆括号，js引擎会把{x}当做1个代码块）
+
+   ```js
+   // 正确的写法
+   let x;
+   ({x} = {x: 1});
+   ```
+
+### 7. 用途
+
+1. **交换变量的值**
+
+   ```javascript
+   let x = 1;
+   let y = 2;
+   
+   [x, y] = [y, x];
+   ```
+
+2. **函数参数的默认值**
+
+   ```javascript
+   jQuery.ajax = function (url, {
+     async = true,
+     beforeSend = function () {},
+     cache = true,
+     complete = function () {},
+     crossDomain = false,
+     global = true,
+     // ... more config
+   } = {}) {
+     // ... do stuff
+   };
+   ```
+
+   指定参数的默认值，就避免了在函数体内部再写`var foo = config.foo || 'default foo';`这样的语句。
+
+3. **遍历 Map 结构**
+
+   任何部署了 Iterator 接口的对象，都可以用`for...of`循环遍历。Map 结构原生支持 Iterator 接口，配合变量的解构赋值，获取键名和键值就非常方便。
+
+   ```javascript
+   const map = new Map();
+   map.set('first', 'hello');
+   map.set('second', 'world');
+   
+   for (let [key, value] of map) {
+     console.log(key + " is " + value);
+   }
+   // first is hello
+   // second is world
+   ```
+
+   如果只想获取键名，或者只想获取键值，可以写成下面这样。
+
+   ```javascript
+   // 获取键名
+   for (let [key] of map) {
+     // ...
+   }
+   
+   // 获取键值
+   for (let [,value] of map) {
+     // ...
+   }
+   ```
+
+4. 更多用途详见：https://es6.ruanyifeng.com/#docs/destructuring
+   * **从函数返回多个值**
+   * **函数参数的定义**
+   * **提取 JSON 数据**
+   * 这些用途没有总结只是因为，没什么特别的
+
+## 三、字符串的扩展
+
+### 1. 字符的Unicode 表示法
+
+1. 允许采用`\uxxxx`形式表示一个字符，其中`xxxx`表示字符的 Unicode 码点。
+
+   ```javascript
+   "\u0061"
+   // "a"
+   ```
+
+2. 上述表示法只限于码点在`\u0000`~`\uFFFF`之间的字符。大于0xFFFF的码点，只要将码点放入大括号，就能正确解读该字符。
+
+   ```javascript
+   "\u{20BB7}"
+   // "𠮷"
+   ```
+
+3. 有了这种表示法之后，JavaScript 共有 6 种方法可以表示一个字符。
+
+   * `'字符'`
+   * `'\字符'`
+   * `'\字符Unicode编码的八进制数值'`
+   * `'\x字符Unicode编码的十六进制数值'`
+   * `'\u四位十六进制的Unicode码点'`
+   * `'\u{字符Unicode编码的十六进制数值}'`
+
+   ```javascript
+   '\z' === 'z'  // true
+   '\172' === 'z' // true
+   '\x7A' === 'z' // true
+   '\u007A' === 'z' // true
+   '\u{7A}' === 'z' // true
+   ```
+
+### 2. 字符串的for...of循环
+
+1. ES6 为字符串添加了遍历器接口（详见《Iterator》一章），使得字符串可以被`for...of`循环遍历。
+
+   ```javascript
+   for (let codePoint of 'foo') {
+     console.log(codePoint)
+   }
+   // "f"
+   // "o"
+   // "o"
+   ```
+
+2. 这个`for...of`遍历器最大的优点是可以识别大于`0xFFFF`的码点
+
+### 3. 模板字符串
+
+1. 基本用法：我已经知道了
+2. 更多深入：https://es6.ruanyifeng.com/#docs/string
+
+## 四、字符串的新增方法
+
+1. includes()：返回布尔值，表示是否找到了参数字符串。
+
+2. startsWith()：返回布尔值，表示参数字符串是否在原字符串的头部。
+
+3. endsWith()：返回布尔值，表示参数字符串是否在原字符串的尾部。
+
+4. trimStart()：消除字符串头部的空格
+
+   * 返回的都是新字符串，不会修改原始字符串。
+
+5. trimEnd()：消除尾部的空格
+
+   * 返回的都是新字符串，不会修改原始字符串。
+
+6. *String.fromCodePoint()*
+
+   * 作用：从 Unicode 码点返回对应字符，可以识别大于`0xFFFF`的字符，弥补了`String.fromCharCode()`方法的不足（不能识别码点大于`0xFFFF`的字符）。
+   * 参数： Unicode 码点
+   * 返回值：Unicode 码点返回对应字符
+
+7. *str.codePointAt(index)*
+
+   * 作用：返回字符串指定索引的Unicode编码，可以识别大于`0xFFFF`的字符，弥补了`charCodeAt()`方法的不足（不能识别码点大于`0xFFFF`的字符）。
+
+   * `codePointAt()`方法返回的是码点的十进制值，如果想要十六进制的值，可以使用`toString()`方法转换一下。
+
+     ```javascript
+     let s = '𠮷a';
+     s.codePointAt(0).toString(16) // "20bb7"
+     s.codePointAt(2).toString(16) // "61"
+     // 字符串的索引是以 2字节字符为刻度的。'𠮷'的编码是"0x20bb7"（大于两个字节，4字节），所以它1个就占了0和1这两个索引
+     // 要处理这样的字符串，详见https://es6.ruanyifeng.com/#docs/string-methods
+     ```
+
+### 五、正则的扩展
+
+* 略
+
+## 六、数值的扩展
+
+### 1. 优化方法
+
+1. Number.isFinite()：检查1个值是否有限，即==不为Infinity==（js中的1个特殊数值，代表无穷大）
+   * 如果参数类型不是数值，`Number.isFinite`一律返回`false`。
+   * ES5中会先把非数值转换为数值类型，再做判断（会导致'25'这样的字符串返回true）
+2. Number.isNaN()：检查1个值是否为NaN（非数值）
+   * 只有NaN会返回true，其他（类型的）值一律返回false
+   * ES5中会先把非数值转换为数值类型，再做判断（会导致'NaN'这样的字符串返回true）
+3. Number.parseInt()：与parseInt()完全一样
+4. Number.parseFloat()：与parseFloat()完全一样
+5. Number.isInteger()：判断参数是否为整数
+   * JavaScript 内部，整数和浮点数采用的是同样的储存方法，所以 25 和 25.0 被视为同一个值。
+   * 注意：小数部分超过js的最小精度Number.EPSILON，则会被舍弃，例如：3.0000000000000002（小数部分小于Number.EPSILON，没有更多的二进制位来表示这么小的精度了，所以Number.isInteger()会返回true）
+
+### 2. Number.EPSILON
+
+* 它表示 1 与大于 1 的最小浮点数之间的差。即js能够表示的最小精度。
+
+* 它的值是 2 的 -52次方
+
+  * 十进制：0.00000000000000022204...(2前面.后面有15个0)
+
+    ```javascript
+    Number.EPSILON === Math.pow(2, -52)
+    // true
+    ```
+
+#### 2.1 解决相差极小的数值比较问题
+
+* ```javascript
+  let a = 0.1 + 0.2 // 0.30000000000000004
+  a === 0.3 // false
+  ```
+
+* 如上：浮点数计算是不精确的（与Number.EPSILON无关），这是计算机本身的特性决定的
+
+* 利用Number.EPSILON就可以方便地设置1个“能够接受的误差范围”。
+
+  * 比如，误差范围设为 2 的-50 次方（即`Number.EPSILON * Math.pow(2, 2)`），即如果两个浮点数的差小于这个值，我们就认为这两个浮点数相等。
+
+    ```
+    let a = 0.1 + 0.2 // 0.30000000000000004
+    if (Math.abs(a - 0.3) < Number.EPSILON * Math.pow(2, 2)) {
+      console.log(`${a}与0.3相等`)
+    }
+    ```
+
+### 3. Math新方法
+
+1. Math.cbrt()：求立方根
+2. Math.hypot()：求所有参数的平方和的平方根
+
+## 七、函数的扩展
+
+1. 箭头函数
+
+   * this
+   * 没有arguments对象，可以用扩展运算符替代
+
+2. 函数参数默认值
+
+3. rest参数（形式为`...变量名`）：rest 参数搭配的变量是一个数组，该变量将多余的参数放入数组中。
+
+4. 尾调用优化
+
+   * 尾调用之所以与其他调用不同，就在于它的特殊的调用位置。
+
+   * > 我们知道，函数调用会在内存形成一个“调用记录”，又称“调用帧”（call frame），保存调用位置和内部变量等信息。
+     >
+     > 如果在函数`A`的内部调用函数`B`，那么在`A`的调用帧上方，还会形成一个`B`的调用帧。
+     >
+     > 等到`B`运行结束，将结果返回到`A`，`B`的调用帧才会消失。
+     >
+     > 如果函数`B`内部还调用函数`C`，那就还有一个`C`的调用帧，以此类推。所有的调用帧，就形成一个“调用栈”（call stack）。
+
+   * 尾调用由于是函数的最后一步操作，所以不需要保留外层函数的调用帧，因为调用位置、内部变量等信息都不会再用到了，只要==直接用内层函数的调用帧，取代外层函数的调用帧==就可以了。
+
+   * > 1. 尾调用优化只在严格模式下开启，正常模式是无效的。
+     > 2. 只有不再用到外层函数的内部变量，内层函数的调用帧才会取代外层函数的调用帧，否则就无法进行“尾调用优化”。
+
+   * **因为：既然外层函数返回尾调用函数的返回值，那么就可以直接把内层函数的返回值，作为外层函数的返回值**
+
+   * 所以尾递归的空间复杂度是O(1)，根本不会栈溢出
+
+   * 改写尾递归的技巧：就是把所有用到的内部变量改写成函数的参数。
+
+     * 第1个参数就是每1次迭代的n值，一般递归的自变量都是从大到小
+
+     * 后续参数就是第m次迭代的结果（m从1开始）
+
+       * m=1，的结果 就是后续参数的默认值
+       * m=2，结果如何变化，就是尾递归实参的写法
+
+     * 例子：
+
+       ```js
+       // 求阶乘，第2个参数始终是第m次迭代的结果
+       function factorial(n, total = 1) {
+         if (n === 1) return total;
+         return factorial(n - 1, n * total);
+       }
+       // 求斐波那契数列，第2、3个参数始终是第m次迭代的结果（第m和m+1个数）
+       function Fibonacci2 (n , ac1 = 1 , ac2 = 1) {
+         if( n <= 1 ) {return ac1};
+         return Fibonacci2 (n - 1, ac2, ac1 + ac2);
+       }
+       ```
+
+## 八、数组的扩展
+
+1. 数组解构赋值
+
+2. 扩展运算符：扩展运算符（spread）是三个点（`...`）。它好比 rest 参数的逆运算，将一个数组转为用逗号分隔的参数序列。
+
+   * 可以代替函数的apply方法（不能替代apply的绑定this功能）
+
+   * 复制数组（克隆）
+
+   * 合并数组
+
+   * 与解构赋值结合
+
+   * 字符串转数组
+
+     ```javascript
+     [...'hello']  // [ "h", "e", "l", "l", "o" ]
+     ```
+
+   * 任何定义了遍历器（Iterator）接口的对象（参阅 Iterator 一章），都可以用扩展运算符转为真正的数组。
+
+     * 例如
+
+       ```javascript
+       let nodeList = document.querySelectorAll('div');
+       let array = [...nodeList];
+       ```
+
+### 1. 新方法
+
+1. arr.find()：数组实例的`find`方法，用于找出第一个符合条件的数组成员。
+   * 参数是一个回调函数，所有数组成员依次执行该回调函数，直到找出第一个返回值为`true`的成员，然后返回该成员。
+     * 回调函数接收的参数：value, index, arr
+   * 如果没有符合条件的成员，则返回`undefined`。
+2. arr.findIndex()：与`find`方法非常类似，返回第一个符合条件的数组成员的位置
+   * 参数是一个回调函数，所有数组成员依次执行该回调函数，直到找出第一个返回值为`true`的成员，然后返回该成员的位置。
+     * 回调函数接收的参数：value, index, arr
+   * 如果所有成员都不符合条件，则返回`-1`。
+3. arr.copyWithin()：从后两个参数指定的范围中，依次复制每一个元素到第1个参数指定的位置（及其后面的元素），会把目标位置的元素覆盖
+   * target（必需）：从该位置开始替换数据。如果为负值，表示倒数。
+   * start（可选）：从该位置开始读取数据，默认为 0。如果为负值，表示从末尾开始计算。
+   * end（可选）：到该位置前停止读取数据，默认等于数组长度。如果为负值，表示从末尾开始计算。
+
+4. arr.includes()：返回一个布尔值，表示某个数组是否包含给定的值
+   * 参数1：数组元素
+   * 参数2：起始索引
+   * indexOf的缺点：（includes没有以下缺点）
+     1. 要比较结果是否等于-1
+     2. NaN误判`[NaN].indexOf(NaN)// -1`
+5. arr.fill()：方法使用给定值，填充（覆盖）一个数组。
+   * `fill`方法还可以接受第二个和第三个参数，用于指定填充的起始位置和结束位置。
+   * 如果填充的类型为对象，那么被赋值的是同一个内存地址的对象，而不是深拷贝对象。
+6. arr.flat()：用于将嵌套的数组“拉平”，变成一维的数组。该方法返回一个新数组，==对原数据没有影响==。
+   * 参数：表示想要拉平的层数，默认为1。如果不管有多少层嵌套，都要转成一维数组，可以用`Infinity`关键字作为参数。
+7. ES6 提供三个新的方法——`entries()`，`keys()`和`values()`——用于遍历数组。它们都返回一个遍历器对象（详见《Iterator》一章），可以用`for...of`循环进行遍历，唯一的区别是`keys()`是对键名的遍历、`values()`是对键值的遍历，`entries()`是对键值对的遍历。
+
+## 九、对象的扩展
+
+1. 对象属性、方法的简洁写法
+2. 对象的解构赋值
+3. 对象的扩展运算符
+4. 属性名表达式
+
+### 1. 属性的可枚举性和遍历
+
+#### 1.1 可枚举性（了解即可）
+
+对象的每个属性都有一个描述对象（Descriptor），用来控制该属性的行为。`Object.getOwnPropertyDescriptor`方法可以获取该属性的描述对象。
+
+```javascript
+let obj = { foo: 123 };
+Object.getOwnPropertyDescriptor(obj, 'foo')
+//  {
+//    value: 123,
+//    writable: true,
+//    enumerable: true,
+//    configurable: true
+//  }
+```
+
+描述对象的`enumerable`属性，称为“可枚举性”，如果该属性为`false`，就表示某些操作会忽略当前属性。
+
+目前，有四个操作会忽略`enumerable`为`false`的属性。
+
+- `for...in`循环：只遍历对象自身的和继承的可枚举的属性。
+- `Object.keys()`：返回对象自身的所有可枚举的属性的键名。
+- `JSON.stringify()`：只串行化对象自身的可枚举的属性。
+- `Object.assign()`： 忽略`enumerable`为`false`的属性，只拷贝对象自身的可枚举的属性。
+
+这四个操作之中，前三个是 ES5 就有的，最后一个`Object.assign()`是 ES6 新增的。其中，只有`for...in`会返回继承的属性，其他三个方法都会忽略继承的属性，只处理对象自身的属性。实际上，引入“可枚举”（`enumerable`）这个概念的最初目的，就是让某些属性可以规避掉`for...in`操作，不然所有内部属性和方法都会被遍历到。比如，对象原型的`toString`方法，以及数组的`length`属性，就通过“可枚举性”，从而避免被`for...in`遍历到。
+
+```javascript
+Object.getOwnPropertyDescriptor(Object.prototype, 'toString').enumerable
+// false
+
+Object.getOwnPropertyDescriptor([], 'length').enumerable
+// false
+```
+
+上面代码中，`toString`和`length`属性的`enumerable`都是`false`，因此`for...in`不会遍历到这两个继承自原型的属性。
+
+另外，ES6 规定，所有 Class 的原型的方法都是不可枚举的。
+
+```javascript
+Object.getOwnPropertyDescriptor(class {foo() {}}.prototype, 'foo').enumerable
+// false
+```
+
+总的来说，操作中引入继承的属性会让问题复杂化，大多数时候，我们只关心对象自身的属性。所以，尽量不要用`for...in`循环，而用`Object.keys()`代替。
+
+#### 1.2 属性的遍历（了解即可）
+
+ES6 一共有 5 种方法可以遍历对象的属性。
+
+**（1）for...in**
+
+`for...in`循环遍历对象自身的和继承的可枚举属性（不含 Symbol 属性）。
+
+**（2）Object.keys(obj)**
+
+`Object.keys`返回一个数组，包括对象自身的（不含继承的）所有可枚举属性（不含 Symbol 属性）的键名。
+
+**（3）Object.getOwnPropertyNames(obj)**
+
+`Object.getOwnPropertyNames`返回一个数组，包含对象自身的所有属性（不含 Symbol 属性，但是包括不可枚举属性）的键名。
+
+**（4）Object.getOwnPropertySymbols(obj)**
+
+`Object.getOwnPropertySymbols`返回一个数组，包含对象自身的所有 Symbol 属性的键名。
+
+**（5）Reflect.ownKeys(obj)**
+
+`Reflect.ownKeys`返回一个数组，包含对象自身的（不含继承的）所有键名，不管键名是 Symbol 或字符串，也不管是否可枚举。
+
+以上的 5 种方法遍历对象的键名，都遵守同样的属性遍历的次序规则。
+
+- 首先遍历所有数值键，按照数值升序排列。
+- 其次遍历所有字符串键，按照加入时间升序排列。
+- 最后遍历所有 Symbol 键，按照加入时间升序排列。
+
+```javascript
+Reflect.ownKeys({ [Symbol()]:0, b:0, 10:0, 2:0, a:0 })
+// ['2', '10', 'b', 'a', Symbol()]
+```
+
+上面代码中，`Reflect.ownKeys`方法返回一个数组，包含了参数对象的所有属性。这个数组的属性次序是这样的，首先是数值属性`2`和`10`，其次是字符串属性`b`和`a`，最后是 Symbol 属性。
+
+## 十、对象新增方法
+
+1. Object.is()：用于比较两个参数的值是否严格相等，几乎等同于===
+
+   * 不同于===：（=\==会认为：`+0`等于`-0`，`NaN`不等于自身。）
+
+     1.`+0`不等于`-0`，
+
+     2.`NaN`等于自身。
+
+2. Object.assign()：方法用于对象的合并，将源对象（source）的所有可枚举属性，复制到目标对象（target）。第一个参数是目标对象，后面的参数都是源对象。
+
+   * 如果目标对象与源对象有同名属性，或多个源对象有同名属性，则后面的属性会覆盖前面的属性。
+   * 属性名为 Symbol 值的属性，也会被`Object.assign()`拷贝。
+   * 浅拷贝
+   * 问题：无法拷贝对象的 存取描述符（值为getter、setter函数的属性）
+
+3. Object.getOwnPropertyDescriptors()：返回指定对象所有自身属性（非继承属性）的描述对象。
+
+   * 参数：对象
+
+   * 返回值：
+
+     ```js
+     const obj = {
+       foo: 123,
+       get bar() { return 'abc' }
+     };
+     Object.getOwnPropertyDescriptors(obj)
+     // {  foo: {  // 数据描述符
+     //      value: 123,// 数据描述符 特有
+     //      writable: true,// 数据描述符 特有
+     //      enumerable: true, // 可枚举
+     //      configurable: true // 可修改描述对象
+     //    },
+     //    bar: {   // 存取描述符
+     //      get: [Function: get bar],// 存取描述符 特有
+     //      set: undefined,// 存取描述符 特有
+     //      enumerable: true,
+     //      configurable: true 
+     //    } 
+     // }
+     ```
+
+   * 配合ES5已有`Object.defineProperties()`方法，就可以实现正确拷贝。（拷贝对象的 存取描述符）
+
+     > Object.defineProperties(obj, prop, 描述对象)：根据描述对象，直接在一个对象obj上定义一个新属性prop，或者修改一个对象的现有属性，并返回此对象。
+     >
+     > 当defineProperties第二个参数是1个对象时，它会把这个对象的每一个属性作为prop，属性值作为对应的描述对象，并把这些属性都加到obj上
+
+     ```js
+     let obj = {
+         abc: 123,
+         set foo(value) {
+             console.log(value)
+         }
+     }
+     let obj2 = {}
+     // 把obj的属性都拷贝到obj2
+     Object.defineProperties(obj2, Object.getOwnPropertyDescriptors(obj));
+     ```
+
+4. Object.keys()：返回一个数组，成员是参数对象自身的（不含继承的）所有可枚举（enumerable）属性的键名。
+
+5. Object.values()：返回一个数组，成员是参数对象自身的（不含继承的）所有可枚举（enumerable）属性的键值。
+
+6. Object.entries()：返回一个数组，成员是参数对象自身的（不含继承的）所有可枚举（enumerable）属性的键值对数组。
+
+## 十一、Symbol
+
+* js的第七种数据类型，表示独一无二的值。前6种分别是：undefined，null，数值，布尔值，字符串，对象
+* 基本使用：`let a = Symbol()`
+  * a就是1个独一无二的值（`a !== Symbol()`）
+  * 所以一个Symbol的字面量一定不与任何值相等（即使他们可能看起来一样）
+
+### 1. Symbol.for()
+
+1. Symbol.for('key')：如果包含key的Symbol值在全局环境中不存在，则在全局环境中生成新的Symbol值，并返回这个Symbol值；否则，直接返回找到的包含指定key的Symbol值
+
+   * 返回值：找到的或新建的Symbol值
+
+2. `Symbol.keyFor()`方法返回一个已登记的 Symbol 类型值的`key`。
+
+   ```js
+   let s1 = Symbol.for("foo");
+   Symbol.keyFor(s1) // "foo"
+   ```
+
+### 2. 使用
+
+1. 由于Symbol的特性，一个Symbol值必须使用一个变量/属性来保存，以便再次使用相同的Symbol值
+2. Symbol可以用作对象的属性，以保证这个属性是独一无二的
+   * 这个属性必须使用`obj[s]`的方式访问（s是1个变量，值是1个Symbol值）
+3. 一般的遍历方法无法遍历到Symbol类型的属性
+   * 它也不是私有属性，有一个`Object.getOwnPropertySymbols()`方法，可以获取指定对象的所有 Symbol 属性名。该方法返回一个数组，成员是当前对象的所有用作属性名的 Symbol 值。
+
+## 十二、Set和Map
+
+### 1. Set（集合）
+
+特点：
+
+* 类似于数组，但Set中的每一个值都是唯一的
+* Set内部判断两个值是否不同，类似于 ===，不同之处是：Set认为NaN等于NaN，而 =\== 认为NaN不等于NaN
+* 可以使用for...of遍历（for...of会使用数据结构的遍历器生成函数，所以只要内置了遍历器的数据结构，都可以使用for...of）
+* 可以对Set结构使用...（扩展运算符）
+  * 事实上，凡是内置默认遍历器生成函数的数据结构，都可以使用...或for...of
+
+#### 1.1 基本使用
+
+1. 创建
+
+   ```js
+   // 创建1个空Set
+   const s = new Set()
+   // Set函数可以接受一个数组（或者具有 iterable 接口的其他数据结构）作为参数，用来初始化。
+   const a = new Set([1, 2, 3])
+   ```
+
+2. 对于复杂类型，Set比较的是引用，所以两个空对象{}，是不相等的
+
+3. 属性和操作方法
+
+   * `Set.prototype.size`：返回`Set`实例的成员总数。
+   * `Set.prototype.add(value)`：添加某个值，返回 Set 结构本身。
+   * `Set.prototype.delete(value)`：删除某个值，返回一个布尔值，表示删除是否成功。
+   * `Set.prototype.has(value)`：返回一个布尔值，表示该值是否为`Set`的成员。
+   * `Set.prototype.clear()`：清除所有成员，没有返回值。
+
+4. 遍历方法：
+
+   * `Set.prototype.keys()`：返回键名的遍历器，由于 Set 结构没有键名，只有键值（或者说键名和键值是同一个值），所以`keys`方法和`values`方法的行为完全一致。下同
+   * `Set.prototype.values()`：返回键值的遍历器
+   * `Set.prototype.entries()`：返回键值对的遍历器
+   * `Set.prototype.forEach()`：使用回调函数遍历每个成员，同数组的forEach方法
+   * 由于Set 结构的实例默认可遍历，它的默认遍历器生成函数就是它的`values`方法。所以可以直接用`for...of`循环遍历 Set。
+
+5. 遍历示例：
+
+   ```js
+   let set = new Set(['red', 'green', 'blue']);
+   
+   for (let x of set) {
+     console.log(x);
+   }
+   // red
+   // green
+   // blue
+   ```
+
+### 2. Map
+
+特点：
+
+* 类似于对象，但Map的 键 可以是任意类型的数据，而对象的键只能是字符串
+
+* 可以使用size属性直接获取键值对的数量
+
+* Map内部判断两个键是否不同，类似于 ===，不同之处是：Map认为NaN等于NaN，而 =\== 认为NaN不等于NaN
+
+  * `undefined`和`null`也是两个不同的键。
+
+* 可以使用for...of直接遍历（每次遍历的到值都是1个数组`['键', '值']`）
+
+* 可以使用...(扩展运算符)
+
+  ```js
+  const map = new Map([
+    [1, 'one'],
+    [2, 'two'],
+    [3, 'three'],
+  ]);
+  
+  [...map.keys()]
+  // [1, 2, 3]
+  
+  [...map.values()]
+  // ['one', 'two', 'three']
+  
+  [...map.entries()]
+  // [[1,'one'], [2, 'two'], [3, 'three']]
+  
+  [...map]
+  // [[1,'one'], [2, 'two'], [3, 'three']]
+  ```
+
+#### 2.1 基本使用
+
+1. 创建
+
+   ```
+   // 创建1个空Map
+   const m = new Map()
+   // 使用二维数组初始化Map，任何具有 Iterator 接口、且每个成员都是一个双元素的数组的数据结构都可以当作Map构造函数的参数
+   // Set和Map都可以用来生成新的 Map。
+   const map = new Map([
+     ['name', '张三'],
+     ['title', 'Author']
+   ]);
+   ```
+
+2. 看似相同的复杂类型字面量（例如 { } 和 { } ），对于Map来说是不同的键
+
+3. 属性和操作方法：
+
+   * Map.prototype.size：属性返回 Map 结构的成员总数。
+   * Map.prototype.set(key, value)：设置键名`key`对应的键值为`value`，然后返回整个 Map 结构。如果`key`已经有值，则键值会被更新，否则就新生成该键。
+   * Map.prototype.get(key)：`get`方法读取`key`对应的键值，如果找不到`key`，返回`undefined`。
+   * Map.prototype.has(key)：`has`方法返回一个布尔值，表示某个键是否在当前 Map 对象之中。
+   * Map.prototype.delete(key)：`delete`方法删除某个键，返回`true`。如果删除失败，返回`false`。
+   * Map.prototype.clear()：`clear`方法清除所有成员，没有返回值。
+
+4. 遍历方法：
+
+   * `Map.prototype.keys()`：返回键名的遍历器。
+   * `Map.prototype.values()`：返回键值的遍历器。
+   * `Map.prototype.entries()`：返回所有成员的遍历器。
+     * 由于Map结构的实例默认可遍历，它的默认遍历器生成函数就是它的`entries`方法。所以可以直接用`for...of`循环遍历 Set。
+   * `Map.prototype.forEach()`：遍历 Map 的所有成员。类似于数组的forEach方法
+
+5. 遍历示例：
+
+   ```js
+   // 等同于使用map.entries()
+   for (let [key, value] of map) {
+     console.log(key, value);
+   }
+   // "F" "no"
+   // "T" "yes"
+   ```
+
+## 十三、Proxy
+
+* Proxy用于拦截（代理）对 对象 的某些操作。
+
+* 创建1个Proxy对象，就是把参数2（拦截器）指定的拦截操作和相应的处理函数，添加到参数1指定的源对象，得到个指定操作被代理的Proxy实例对象
+
+* 实例：代理 obj 存取操作
+
+  * target：就是Proxy的参数1，被代理的对象
+  * receiver：就是obj，代理者（Proxy实例）
+  * Reflect：对应对象操作 的 原生默认操作，以保证原生操作被改写的面目全非时，还可以对对象进行默认的原生操作
+
+  ```js
+  var obj = new Proxy({}, {
+    get: function (target, propKey, receiver) {
+      console.log(`getting ${propKey}!`);
+      return Reflect.get(target, propKey, receiver);
+    },
+    set: function (target, propKey, value, receiver) {
+      console.log(`setting ${propKey}!`);
+      return Reflect.set(target, propKey, value, receiver);
+    }
+  });
+  ```
+
+## 十四、Reflect
+
+* Reflect某种程度上可以和Object划等号，但又不同
+* 它提供的对象操作一定是默认的原生操作，而Object无法保证（因为存在Proxy）
+
+### 1. 特点
+
+1. 在进行某些操作时，可以代替Object调用操作对象的方法，且未来语言内部的对象操作方法，将只部署在Reflect
+2. 让Object操作都变成函数式
+   * 例如某些`Object`操作是命令式，比如`name in obj`和`delete obj[name]`，
+   * 而`Reflect.has(obj, name)`和`Reflect.deleteProperty(obj, name)`让它们变成了函数行为。
+3. `Reflect`对象的方法与`Proxy`对象的方法一一对应，只要是`Proxy`对象的方法，就能在`Reflect`对象上找到对应的方法。这就让`Proxy`对象可以方便地调用对应的`Reflect`方法，完成默认行为，作为修改行为的基础。也就是说，不管`Proxy`怎么修改默认行为，你总可以在`Reflect`上获取默认行为。
+
+## 十五、Promise
+
+* Promise是为了解决js中的回调嵌套的（回调地狱）
+* 它可以使嵌套的异步操作免于层层缩进，换句话说，就是让异步流程以同步操作的形式表达出来
+* Promise实例有3种状态：pending（进行中）、fulfilled（已成功）、rejected（已失败）
+  * Promise实例只有两种状态变化：1.从pending 变为 fulfilled；2.从pending 变为 rejected，只有异步操作的结果可以使状态改变
+  * 一旦以上两种变化发生，Promise的状态就凝固了，再也不会变化
+
+### 1. 基本使用方式
+
+1. 异步操作函数()：将异步操作封装进一个函数中，这个函数返回一个Promise实例
+
+   * return new Promise(function)：Promise()构造函数在new一个Promise实例的时候，接受一个函数，作为初始化参数，这个函数就是这个Promise实例的具体异步操作，在创建Promise实例之后，会立即执行这个函数（内部是异步操作）
+
+     * Promise()构造函数的参数，配置函数（具体的异步操作），接收两个参数
+       * 参数1：resolve，一个函数，被调用时，将`Promise`对象的状态从“未完成”变为“成功”（即从 pending 变为 resolved），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去；
+       * 参数2：reject，一个函数，被调用时，将`Promise`对象的状态从“未完成”变为“失败”（即从 pending 变为 rejected），在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去。
+
+     ```javascript
+     外层封装异步操作函数() {
+     	return new Promise(function (resolve, reject) {
+     		具体的异步操作(function (err, data) {
+     			if (err) {
+     				reject(err)
+     			} else {
+     				resolve(data)
+     			}
+     		})
+     	})
+     }
+     ```
+
+2. 为什么要把new Promise()放在一个函数中，并返回
+
+   * 因为Promise在创建实例的时候，会立即执行一次参数中的函数（即具体的异步操作），为了避免具体的异步操作被立即执行，才把new Promise()放在一个函数中并返回
+
+3. resolve和reject从何而来
+
+   * 这两个是Promise的内部的（静态）方法，用于在异步操作结束时，改变promise实例的状态，并把结果数据传递给 成功的回调 或 失败的回调
+   * 即在使用Promise方式执行异步操作时，要调用==外层封装异步操作函数()== ，它返回一个Promise对象，可以调用then方法
+     * then()方法参数1：函数，指定异步操作成功的回调，即异步操作成功后，会调用这个函数
+     * then()方法参数2：函数，指定异步操作失败的回调，即异步调用失败后，会调用这个函数
+
+4. Promise完整的使用示例
+
+   ```javascript
+   const fs = require('fs')
+   const path = require('path')
+   
+   function getFileCon(path) {
+     return new Promise(function (resolve, reject) {
+       fs.readFile(path, 'utf8', (err, data) => {
+         if (err) {
+           reject(err)
+         } else {
+           resolve(data)
+         }
+       })
+     })
+   }
+   
+   getFileCon(path.join(__dirname, './111.txt'))
+   .then(function (data) {
+     console.log(data)
+   }, function (err) {
+     console.log('这是错误结果：' + err.message)
+   })
+   ```
+
+### 2. 执行过程分析
+
+* 每次执行then方法都会返回1个新的promise实例（即执行1次then，就有p1、p2两个promise，在p1的回调中返回1个新的promise实例p2\`的话，其实是把p2的resolve交给这个新的p2`了）
+* 链式调用的关键：
+  * 每一个promise实例调用then()时，都保存了==自己的成功回调 + 下一个promise的resolve==
+  * 上一个promise执行回调后，会把回调的返回值传递给下一个promise的resolve
+* p1的回调返回一个新promise（p2\`），==p2（p1.then()创建的）的回调就会等p2`完成再调用==的关键：
+  * p2的resolve拿到p2\`（p1返回的），就会把自己的resolve作为p2`的回调
+  * p2`结束，执行的回调是p2的resolve，并把自己的结果传递进去了（此时p2才从pending => fulfilled）
+
+```js
+//完整的实现(只考虑成功，失败类似)
+class Promise {
+    callbacks = []; // 保存promise实例的回调函数，链式调用多个then，就有多个回调函数
+    state = 'pending';//增加状态
+    value = null;//保存结果
+    constructor(fn) {
+        // fn就是new Promise((resolve) => {})中传递的函数
+        // 在构造函数中直接被调用，并传入绑定了this为当前promise实例的_resolve方法
+        // 当fn中的异步操作成功时，手动调用了resolve（this._resolve.bind(this)）
+        fn(this._resolve.bind(this));
+    }
+    then(onFulfilled) {
+        // onFulfilled就是通过then指定的上一个promise的成功的回调
+        // 返回1个新的promise实例
+        return new Promise(resolve => {
+            // 先不管新的promise实例，在那之前：
+            // 这里会先执行（这里就是fn，而fn会在构造函数中执行）
+            // 这里this是上一个promise实例（即当前then方法中的this）
+            this._handle({
+                // 返回新的promise之前，先把上一个promise的成功回调保存（onFulfilled）
+                onFulfilled: onFulfilled || null,
+                // 同时保存（即将返回的）新的promise实例的resolve（this._resolve.bind(this)）
+                // 即新的promise的resolve（绑定了新promise的this）和上个promise的回调函数保存在一起，这样上一个promise成功，则一定会执行它的回调，并找到下一个promise的resolve，改变它的状态（并执行它的回调）
+                resolve: resolve
+            });
+        });
+    }
+    _handle(callback) {
+        // 1. 如果当前（上一个）promise还没有成功，则把 第上个promise的then提供的成功的回调 + 下一个promise的resolve保存到上1个promise的callback队列中
+        if (this.state === 'pending') {
+            this.callbacks.push(callback);
+            return;
+        }
+        // 2. 如果当前promise已经成功
+        // 2.1 如果当前promise已经成功，且它的then中没有传递回调（自然无法返回包含新的异步操作的promise了）
+        // 则直接执行下一个promise的resolve（this._resolve.bind(this)）
+        if (!callback.onFulfilled) {
+            // 即告诉下一个promise改变状态，把结果传递下去（到下一个promise），并执行下一个promise的回调
+            callback.resolve(this.value);
+            return;
+        }
+        // 2.2 当前promise已经成功，且有回调，则执行指定的成功回调
+        var ret = callback.onFulfilled(this.value);
+        callback.resolve(ret);
+    }
+    _resolve(value) {
+        // 当前promise的resolve（当前promise设为p2）
+        // 如果上一个promise（设为p1,）的成功回调返回的是一个新的promise（设为p2`）
+        // 为什么不用value instanceof Promise ？？？
+        if (value && (typeof value === 'object' || typeof value === 'function')) {
+            var then = value.then;
+            if (typeof then === 'function') {
+                // 如果上一个promise（设为p1,）的成功回调返回的是一个新的promise（即value，设为p2`）
+                // 则调用p2`的then为其指定 成功的回调（原本要改变为fulfilled状态的p2 的resolve）
+                // 这样，当p2`的异步操作成功时（状态改变、保存结果后）就会执行p2的resolve（作为p2`的回调当然能拿到p2`的结果作为value），使p2变为fulfilled（把p2`的结果保存到自己身上）；然后再执行p2的成功的回调
+                then.call(value, this._resolve.bind(this));
+                return;
+            }
+        }
+        this.state = 'fulfilled';//改变状态
+        this.value = value;//保存结果
+        this.callbacks.forEach(callback => this._handle(callback));
+    }
+}
+```
+
+> 以下过程中使用pn表示在主线程中被依次创建的promise实例；使用pn`表示在pn-1的回调中返回的promise实例
+>
+> resolve：（详见上面的_resolve）
+>
+> * 如果上一个promise的回调返回的==是一个新的promise==：把本promise的resolve作为新promise的成功回调。当新promise结束时，就会执行本promise的resolve（并使本promise拿到新promise的结果）
+> * 如果上一个promise的回调返回的==不是一个新的promise==：拿到本promise的结果：改变本promise的状态；保存结果到本promise；运行本promise的成功回调
+
+1. ==第1个promise==实例被创建（p1--pending）
+
+   * 即使还没有执行p1.then()，异步操作就结束了，p1的状态就变为fulfilled也没关系，原因：
+     * 如果一直没有执行p1.then()，那么说明用户不关心p1的执行结果
+     * 以后的任一时刻执行了p1.then()，给出了成功的回调，则会立即执行这个回调（见上方源码then 和 _handle）
+
+2. p1.then执行：把 ==p1成功回调 + (即将创建的)p2的resolve==（bind(p2的this)）放入p1.callback（array）
+
+   * p1.then返回p2
+
+3. p2.then执行，把 ==p2成功回调 + (即将创建的)p3的resolve==（bind(p3的this)）放入p2.callback（array）
+
+   * p2.then返回p3
+
+   ```js
+   let p1 = new Promise((resolve /*reject暂略*/) => {
+   	setTimeout(() => {
+   		resolve(result)
+   	}, 3000)
+   })
+   let p2 = p1.then((result) => {
+   	return result /*这里有两种情况：1.返回非promise（包括undefined）；2.返回1个新的promise*/
+   })
+   let p3 = p2.then((result) => {
+   	return result /*这里有两种情况：1.返回非promise（包括undefined）；2.返回1个新的promise*/
+   })
+   // ......
+   ```
+
+4. -------------------------------------当前线程结束--------------------------------------
+
+   * 此时：
+     * p1 -- pending -- 保存着{自己成功的回调，p2的resolve}，结果为null
+     * p2 -- pending -- 保存着{自己成功的回调，p3的resolve}，结果为null
+     * p3 -- pending -- 没有回调和下一个promise的resolve，结果为null
+   * 一段时间后，异步操作结束，执行了p1的resolve，并传入结果
+
+5. p1 -- fulfilled：保存结果；执行自己成功的回调；把回调函数的返回值（新promise / 其他值）传递给p2的resolve并执行之
+
+   * 如果p1的回调返回一个新的promise —— p2\`
+     * 则在p2的resolve中把p2的resolve设置为p2`的成功的回调
+     * 这样，当p2\`结束时，就会执行p2的resolve并传递结果（因为p2`的回调就是p2的resolve）
+     * 接 6
+   * 如果p1的回调没有返回一个新的promise，接 6
+
+6. p2 -- fulfilled：保存结果；执行自己成功的回调；把回调函数的返回值（新promise / 其他值）传递给p3的resolve并执行之
+
+7. p2 -- fulfilled：保存结果；没有回调——结束
+
+### 3. 捕获异常的两种方式
+
+1. 多个promise实例嵌套，其中一个出现  错误，不影响后续的promise
+
+   * 在每一个promise的then方法中指定处理失败的回调，**==且==**在处理失败的回调中return一个新的promise实例
+
+   ```javascript
+   getFileCon(path)
+   .then(function(){}, function(){
+   	// 失败的回调，return一个新的promise实例
+   	return getFileCon(path)
+   })
+   .then(function(){}, function(){
+   	// 失败的回调，return一个新的promise实例
+   	return getFileCon(path)
+   })
+   .then(function(){}, function(){
+   	// 最后一级，失败的回调
+   })
+   ```
+
+2. 多个promise实例嵌套，其中一个出现错误，后续的异步操作立即全部终止，且捕获  错误
+
+   * 使用catch()方法捕获  错误，**==且==** 不为每一级的promise实例指定失败的回调（==建议的写法==）
+     * catch()方法参数：一个函数，作为异步操作链出现异常时的回调，接收错误对象，并停止后续操作
+
+   ```javascript
+   getFileCon(path)
+   .then(function(){})
+   .then(function(){})
+   .then(function(){})
+   .catch(function (error) {
+   	// 只要任一promise出现异常，就终止后续操作，并执行此回调函数
+   })
+   ```
+
+## 十六、Iterator
+
+* Symbol.iterator：定义在 数据结构对象 或 其原型链 上的一个名为\[Symbol.iterator]()的函数，这个函数是一个遍历器生成函数。
+* 1句话概括Iterator：调用1个数据结构的遍历器生成函数，它会返回1个遍历器对象，遍历器对象包含1个指针，指向此数据结构（实例）的起始位置，每调用1次遍历器对象的next()方法，就会返回当前位置的值，并把指针向后移动...直至遍历完成
+  * 所谓指针，以数组为例，就是数组的索引，指针移动就是把索引增加
+
+### 1. 内置Iterator的数据结构
+
+1. 数组
+2. Set
+3. Map
+4. String
+5. 函数的 arguments 对象
+6. NodeList 对象
+7. TypedArray
+
+* 由于for...of就是使用遍历器对象来遍历数据结构的，所以只要是部署了Iterator的数据结构，都可以使用for...of遍历（很遗憾，普通对象除外）
+* 数组和Set的解构赋值、扩展运算符 都使用了Iterator
+  * 只要某数据结构 有Iterator，就可以使用扩展运算符，转换为数组
+* for...in与for...of的对比
+  * for...in：
+    * `for...in`循环不仅遍历数字键名，还会遍历手动添加的其他键，甚至包括原型链上的键。
+    * `for...in`循环 不能保证遍历按照数据添加的顺序进行
+    * `for...in`最好只用来遍历对象
+  * for...of：
+    * for...of不会遍历数组上除了数字以外的键的值
+    * 遍历除对象以外的数据结构，最好使用for...of
+
+### 2. 使用for...of
+
+1. 数组：数组使用for...of得到的是每一个值，无法直接得到索引（键）
+   * 要获取数组的键，或键值对，可以借助数组的keys()、entries()方法
+2. Set：Set使用for...of得到的是每一个值
+3. Map：Map使用for...of得到的是每一个键值对数组
+4. 对象：对象不能直接使用for...of，可以使用obj.keys()或obj.entries()得到键数组或键值对数组，再使用for...of
+
+* 以上4种js内置数据结构，都有keys、values、entries这3个方法，唯有对象的这3个方法返回的是数组，其余三种返回的都是遍历器对象，供for...of使用

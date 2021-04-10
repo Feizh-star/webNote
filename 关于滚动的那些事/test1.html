@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    html,body {
+      width: 100%;
+      height: 100%;
+    }
+    ul {
+      list-style: none;
+    }
+    hr {
+      margin: 20px 0;
+      width: 100vw;
+    }
+    .use-bscroll {
+      width: 98vw;
+      margin: 0 1vw;
+      height: 80vh;
+      border: 3px solid #aaa;
+      text-align: center;
+      overflow-y: hidden;
+    }
+    .use-bscroll 
+    li {
+      line-height: 50px;
+    }
+    .use-bscroll 
+    li:nth-of-type(2n-1) {
+      background-color: red;
+      
+    }
+    .use-bscroll 
+    li:nth-of-type(2n) {
+      background-color: green;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
+    <div class="use-bscroll" id="inner">
+      <ul>
+        <li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>10</li><li>11</li><li>12</li><li>13</li><li>14</li><li>15</li><li>16</li><li>17</li><li>18</li><li>19</li><li>20</li>
+      </ul>
+    </div>
+  </div>
+  <script>
+    let touchY = 0
+    // 页面的最大滚动距离
+    let maxScrollYOfDoc = document.documentElement.scrollHeight - document.documentElement.offsetHeight
+    let inner = document.getElementById('inner')
+    document.addEventListener('touchstart', function (e) {
+      touchY = e.touches[0].clientY
+    })
+    document.addEventListener('touchmove', function (e) {
+      currentY = e.touches[0].clientY
+      if (currentY < touchY && document.documentElement.scrollTop < maxScrollYOfDoc) {
+        // 向上滑动 且 外层滚动没有到最底部（滚动距离最大值），仅有这种情况下，禁止内层滚动
+        inner.style['overflow-y'] = 'hidden'
+      } else {
+        // 其余所有情况下，允许内层滚动
+        inner.style['overflow-y'] = 'scroll'
+      }
+      touchY = currentY
+    })
+    // 不可去掉，这个事件监听是为了解决：当手指在内层快速向上划动，外层依赖惯性到达底部，内层的'overflow-y'依然是'hidden'
+    document.addEventListener('scroll', function (e) {
+      if (maxScrollYOfDoc - document.documentElement.scrollTop < 0.1) {
+        inner.style['overflow-y'] = 'scroll'
+      }
+    })
+  </script>
+</body>
+</html>

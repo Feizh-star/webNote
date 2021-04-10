@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./jquery-3.5.1.js"></script>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    html,body {
+      width: 100%;
+      height: 100%;
+    }
+    ul {
+      list-style: none;
+    }
+    hr {
+      margin: 20px 0;
+      width: 100vw;
+    }
+    .zhanwei {
+      position: relative;
+      width: 100vw;
+      height: 250px;
+      background: -webkit-linear-gradient(0, red, purple);
+      z-index: 1;
+    }
+    .header {
+      width: 100%; 
+      height: 50px; 
+      /* background-color: blue;  */
+      z-index: 1;
+      position: sticky;
+      top: 0;
+    }
+    .navbar {
+      width: 100vw;
+      height: 32px;
+      background-color: #eee;
+      position: sticky;
+      top: 50px;
+      /* z-index: 1; */
+    }
+    .navbar .navbar-content {
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, .4);
+      /* background-color: rgba(0, 0, 0); */
+      position: relative;
+      z-index: 1;
+    }
+    .navbar .menu {
+      position: absolute;
+      top: 32px;
+      width: 20vw;
+      /* width: 100vw;
+      padding-right: 80vw; */
+      background-color: lightgreen;
+    }
+    .menu li {
+      line-height: 50px;
+    }
+    .page .menu {
+      width: 20vw;
+      background-color: lightgreen;
+    }
+    .use-bscroll {
+      width: 100%;
+      padding-left: 20vw;
+      /* height: 80vh; */
+      /* border: 3px solid #aaa; */
+      text-align: center;
+      /* overflow-y: scroll; */
+    }
+    .navbar .use-bscroll {
+      position: absolute;
+      top: 32px;
+      right: 0;
+      padding-left: 0;
+      width: 80vw;
+    }
+    li {
+      line-height: 50px;
+    }
+    .use-bscroll 
+    li:nth-of-type(2n-1) {
+      background-color: red;
+      
+    }
+    .use-bscroll 
+    li:nth-of-type(2n) {
+      background-color: green;
+    }
+  </style>
+</head>
+<body>
+  <div class="page" id="container">
+    <div class="zhanwei"></div>
+    <div class="header"></div>
+    <div class="navbar" id="navbar">
+      <div class="navbar-content"></div>
+      <div class="menu" id="menu">
+        <ul>
+          <li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>10</li><li>11</li><li>12</li><li>13</li><li>14</li><li>15</li><li>16</li><li>17</li><li>18</li><li>19</li><li>20</li>
+        </ul>
+      </div>
+    </div>
+    <!-- <div class="container" id="container"> -->
+    <div class="use-bscroll" id="goods">
+      <ul>
+        <li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>10</li><li>11</li><li>12</li><li>13</li><li>14</li><li>15</li><li>16</li><li>17</li><li>18</li><li>19</li><li>20</li>
+      </ul>
+    </div>
+    <!-- </div> -->
+    <div class="receive-child" id="receivechild" style="width: 100%;">
+
+    </div>
+  </div>
+  <script>
+    $(function () {
+      // console.log('ok')
+      let navbarTop = $('#navbar')[0].offsetTop
+      // console.log(navbarTop)
+      // 标志，用于判断两个列表 哪一个在标准流
+      let flag = 0  // 0：右侧在标准流；1左侧标准流
+      // 状态：
+      // 1.列表顶部 距离 navbar 顶部的距离，以下为正，以上为负
+      // 2.列表顶部 距离 navbar 底部的距离
+      let statusRight = {
+        goodsTopToNavbarTop: 32
+      }
+      let statusLeft = {
+        menuTopToNavbarTop: 32,
+      }
+      $('#menu').on('touchstart', function (e) {
+        // console.log('ok')
+        let goodsList = $('#goods').clone(true)
+        let menuList = $('#menu').clone(true)
+        // $('#container')
+        // 当列表回到文档流的时候，可能会携带行内样式（定位值，应当仅当它定位时生效），
+        // 当它的滚动位置改变，再次脱标时，这个行内样式会再次生效（就会出问题，它一下跳到上次脱标的位置了）
+        menuList[0].style = ''
+        if (flag === 0 && statusLeft.menuTopToNavbarTop < 32 && document.documentElement.scrollTop <= 250) {
+          // 当 滚动距离 < navbar距页面顶端的距离 - 默认的粘滞定位top 时，
+          // 右边栏顶部在navbar底边线上边（即goodsTopToNavbarTop < 32，右边上拉粘滞定位生效后，左边下拉导致）
+          // 切换到右边时，
+          // 导致，导致右边 append到文档流时，其相对于navbar底边的距离变为0
+          // 此时不能调整滚动距离，而应调整navbar的粘滞定位高度
+          // navbar 距离屏幕顶端的距离
+          // console.log($('#navbar').offsetTop)
+          var navbarToScreenTop = $('#navbar')[0].offsetTop - document.documentElement.scrollTop
+          // console.log(navbarToScreenTop)
+          $('#navbar').css('top', navbarToScreenTop + 'px')
+          document.documentElement.scrollTop = 332 - (navbarToScreenTop + statusLeft.menuTopToNavbarTop)
+        }
+        $('#goods').remove()
+        $('#receivechild').append(menuList)
+        $('#menu').remove()
+        $('#navbar').append(goodsList)
+        // console.log($('#navbar')[0].offsetTop)
+        // console.log(document.documentElement.scrollTop)
+        // var h = 50 - (navbarTop - document.documentElement.scrollTop)
+        // console.log(h)
+        if (document.documentElement.scrollTop > 250 && flag === 0) {
+          // 右侧列表顶部 距离 navbar 顶部的距离，以下为正，以上为负
+          // var goodsTopToNavbarTop = -(document.documentElement.scrollTop + 50 - (300 + 32))
+          // console.log(goodsTopToNavbarTop)
+          // console.log('scrollTop:'+ document.documentElement.scrollTop)
+          $('#goods').css('top', statusRight.goodsTopToNavbarTop + 'px')
+          document.documentElement.scrollTop = 250
+          console.log('error1')
+        }
+        if (flag === 0 && statusLeft.menuTopToNavbarTop < 32) {
+          document.documentElement.scrollTop = 332 - (50 + statusLeft.menuTopToNavbarTop)
+          console.log('error2')
+        } else if (statusRight.menuTopToNavbarTop === 32) {
+
+        }
+        flag = 1
+        
+        // console.log(document.documentElement.scrollTop)
+      })
+      $('#goods').on('touchstart', function (e) {
+        // console.log('ok')
+        let goodsList = $('#goods').clone(true)
+        let menuList = $('#menu').clone(true)
+        // $('#container')
+        // 当列表回到文档流的时候，可能会携带行内样式（定位值，应当仅当它定位时生效），
+        // 当它的滚动位置改变，再次脱标时，这个行内样式会再次生效（就会出问题，它一下跳到上次脱标的位置了）
+        goodsList[0].style = ''
+        if (flag === 1 && statusRight.goodsTopToNavbarTop < 32 && document.documentElement.scrollTop <= 250) {
+          // 当 滚动距离 < navbar距页面顶端的距离 - 默认的粘滞定位top 时，
+          // 右边栏顶部在navbar底边线上边（即goodsTopToNavbarTop < 32，右边上拉粘滞定位生效后，左边下拉导致）
+          // 切换到右边时，
+          // 导致，导致右边 append到文档流时，其相对于navbar底边的距离变为0
+          // 此时不能调整滚动距离，而应调整navbar的粘滞定位高度
+          // navbar 距离屏幕顶端的距离
+          // console.log($('#navbar').offsetTop)
+          var navbarToScreenTop = $('#navbar')[0].offsetTop - document.documentElement.scrollTop
+          console.log(navbarToScreenTop)
+          $('#navbar').css('top', navbarToScreenTop + 'px')
+          console.log(document.documentElement.scrollTop)
+          document.documentElement.scrollTop = 332 - (navbarToScreenTop + statusRight.goodsTopToNavbarTop)
+          console.log(document.documentElement.scrollTop + '')
+        }
+        $('#menu').remove()
+        $('#receivechild').append(goodsList)
+        $('#goods').remove()
+        $('#navbar').append(menuList)
+        // console.log($('#navbar')[0].offsetTop)
+        // console.log(document.documentElement.scrollTop)
+        // document.documentElement.scrollTop = navbarTop + 'px'
+        // console.log(navbarTop - document.documentElement.scrollTop)
+        // var h = 50 - (navbarTop - document.documentElement.scrollTop)
+        // console.log(navbarTop - document.documentElement.scrollTop)
+        // console.log(h)
+        // console.log(document.documentElement.scrollTop + 50 - (270 + 32))
+        if (document.documentElement.scrollTop > 250 && flag === 1) {
+          // 右侧列表顶部 距离 navbar 顶部的距离，以下为正，以上为负
+          // var goodsTopToNavbarTop = -(document.documentElement.scrollTop + 50 - (300 + 32))
+          // console.log(goodsTopToNavbarTop)
+          // console.log('scrollTop:'+ document.documentElement.scrollTop)
+          $('#menu').css('top', statusLeft.menuTopToNavbarTop + 'px')
+          document.documentElement.scrollTop = 250
+          console.log('error3')
+        }
+        if (flag === 1 && statusRight.goodsTopToNavbarTop < 32 && document.documentElement.scrollTop > 250) {
+          console.log('error4')
+          document.documentElement.scrollTop = 332 - (50 + statusRight.goodsTopToNavbarTop)
+        } else if (statusRight.goodsTopToNavbarTop === 32) {
+
+        }
+        console.log(document.documentElement.scrollTop)
+        
+        flag = 0
+      })
+      $(document).on('scroll', function (e) {
+        console.log(document.documentElement.scrollTop)
+        // 250 是navbar距离页面顶部的距离 - navbar的粘滞定位的高度，也就是 navbar开始粘滞之后才计算右边内容顶部距离navbar上下底边的距离
+        // if (document.documentElement.scrollTop > 250 && flag === 0) {
+        //   statusRight.goodsTopToNavbarTop = -(document.documentElement.scrollTop + 50 - (300 + 32))
+        // } else if (document.documentElement.scrollTop <= 250 && flag === 0) {
+        //   statusRight.goodsTopToNavbarTop = 32
+        // }
+        if (flag === 0) {
+          if (document.documentElement.scrollTop > 250) {
+            statusRight.goodsTopToNavbarTop = -(document.documentElement.scrollTop + 50 - (300 + 32))
+          } else if (document.documentElement.scrollTop <= 300 - parseFloat($('#navbar').css('top'))) {
+            statusRight.goodsTopToNavbarTop = 32
+          }
+        } else if (flag === 1) {
+          if (document.documentElement.scrollTop > 250) {
+            statusLeft.menuTopToNavbarTop = -(document.documentElement.scrollTop + 50 - (300 + 32))
+          } else if (document.documentElement.scrollTop <= 250) {
+            statusLeft.menuTopToNavbarTop = 32
+          }
+        }
+        // console.log(parseFloat($('#navbar').css('top')))
+        if (parseFloat($('#navbar').css('top')) > 50 && statusRight.goodsTopToNavbarTop === 32 && flag === 0) {
+          console.log('1')
+          $('#navbar').css('top', '50px')
+        }
+        if (parseFloat($('#navbar').css('top')) > 50 && statusLeft.menuTopToNavbarTop === 32 && flag === 1) {
+          console.log('2')
+          $('#navbar').css('top', '50px')
+        }
+      })
+    })
+  </script>
+</body>
+</html>

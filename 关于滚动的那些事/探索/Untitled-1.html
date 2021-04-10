@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./jquery-3.5.1.js"></script>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    html,body {
+      width: 100%;
+      height: 100%;
+    }
+    ul {
+      list-style: none;
+    }
+    .zhanwei {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      background: -webkit-linear-gradient(0, red, purple);
+      z-index: 1;
+    }
+    .navbar {
+      width: 100%;
+      height: 50px;
+      background-color: #eee;
+      position: sticky;
+      top: 0px;
+    }
+    .navbar .navbar-content {
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, .4);
+      position: relative;
+      z-index: 1;
+    }
+    .navbar .menu {
+      position: absolute;
+      top: 50px;
+      width: 80px;
+      background-color: lightgreen;
+    }
+    .menu {
+      text-align: center;
+      width: 80px;
+    }
+    .use-bscroll {
+      width: 100%;
+      padding-left: 80px;
+      text-align: center;
+    }
+    .navbar .use-bscroll {
+      position: absolute;
+      top: 50px;
+      right: 0;
+      padding-left: 0;
+      width: calc(100% - 80px);
+    }
+    li {
+      line-height: 50px;
+    }
+    .use-bscroll 
+    li:nth-of-type(2n-1) {
+      background-color: red;
+      
+    }
+    .use-bscroll 
+    li:nth-of-type(2n) {
+      background-color: green;
+    }
+    .menu
+    li:nth-of-type(2n-1) {
+      background-color: gray;
+      
+    }
+    .menu
+    li:nth-of-type(2n) {
+      background-color: lightblue;
+    }
+  </style>
+</head>
+<body>
+  <div class="page" id="container">
+    <div class="zhanwei"></div>
+
+    <div class="navbar" id="navbar">
+      <div class="navbar-content"></div>
+      <div class="menu" id="menu">
+        <ul>
+          <li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>10</li><li>11</li><li>12</li><li>13</li><li>14</li><li>15</li><li>16</li><li>17</li><li>18</li><li>19</li><li>20</li>
+        </ul>
+      </div>
+    </div>
+    <div class="receive-child" id="receivechild" style="width: 100%;">
+      <div class="use-bscroll" id="goods">
+        <ul>
+          <li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>10</li><li>11</li><li>12</li><li>13</li><li>14</li><li>15</li><li>16</li><li>17</li><li>18</li><li>19</li><li>20</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(function () {
+      // nav距离页面顶部的距离
+      let navbarTop = $('#navbar')[0].offsetTop
+      // console.log(navbarTop)
+      // 标志，用于判断两个列表 哪一个在标准流
+      let flag = 0  // 0：右侧在标准流；1左侧标准流
+      // 记录手指滑动方向
+      let touchY = 0
+      let direction = true // true 上滑；false 下滑
+      $(document).on('start', function (e) {
+        touchY = e.touches[0].clientY
+      })
+      $(document).on('touchmove', function (e) {
+        if(e.touches[0].clientY > touchY) {
+          direction = false
+        } else if (e.touches[0].clientY < touchY) {
+          direction = true
+        }
+      })
+      // 状态：
+      // 1.列表顶部 距离 navbar 顶部的距离，以下为正，以上为负
+      // 2.列表顶部 距离 navbar 底部的距离
+      let statusR = {
+        goodsTopToNavbarTop: 0
+      }
+      let statusL = {
+        menuTopToNavbarTop: 0,
+      }
+      $('#menu').on('touchstart', function (e) {
+        // 拿到两个列表的克隆
+        let goods = $('#goods').clone(true)
+        let menu = $('#menu').clone(true)
+        // 滚动距离小于200，右侧 切 左侧
+        if (document.documentElement.scrollTop <= 200) {
+          // 保存状态
+          statusR.goodsTopToNavbarTop = $('#navbar')[0].offsetHeight
+
+          // 开始切换
+          $('#receivechild').prepend(menu)
+          $('#goods').remove()
+          $('.navbar > #menu').remove()
+          $('#navbar').append(goods)
+        }
+        // 滚动距离大于200（nav已经停靠），右侧 切 左侧
+        if (document.documentElement.scrollTop > 200) {
+          // 保存状态
+          statusR.goodsTopToNavbarTop = navbarTop + $('#navbar')[0].offsetHeight - document.documentElement.scrollTop
+        }
+
+        // 打印状态
+        console.log('menu touchstart----------')
+        console.log(statusR)
+        console.log(statusL)
+      })
+      $('#goods').on('touchstart', function (e) {
+        
+      })
+      $(document).on('scroll', function (e) {
+        
+      })
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    html,body {
+      width: 100%;
+      height: 100%;
+    }
+    ul {
+      list-style: none;
+    }
+    hr {
+      margin: 20px 0;
+      width: 100vw;
+    }
+    .use-bscroll {
+      width: 98vw;
+      margin: 0 1vw;
+      height: 80vh;
+      border: 3px solid #aaa;
+      text-align: center;
+      overflow-y: scroll;
+    }
+    .use-bscroll 
+    li {
+      line-height: 50px;
+    }
+    .use-bscroll 
+    li:nth-of-type(2n-1) {
+      background-color: red;
+      
+    }
+    .use-bscroll 
+    li:nth-of-type(2n) {
+      background-color: green;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
+    <div style="position: relative;">
+      <div class="use-bscroll" id="inner">
+        <ul>
+          <li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>10</li><li>11</li><li>12</li><li>13</li><li>14</li><li>15</li><li>16</li><li>17</li><li>18</li><li>19</li><li>20</li>
+        </ul>
+      </div>
+      <div id="outter"></div>
+    </div>
+    
+  </div>
+  <script>
+    let touchY = 0
+    let direction = 1 // 1代表向下滑动，-1反之
+    // 页面的最大滚动距离
+    let maxScrollYOfDoc = document.documentElement.scrollHeight - document.documentElement.offsetHeight
+    let inner = document.getElementById('inner')
+    let outter = document.getElementById('outter')
+    outter.style.position = 'absolute'
+    outter.style.top = '0'
+    outter.style.width = inner.offsetWidth + 'px'
+    outter.style.height = inner.offsetHeight + 'px'
+    document.addEventListener('touchstart', function (e) {
+      touchY = e.touches[0].clientY
+      // 解决：进入页面，先下滑(none解除屏蔽)的问题，保证每次开始滑动，都是屏蔽状态，是否解除，由touchmove决定
+      outter.style.display = 'block'
+    })
+    document.addEventListener('touchmove', function (e) {
+      currentY = e.touches[0].clientY
+      if (currentY < touchY && document.documentElement.scrollTop < maxScrollYOfDoc) {
+        // 1.1向上滑动 且 外层滚动没有到最底部（滚动距离最大值），仅有这种情况下，禁止内层滚动
+        outter.style.display = 'block'
+      }
+      // 2.向下滑动，无论有没有在最底部，都允许
+      if (currentY > touchY) {
+        outter.style.display = 'none'
+      }
+      // 解决：外层已经到了最底部，再上滑，（1.2）滚动事件不会触发；（2.）也不会触发，于是受touchstart影响，一直是block（屏蔽内层滚动）
+      if (maxScrollYOfDoc - document.documentElement.scrollTop < 0.1) {
+        outter.style.display = 'none'
+      }
+      touchY = currentY
+    })
+    // 只有当 外层划动到了底部，才允许内层划动
+    // 1.2向上滑动，到了最底部，就允许内层向上滑动
+    document.addEventListener('scroll', function (e) {
+      if (maxScrollYOfDoc - document.documentElement.scrollTop < 0.1) {
+        outter.style.display = 'none'
+      }
+    })
+  </script>
+</body>
+</html>

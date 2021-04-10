@@ -1,0 +1,708 @@
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.9.0">
+    <title>Vue ç»„ä»¶çš„å•å…ƒæµ‹è¯• â€” Vue.js</title>
+    <meta charset=utf-8"utf-8">
+    <meta name="description" content="Vue.js - The Progressive JavaScript Framework">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="alternate" hreflang="x-default" href="https://vuejs.org/v2/cookbook/unit-testing-vue-components.html">
+    <link rel="alternate" hreflang="zh" href="https://cn.vuejs.org/v2/cookbook/unit-testing-vue-components.html">
+    <link rel="alternate" hreflang="ja" href="https://jp.vuejs.org/v2/cookbook/unit-testing-vue-components.html">
+    <link rel="alternate" hreflang="ru" href="https://ru.vuejs.org/v2/cookbook/unit-testing-vue-components.html">
+    <link rel="alternate" hreflang="ko" href="https://kr.vuejs.org/v2/cookbook/unit-testing-vue-components.html">
+    <link rel="alternate" hreflang="pt-BR" href="https://br.vuejs.org/v2/cookbook/unit-testing-vue-components.html">
+    <link rel="alternate" hreflang="fr" href="https://fr.vuejs.org/v2/cookbook/unit-testing-vue-components.html">
+    <link rel="alternate" hreflang="es" href="https://es.vuejs.org/v2/cookbook/unit-testing-vue-components.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Vue ç»„ä»¶çš„å•å…ƒæµ‹è¯• â€” Vue.js">
+    <meta property="og:description" content="Vue.js - The Progressive JavaScript Framework">
+    <meta property="og:image" content="https://cn.vuejs.org//images/logo.png">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Vue ç»„ä»¶çš„å•å…ƒæµ‹è¯• â€” Vue.js">
+    <meta name="twitter:description" content="Vue.js - The Progressive JavaScript Framework">
+    <meta name="twitter:image" content="https://cn.vuejs.org/images/logo.png">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/images/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/images/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+    <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
+    <link rel="icon" href="/images/logo.png" type="image/png">
+
+    <meta name="msapplication-TileColor" content="#4fc08d">
+    <meta name="theme-color" content="#4fc08d">
+
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- <link href="https://fonts.googleapis.com" rel="preconnect" crossorigin> -->
+    <!-- <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin> -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com" rel="preconnect" crossorigin> -->
+
+    <!-- <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono" rel="stylesheet"> -->
+    <!-- <link href="//fonts.googleapis.com/css?family=Dosis:500&text=Vue.js" rel="stylesheet"> -->
+
+    <link href="../../../code.bdstatic.com/npm/font-awesome@4.7.0/css/font-awesome.min.css" tppabs="https://code.bdstatic.com/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- main page styles -->
+    <link rel="stylesheet" href="../../css/page.css" tppabs="https://cn.vuejs.org/css/page.css">
+
+    <!-- this needs to be loaded before guide's inline scripts -->
+    <script src="../../js/vue.js" tppabs="https://cn.vuejs.org/js/vue.js"></script>
+
+    
+
+    <script>
+      Vue.config.productionTip = false
+      window.PAGE_TYPE = "cookbook"
+    </script>
+
+    <!-- ga -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-46852172-3', 'https://cn.vuejs.org/v2/cookbook/cn.vuejs.org');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body class="docs">
+    <div id="mobile-bar">
+      <a class="menu-button"></a>
+      <a class="logo" href="../../index-1.htm" tppabs="https://cn.vuejs.org/"></a>
+    </div>
+    <header id="header">
+  <a id="logo" href="../../index-1.htm" tppabs="https://cn.vuejs.org/">
+    <img src="../../images/logo.png" tppabs="https://cn.vuejs.org/images/logo.png" alt="vue logo">
+    <span>Vue.js</span>
+  </a>
+  <ul id="nav">
+    <li>
+  <form id="search-form">
+    <input type="text" id="search-query-nav" class="search-query st-default-search-input" aria-label="æœç´¢">
+  </form>
+</li>
+<li class="nav-dropdown-container learn">
+  <a class="nav-link current">å­¦ä¹ </a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><h4>æ–‡æ¡£</h4></li>
+    <li>
+      <ul>
+        <li><a href="../guide/index.htm" tppabs="https://cn.vuejs.org/v2/guide/" class="nav-link">æ•™ç¨‹</a></li>
+        <li><a href="../api/index.htm" tppabs="https://cn.vuejs.org/v2/api/" class="nav-link">API</a></li>
+        <li><a href="../style-guide/index.htm" tppabs="https://cn.vuejs.org/v2/style-guide/" class="nav-link">é£æ ¼æŒ‡å—</a></li>
+        <li><a href="javascript:if(confirm('https://cn.vuejs.org/v2/examples/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ²»¿ÉÓÃ, »ò·ÅÆúÁËÏÂÔØ, »òÏîÄ¿¼´½«Í£Ö¹¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://cn.vuejs.org/v2/examples/'" tppabs="https://cn.vuejs.org/v2/examples/" class="nav-link">ç¤ºä¾‹</a></li>
+        <li><a href="index.htm" tppabs="https://cn.vuejs.org/v2/cookbook/" class="nav-link current">Cookbook</a></li>
+      </ul>
+    </li>
+    <li><h4>è§†é¢‘æ•™ç¨‹</h4></li>
+    <li>
+      <ul>
+        <li><a href="javascript:if(confirm('https://www.vuemastery.com/courses/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://www.vuemastery.com/courses/'" tppabs="https://www.vuemastery.com/courses/" class="nav-link" target="_blank" rel="sponsored noopener">Vue Mastery (è‹±æ–‡)</a></li>
+        <li><a href="javascript:if(confirm('https://vueschool.io/?friend=vuejs&utm_source=Vuejs.org&utm_medium=Link&utm_content=Navbar%20Dropdown  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://vueschool.io/?friend=vuejs&utm_source=Vuejs.org&utm_medium=Link&utm_content=Navbar%20Dropdown'" tppabs="https://vueschool.io/?friend=vuejs&utm_source=Vuejs.org&utm_medium=Link&utm_content=Navbar%20Dropdown" class="nav-link" target="_blank" rel="noopener">Vue School (è‹±æ–‡)</a></li>
+        <li><a href="javascript:if(confirm('https://learning.dcloud.io/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://learning.dcloud.io/'" tppabs="https://learning.dcloud.io/" class="nav-link" target="_blank" rel="sponsored noopener">DCloud è§†é¢‘æ•™ç¨‹</a></li>
+      </ul>
+    </li>
+  </ul>
+</li>
+
+<li class="nav-dropdown-container ecosystem">
+  <a class="nav-link">ç”Ÿæ€ç³»ç»Ÿ</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><h4>å¸®åŠ©</h4></li>
+    <li><ul>
+      <li><a href="javascript:if(confirm('https://forum.vuejs.org/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://forum.vuejs.org/'" tppabs="https://forum.vuejs.org/" class="nav-link" target="_blank" rel="noopener">è®ºå›</a></li>
+      <li><a href="javascript:if(confirm('https://chat.vuejs.org/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://chat.vuejs.org/'" tppabs="https://chat.vuejs.org/" class="nav-link" target="_blank" rel="noopener">èŠå¤©å®¤</a></li>
+      <li><a href="javascript:if(confirm('https://events.vuejs.org/meetups/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://events.vuejs.org/meetups/'" tppabs="https://events.vuejs.org/meetups/" class="nav-link" target="_blank" rel="noopener">èšä¼š</a></li>
+    </ul></li>
+    <li><h4>å·¥å…·</h4></li>
+    <li>
+      <ul>
+        <li><a href="javascript:if(confirm('https://github.com/vuejs/vue-devtools  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/vuejs/vue-devtools'" tppabs="https://github.com/vuejs/vue-devtools" class="nav-link" target="_blank" rel="noopener">Devtools</a></li>
+        <li><a href="javascript:if(confirm('https://cli.vuejs.org/zh/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://cli.vuejs.org/zh/'" tppabs="https://cli.vuejs.org/zh/" class="nav-link" target="_blank" rel="noopener">Vue CLI</a></li>
+        <li><a href="javascript:if(confirm('https://vue-loader.vuejs.org/zh/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://vue-loader.vuejs.org/zh/'" tppabs="https://vue-loader.vuejs.org/zh/" class="nav-link" target="_blank" rel="noopener">Vue Loader</a></li>
+      </ul>
+    </li>
+    <li><h4>æ ¸å¿ƒæ’ä»¶</h4></li>
+    <li><ul>
+      <li><a href="javascript:if(confirm('https://router.vuejs.org/zh/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://router.vuejs.org/zh/'" tppabs="https://router.vuejs.org/zh/" class="nav-link" target="_blank" rel="noopener">Vue Router</a></li>
+      <li><a href="javascript:if(confirm('https://vuex.vuejs.org/zh/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://vuex.vuejs.org/zh/'" tppabs="https://vuex.vuejs.org/zh/" class="nav-link" target="_blank" rel="noopener">Vuex</a></li>
+      <li><a href="javascript:if(confirm('https://ssr.vuejs.org/zh/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://ssr.vuejs.org/zh/'" tppabs="https://ssr.vuejs.org/zh/" class="nav-link" target="_blank" rel="noopener">Vue æœåŠ¡ç«¯æ¸²æŸ“</a></li>
+    </ul></li>
+    <li><h4>ä¿¡æ¯</h4></li>
+    <li><ul>
+      <li><a href="javascript:if(confirm('https://news.vuejs.org/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://news.vuejs.org/'" tppabs="https://news.vuejs.org/" class="nav-link" target="_blank" rel="noopener">å‘¨åˆŠ</a></li>
+      <li><a href="javascript:if(confirm('https://github.com/vuejs/vue/projects/6  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/vuejs/vue/projects/6'" tppabs="https://github.com/vuejs/vue/projects/6" class="nav-link" target="_blank" rel="noopener">Roadmap</a></li>
+      <li><a href="javascript:if(confirm('https://events.vuejs.org/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://events.vuejs.org/'" tppabs="https://events.vuejs.org/" class="nav-link" target="_blank" rel="noopener">æ´»åŠ¨</a></li>
+      <li><a href="javascript:if(confirm('https://twitter.com/vuejs  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://twitter.com/vuejs'" tppabs="https://twitter.com/vuejs" class="nav-link" target="_blank" rel="noopener">Twitter</a></li>
+      <li><a href="javascript:if(confirm('https://medium.com/the-vue-point  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://medium.com/the-vue-point'" tppabs="https://medium.com/the-vue-point" class="nav-link" target="_blank" rel="noopener">åšå®¢</a></li>
+      <li><a href="javascript:if(confirm('https://vuejobs.com/?ref=vuejs  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://vuejobs.com/?ref=vuejs'" tppabs="https://vuejobs.com/?ref=vuejs" class="nav-link" target="_blank" rel="noopener">å·¥ä½œ</a></li>
+    </ul></li>
+  </ul>
+</li>
+
+<li>
+  <a href="../guide/team.html" tppabs="https://cn.vuejs.org/v2/guide/team.html" class="nav-link team">å›¢é˜Ÿ</a>
+</li>
+<li class="nav-dropdown-container resources">
+  <a href="#" class="nav-link">èµ„æºåˆ—è¡¨</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><a href="../../resources/partners.html" tppabs="https://cn.vuejs.org/resources/partners.html" class="nav-link">åˆä½œä¼™ä¼´</a></li>
+    <li><a href="../../resources/themes.html" tppabs="https://cn.vuejs.org/resources/themes.html" class="nav-link">ä¸»é¢˜</a></li>
+    <li><a href="javascript:if(confirm('https://github.com/vuejs/awesome-vue  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/vuejs/awesome-vue'" tppabs="https://github.com/vuejs/awesome-vue" class="nav-link" target="_blank" rel="noopener">Awesome Vue</a></li>
+    <li><a href="javascript:if(confirm('https://awesomejs.dev/for/vue/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://awesomejs.dev/for/vue/'" tppabs="https://awesomejs.dev/for/vue/" class="nav-link" target="_blank" rel="noopener">æµè§ˆå’Œ Vue ç›¸å…³çš„åŒ…</a></li>
+  </ul>
+</li>
+
+<!-- <li>
+  <a href="/partners" class="nav-link ">Partners</a>
+</li> -->
+<li class="nav-dropdown-container support-vue">
+  <a href="../../support-vuejs/index.htm" tppabs="https://cn.vuejs.org/support-vuejs/" class="nav-link">æ”¯æŒ Vue</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><a href="../../support-vuejs/index.htm#One-time-Donations" tppabs="https://cn.vuejs.org/support-vuejs/#One-time-Donations" class="nav-link">ä¸€æ¬¡æ€§èµåŠ©</a></li>
+    <li><a href="../../support-vuejs/index.htm#Recurring-Pledges" tppabs="https://cn.vuejs.org/support-vuejs/#Recurring-Pledges" class="nav-link">å‘¨æœŸæ€§èµåŠ©</a></li>
+    <li><a href="javascript:if(confirm('https://www.smallsticker.com/%E8%B4%B4%E7%BA%B8/vue.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://www.smallsticker.com/%E8%B4%B4%E7%BA%B8/vue.html'" tppabs="https://www.smallsticker.com/%E8%B4%B4%E7%BA%B8/vue.html" rel="noopener" class="nav-link">è´´çº¸</a></li>
+    <li><a href="javascript:if(confirm('https://osholic.com/?utm_source=vue&utm_medium=dropdown  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://osholic.com/?utm_source=vue&utm_medium=dropdown'" tppabs="https://osholic.com/?utm_source=vue&utm_medium=dropdown" rel="noopener" class="nav-link">å‘¨è¾¹</a></li>
+    <li><a href="javascript:if(confirm('https://vue.threadless.com/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://vue.threadless.com/'" tppabs="https://vue.threadless.com/" target="_blank" rel="noopener" class="nav-link">T æ¤å•†åº—</a></li>
+  </ul>
+</li>
+
+<li class="nav-dropdown-container language">
+  <a class="nav-link">å¤šè¯­è¨€</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><a href="javascript:if(confirm('https://vuejs.org/v2/cookbook/unit-testing-vue-components.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://vuejs.org/v2/cookbook/unit-testing-vue-components.html'" tppabs="https://vuejs.org/v2/cookbook/unit-testing-vue-components.html" class="nav-link">English</a></li>
+    <li><a href="javascript:if(confirm('https://jp.vuejs.org/v2/cookbook/unit-testing-vue-components.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://jp.vuejs.org/v2/cookbook/unit-testing-vue-components.html'" tppabs="https://jp.vuejs.org/v2/cookbook/unit-testing-vue-components.html" class="nav-link">æ—¥æœ¬èª</a></li>
+    <li><a href="javascript:if(confirm('https://ru.vuejs.org/v2/cookbook/unit-testing-vue-components.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://ru.vuejs.org/v2/cookbook/unit-testing-vue-components.html'" tppabs="https://ru.vuejs.org/v2/cookbook/unit-testing-vue-components.html" class="nav-link">Ğ ÑƒÑÑĞºĞ¸Ğ¹</a></li>
+    <li><a href="javascript:if(confirm('https://kr.vuejs.org/v2/cookbook/unit-testing-vue-components.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://kr.vuejs.org/v2/cookbook/unit-testing-vue-components.html'" tppabs="https://kr.vuejs.org/v2/cookbook/unit-testing-vue-components.html" class="nav-link">í•œêµ­ì–´</a></li>
+    <li><a href="javascript:if(confirm('https://br.vuejs.org/v2/cookbook/unit-testing-vue-components.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://br.vuejs.org/v2/cookbook/unit-testing-vue-components.html'" tppabs="https://br.vuejs.org/v2/cookbook/unit-testing-vue-components.html" class="nav-link">PortuguÃªs</a></li>
+    <li><a href="javascript:if(confirm('https://fr.vuejs.org/v2/cookbook/unit-testing-vue-components.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://fr.vuejs.org/v2/cookbook/unit-testing-vue-components.html'" tppabs="https://fr.vuejs.org/v2/cookbook/unit-testing-vue-components.html" class="nav-link">FranÃ§ais</a></li>
+    <li><a href="javascript:if(confirm('https://vi.vuejs.org/v2/cookbook/unit-testing-vue-components.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://vi.vuejs.org/v2/cookbook/unit-testing-vue-components.html'" tppabs="https://vi.vuejs.org/v2/cookbook/unit-testing-vue-components.html" class="nav-link">Tiáº¿ng Viá»‡t</a></li>
+    <li><a href="javascript:if(confirm('https://es.vuejs.org/v2/cookbook/unit-testing-vue-components.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://es.vuejs.org/v2/cookbook/unit-testing-vue-components.html'" tppabs="https://es.vuejs.org/v2/cookbook/unit-testing-vue-components.html" class="nav-link">EspaÃ±ol</a></li>
+    <li><a href="javascript:if(confirm('https://docs.vuejs.id/v2/cookbook/unit-testing-vue-components.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://docs.vuejs.id/v2/cookbook/unit-testing-vue-components.html'" tppabs="https://docs.vuejs.id/v2/cookbook/unit-testing-vue-components.html" class="nav-link">Bahasa Indonesia</a></li>
+  </ul>
+</li>
+
+<li><a href="javascript:if(confirm('https://github.com/vuejs/cn.vuejs.org/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/vuejs/cn.vuejs.org/'" tppabs="https://github.com/vuejs/cn.vuejs.org/" target="_blank" class="nav-link contribute">å‚ä¸ç¿»è¯‘</a></li>
+
+  </ul>
+</header>
+
+    
+      <div id="main" class="fix-sidebar">
+        
+  
+
+<div class="sidebar">
+  <div class="sidebar-inner">
+    
+    <div class="list">
+      <div id="sidebar-sponsors-special">
+  <div class="main-sponsor">
+    <span>ç‰¹åˆ«èµåŠ©å•†</span>
+    <div>
+    <a href="javascript:if(confirm('http://www.dcloud.io/?hmsr=vuejsorg&hmpl=&hmcu=&hmkw=&hmci=  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.dcloud.io/?hmsr=vuejsorg&hmpl=&hmcu=&hmkw=&hmci='" tppabs="http://www.dcloud.io/?hmsr=vuejsorg&hmpl=&hmcu=&hmkw=&hmci=" target="_blank" rel="sponsored noopener" class="logo">
+      <img id="s-dcloud" alt="dcloud">
+      <script>
+      (function(){
+        var el = document.getElementById("s-dcloud");
+        var adImg = null;
+        var altImg = "../../images/dcloud2.png"/*tpa=https://cn.vuejs.org/images/dcloud2.png*/;
+        var img = "../../images/dcloud1.png"/*tpa=https://cn.vuejs.org/images/dcloud1.png*/;
+        el.src = adImg || (altImg && Math.random() >= 0.5 ? altImg : img);
+      })()
+      </script>
+    </a>
+    </div>
+    <div>
+    <a href="javascript:if(confirm('https://coding.imooc.com/?c=vuejs&mc_marking=7cf403c3c89d6fccf944791e71e7a959&mc_channel=vuezwsq  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://coding.imooc.com/?c=vuejs&mc_marking=7cf403c3c89d6fccf944791e71e7a959&mc_channel=vuezwsq'" tppabs="https://coding.imooc.com/?c=vuejs&mc_marking=7cf403c3c89d6fccf944791e71e7a959&mc_channel=vuezwsq" target="_blank" rel="sponsored noopener" class="logo">
+      <img id="s-imooc" alt="imooc">
+      <script>
+      (function(){
+        var el = document.getElementById("s-imooc");
+        var adImg = "../../images/imooc-sponsor2.png"/*tpa=https://cn.vuejs.org/images/imooc-sponsor2.png*/;
+        var altImg = null;
+        var img = "../../images/imooc-sponsor.png"/*tpa=https://cn.vuejs.org/images/imooc-sponsor.png*/;
+        el.src = adImg || (altImg && Math.random() >= 0.5 ? altImg : img);
+      })()
+      </script>
+    </a>
+    </div>
+  </div>
+</div>
+<!--
+
+<div id="sidebar-sponsors-platinum-left">
+  <div class="main-sponsor">
+    <span>ç™½é‡‘èµåŠ©å•†</span>
+    <div>
+    <a href="https://vueschool.io/?utm_source=Vuejs.org&utm_medium=Banner&utm_campaign=Sponsored%20Banner&utm_content=V1" target="_blank" rel="sponsored noopener" class="logo">
+      <img src="/images/vueschool.png" alt="VueSchool">
+    </a>
+    <a href="https://vehikl.com/" target="_blank" rel="sponsored noopener" class="logo">
+      <img src="/images/vehikl.png" alt="Vehikl">
+    </a>
+    <a href="https://retool.com/?utm_source=sponsor&utm_campaign=vue" target="_blank" rel="sponsored noopener" class="logo">
+      <img src="/images/retool.png" alt="Retool">
+    </a>
+    <a href="https://passionatepeople.io/" target="_blank" rel="sponsored noopener" class="logo">
+      <img src="/images/passionate_people.png" alt="Passionate People">
+    </a>
+    <a href="https://www.storyblok.com" target="_blank" rel="sponsored noopener" class="logo">
+      <img src="/images/storyblok.png" alt="Storyblok">
+    </a>
+    </div>
+  </div>
+  <a class="become-backer" href="/support-vuejs">
+    æˆä¸ºèµåŠ©è€…
+  </a>
+</div>
+
+
+-->
+
+      
+        <h2>
+          
+          Cookbook<sup class="beta">beta</sup>
+          
+        </h2>
+        <ul class="menu-root">
+  
+    
+    
+    <li>
+      <a href="index.html" tppabs="https://cn.vuejs.org/v2/cookbook/index.html" class="sidebar-link">ä»‹ç»</a>
+    </li>
+  
+    
+    
+    <li>
+      <a href="adding-instance-properties.html" tppabs="https://cn.vuejs.org/v2/cookbook/adding-instance-properties.html" class="sidebar-link">æ·»åŠ å®ä¾‹ property</a>
+    </li>
+  
+    
+    
+    <li>
+      <a href="javascript:if(confirm('https://cn.vuejs.org/v2/cookbook/form-validation.html  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ²»¿ÉÓÃ, »ò·ÅÆúÁËÏÂÔØ, »òÏîÄ¿¼´½«Í£Ö¹¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://cn.vuejs.org/v2/cookbook/form-validation.html'" tppabs="https://cn.vuejs.org/v2/cookbook/form-validation.html" class="sidebar-link">è¡¨å•æ ¡éªŒ</a>
+    </li>
+  
+    
+    
+    <li>
+      <a href="editable-svg-icons.html" tppabs="https://cn.vuejs.org/v2/cookbook/editable-svg-icons.html" class="sidebar-link">å¯ç¼–è¾‘çš„ SVG å›¾æ ‡ç³»ç»Ÿ</a>
+    </li>
+  
+    
+    
+    <li>
+      <a href="serverless-blog.html" tppabs="https://cn.vuejs.org/v2/cookbook/serverless-blog.html" class="sidebar-link">åˆ›å»ºä¸€ä¸ªåŸºäº CMS çš„åšå®¢</a>
+    </li>
+  
+    
+    
+    <li>
+      <a href="unit-testing-vue-components.html" tppabs="https://cn.vuejs.org/v2/cookbook/unit-testing-vue-components.html" class="sidebar-link current">Vue ç»„ä»¶çš„å•å…ƒæµ‹è¯•</a>
+    </li>
+  
+    
+    
+    <li>
+      <a href="creating-custom-scroll-directives.html" tppabs="https://cn.vuejs.org/v2/cookbook/creating-custom-scroll-directives.html" class="sidebar-link">åˆ›å»ºè‡ªå®šä¹‰æ»šåŠ¨æŒ‡ä»¤</a>
+    </li>
+  
+    
+    
+    <li>
+      <a href="debugging-in-vscode.html" tppabs="https://cn.vuejs.org/v2/cookbook/debugging-in-vscode.html" class="sidebar-link">åœ¨ VS Code ä¸­è°ƒè¯•</a>
+    </li>
+  
+    
+    
+    <li>
+      <a href="using-axios-to-consume-apis.html" tppabs="https://cn.vuejs.org/v2/cookbook/using-axios-to-consume-apis.html" class="sidebar-link">ä½¿ç”¨ axios è®¿é—® API</a>
+    </li>
+  
+    
+    
+    <li>
+      <a href="avoiding-memory-leaks.html" tppabs="https://cn.vuejs.org/v2/cookbook/avoiding-memory-leaks.html" class="sidebar-link">é¿å…å†…å­˜æ³„æ¼</a>
+    </li>
+  
+    
+    
+    <li>
+      <a href="client-side-storage.html" tppabs="https://cn.vuejs.org/v2/cookbook/client-side-storage.html" class="sidebar-link">å®¢æˆ·ç«¯å­˜å‚¨</a>
+    </li>
+  
+    
+    
+    <li>
+      <a href="packaging-sfc-for-npm.html" tppabs="https://cn.vuejs.org/v2/cookbook/packaging-sfc-for-npm.html" class="sidebar-link">Packaging Vue Components for npm</a>
+    </li>
+  
+    
+    
+    <li>
+      <a href="dockerize-vuejs-app.html" tppabs="https://cn.vuejs.org/v2/cookbook/dockerize-vuejs-app.html" class="sidebar-link">Dockerize Vue.js App</a>
+    </li>
+  
+    
+    
+    <li>
+      <a href="practical-use-of-scoped-slots.html" tppabs="https://cn.vuejs.org/v2/cookbook/practical-use-of-scoped-slots.html" class="sidebar-link">Practical use of scoped slots with GoogleMaps</a>
+    </li>
+  
+</ul>
+
+      
+    </div>
+  </div>
+</div>
+<!--
+
+<div id="sidebar-sponsors-platinum-right">
+  <div class="main-sponsor">
+    <span>ç™½é‡‘èµåŠ©å•†</span>
+    <div>
+    <a href="https://vueschool.io/?utm_source=Vuejs.org&utm_medium=Banner&utm_campaign=Sponsored%20Banner&utm_content=V1" target="_blank" rel="sponsored noopener" class="logo">
+      <img src="/images/vueschool.png" alt="VueSchool">
+    </a>
+    <a href="https://vehikl.com/" target="_blank" rel="sponsored noopener" class="logo">
+      <img src="/images/vehikl.png" alt="Vehikl">
+    </a>
+    <a href="https://retool.com/?utm_source=sponsor&utm_campaign=vue" target="_blank" rel="sponsored noopener" class="logo">
+      <img src="/images/retool.png" alt="Retool">
+    </a>
+    <a href="https://passionatepeople.io/" target="_blank" rel="sponsored noopener" class="logo">
+      <img src="/images/passionate_people.png" alt="Passionate People">
+    </a>
+    <a href="https://www.storyblok.com" target="_blank" rel="sponsored noopener" class="logo">
+      <img src="/images/storyblok.png" alt="Storyblok">
+    </a>
+    </div>
+  </div>
+  <a class="become-backer" href="/support-vuejs">
+    æˆä¸ºèµåŠ©è€…
+  </a>
+</div>
+
+
+-->
+
+
+<div class="content cookbook with-sidebar ">
+  
+    
+      
+<div id="ad">
+  <span style="float: right;">å¹¿å‘Š</span>
+  <a href="javascript:if(confirm('https://coding.imooc.com/?c=vuejs&mc_marking=2243e4b1af42da32ee6e9f088e646c7c&mc_channel=vuezwsq  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://coding.imooc.com/?c=vuejs&mc_marking=2243e4b1af42da32ee6e9f088e646c7c&mc_channel=vuezwsq'" tppabs="https://coding.imooc.com/?c=vuejs&mc_marking=2243e4b1af42da32ee6e9f088e646c7c&mc_channel=vuezwsq" target="_blank" rel="nofollow">
+    <img src="../../images/imooc-ad3.png" tppabs="https://cn.vuejs.org/images/imooc-ad3.png" alt="Vue.jså®æˆ˜é¡¹ç›®å¼€å‘æ•™ç¨‹">
+  </a>
+  <!-- <script
+    async
+    type="text/javascript"
+    src="//cdn.carbonads.com/carbon.js?serve=CEBDT27Y&placement=vuejsorg"
+    id="_carbonads_js">
+  </script> -->
+</div>
+
+
+    
+  
+  
+    <h1>Vue ç»„ä»¶çš„å•å…ƒæµ‹è¯•</h1>
+  
+
+  <div class="ad-pagetop">
+  <a href="javascript:if(confirm('http://www.vueshop.com.cn/index.php?http_referer=vuejs  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='http://www.vueshop.com.cn/index.php?http_referer=vuejs'" tppabs="http://www.vueshop.com.cn/index.php?http_referer=vuejs" target="_blank" rel="noopener noreferrer">
+    <span class="name">VUEshop</span>
+    <span class="description">ä¸­å›½å…è´¹å•†åŸç³»ç»Ÿ - æœè±¹å•†åŸç³»ç»Ÿ - å…è´¹50å°æ—¶ Vue è§†é¢‘æ•™ç¨‹</span>
+    <span class="action">ç«‹å³æŸ¥çœ‹ &gt;</span>
+  </a>
+</div>
+
+
+  
+    <h2 id="åŸºæœ¬çš„ç¤ºä¾‹"><a href="#åŸºæœ¬çš„ç¤ºä¾‹" class="headerlink" title="åŸºæœ¬çš„ç¤ºä¾‹"></a>åŸºæœ¬çš„ç¤ºä¾‹</h2><p>å•å…ƒæµ‹è¯•æ˜¯è½¯ä»¶å¼€å‘éå¸¸åŸºç¡€çš„ä¸€éƒ¨åˆ†ã€‚å•å…ƒæµ‹è¯•ä¼šå°é—­æ‰§è¡Œæœ€å°åŒ–å•å…ƒçš„ä»£ç ï¼Œä½¿å¾—æ·»åŠ æ–°åŠŸèƒ½å’Œè¿½è¸ªé—®é¢˜æ›´å®¹æ˜“ã€‚Vue çš„<a href="../guide/single-file-components.html" tppabs="https://cn.vuejs.org/v2/guide/single-file-components.html">å•æ–‡ä»¶ç»„ä»¶</a>ä½¿å¾—ä¸ºç»„ä»¶æ’°å†™éš”ç¦»çš„å•å…ƒæµ‹è¯•è¿™ä»¶äº‹æ›´åŠ ç›´æ¥ã€‚å®ƒä¼šè®©ä½ æ›´æœ‰ä¿¡å¿ƒåœ°å¼€å‘æ–°ç‰¹æ€§è€Œä¸ç ´åç°æœ‰çš„å®ç°ï¼Œå¹¶å¸®åŠ©å…¶ä»–å¼€å‘è€…ç†è§£ä½ çš„ç»„ä»¶çš„ä½œç”¨ã€‚</p>
+<p>è¿™æ˜¯ä¸€ä¸ªåˆ¤æ–­ä¸€äº›æ–‡æœ¬æ˜¯å¦è¢«æ¸²æŸ“çš„ç®€å•çš„ç¤ºä¾‹ï¼š</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">v-model</span>=<span class="hljs-string">"username"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span>
+      <span class="hljs-attr">v-if</span>=<span class="hljs-string">"error"</span>
+      <span class="hljs-attr">class</span>=<span class="hljs-string">"error"</span>
+    &gt;</span>
+      &#123;&#123; error &#125;&#125;
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;
+  <span class="hljs-attr">name</span>: <span class="hljs-string">'Hello'</span>,
+  data () &#123;
+    <span class="hljs-keyword">return</span> &#123;
+      <span class="hljs-attr">username</span>: <span class="hljs-string">''</span>
+    &#125;
+  &#125;,
+
+  <span class="hljs-attr">computed</span>: &#123;
+    error () &#123;
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.username.trim().length &lt; <span class="hljs-number">7</span>
+        ? <span class="hljs-string">'Please enter a longer username'</span>
+        : <span class="hljs-string">''</span>
+    &#125;
+  &#125;
+&#125;
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+<pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; shallowMount &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'@vue/test-utils'</span>
+<span class="hljs-keyword">import</span> Hello <span class="hljs-keyword">from</span> <span class="hljs-string">'./Hello.vue'</span>
+
+test(<span class="hljs-string">'Hello'</span>, () =&gt; &#123;
+  <span class="hljs-comment">// æ¸²æŸ“è¿™ä¸ªç»„ä»¶</span>
+  <span class="hljs-keyword">const</span> wrapper = shallowMount(Hello)
+
+  <span class="hljs-comment">// `username` åœ¨é™¤å»å¤´å°¾ç©ºæ ¼ä¹‹åä¸åº”è¯¥å°‘äº 7 ä¸ªå­—ç¬¦</span>
+  wrapper.setData(&#123; <span class="hljs-attr">username</span>: <span class="hljs-string">' '</span>.repeat(<span class="hljs-number">7</span>) &#125;)
+
+ Â <span class="hljs-comment">// ç¡®è®¤é”™è¯¯ä¿¡æ¯è¢«æ¸²æŸ“äº†</span>
+  expect(wrapper.find(<span class="hljs-string">'.error'</span>).exists()).toBe(<span class="hljs-literal">true</span>)
+
+  <span class="hljs-comment">// å°†åå­—æ›´æ–°è‡³è¶³å¤Ÿé•¿</span>
+  wrapper.setData(&#123; <span class="hljs-attr">username</span>: <span class="hljs-string">'Lachlan'</span> &#125;)
+
+  <span class="hljs-comment">// æ–­è¨€é”™è¯¯ä¿¡æ¯ä¸å†æ˜¾ç¤ºäº†</span>
+  expect(wrapper.find(<span class="hljs-string">'.error'</span>).exists()).toBe(<span class="hljs-literal">false</span>)
+&#125;)</code></pre>
+<p>ä¸Šè¿°ä»£ç ç‰‡æ®µå±•ç¤ºäº†å¦‚ä½•åŸºäº <code>username</code> çš„é•¿åº¦æµ‹è¯•ä¸€ä¸ªé”™è¯¯ä¿¡æ¯æ˜¯å¦è¢«æ¸²æŸ“ã€‚å®ƒå±•ç¤ºäº† Vue ç»„ä»¶å•å…ƒæµ‹è¯•çš„ä¸€èˆ¬æ€è·¯ï¼šæ¸²æŸ“è¿™ä¸ªç»„ä»¶ï¼Œç„¶åæ–­è¨€è¿™äº›æ ‡ç­¾æ˜¯å¦åŒ¹é…ç»„ä»¶çš„çŠ¶æ€ã€‚</p>
+<h2 id="ä¸ºä»€ä¹ˆè¦æµ‹è¯•ï¼Ÿ"><a href="#ä¸ºä»€ä¹ˆè¦æµ‹è¯•ï¼Ÿ" class="headerlink" title="ä¸ºä»€ä¹ˆè¦æµ‹è¯•ï¼Ÿ"></a>ä¸ºä»€ä¹ˆè¦æµ‹è¯•ï¼Ÿ</h2><p>ç»„ä»¶çš„å•å…ƒæµ‹è¯•æœ‰å¾ˆå¤šå¥½å¤„ï¼š</p>
+<ul>
+<li>æä¾›æè¿°ç»„ä»¶è¡Œä¸ºçš„æ–‡æ¡£</li>
+<li>èŠ‚çœæ‰‹åŠ¨æµ‹è¯•çš„æ—¶é—´</li>
+<li>å‡å°‘ç ”å‘æ–°ç‰¹æ€§æ—¶äº§ç”Ÿçš„ bug</li>
+<li>æ”¹è¿›è®¾è®¡</li>
+<li>ä¿ƒè¿›é‡æ„</li>
+</ul>
+<p>è‡ªåŠ¨åŒ–æµ‹è¯•ä½¿å¾—å¤§å›¢é˜Ÿä¸­çš„å¼€å‘è€…å¯ä»¥ç»´æŠ¤å¤æ‚çš„åŸºç¡€ä»£ç ã€‚</p>
+<h4 id="èµ·æ­¥"><a href="#èµ·æ­¥" class="headerlink" title="èµ·æ­¥"></a>èµ·æ­¥</h4><p><a href="javascript:if(confirm('https://github.com/vuejs/vue-test-utils  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/vuejs/vue-test-utils'" tppabs="https://github.com/vuejs/vue-test-utils" target="_blank" rel="noopener">Vue Test Utils</a> æ˜¯ Vue ç»„ä»¶å•å…ƒæµ‹è¯•çš„å®˜æ–¹åº“ã€‚<a href="javascript:if(confirm('https://github.com/vuejs/vue-cli  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/vuejs/vue-cli'" tppabs="https://github.com/vuejs/vue-cli" target="_blank" rel="noopener">Vue CLI</a> çš„ <code>webpack</code> æ¨¡æ¿å¯¹ Karma å’Œ Jest è¿™ä¸¤ä¸ªæµ‹è¯•è¿è¡Œå™¨éƒ½æ”¯æŒï¼Œå¹¶ä¸”åœ¨ Vue Test Utils çš„æ–‡æ¡£ä¸­æœ‰ä¸€äº›<a href="javascript:if(confirm('https://vue-test-utils.vuejs.org/zh/guides/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://vue-test-utils.vuejs.org/zh/guides/'" tppabs="https://vue-test-utils.vuejs.org/zh/guides/" target="_blank" rel="noopener">å¼•å¯¼</a>ã€‚</p>
+<h2 id="å®é™…çš„ä¾‹å­"><a href="#å®é™…çš„ä¾‹å­" class="headerlink" title="å®é™…çš„ä¾‹å­"></a>å®é™…çš„ä¾‹å­</h2><p>å•å…ƒæµ‹è¯•åº”è¯¥ï¼š</p>
+<ul>
+<li>å¯ä»¥å¿«é€Ÿè¿è¡Œ</li>
+<li>æ˜“äºç†è§£</li>
+<li>åªæµ‹è¯•<em>ä¸€ä¸ªç‹¬ç«‹å•å…ƒçš„å·¥ä½œ</em></li>
+</ul>
+<p>æˆ‘ä»¬åœ¨ä¸Šä¸€ä¸ªç¤ºä¾‹çš„åŸºç¡€ä¸Šç»§ç»­æ„å»ºï¼ŒåŒæ—¶å¼•å…¥ä¸€ä¸ª<a href="javascript:if(confirm('https://zh.wikipedia.org/wiki/å·¥å‚æ–¹æ³•  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://zh.wikipedia.org/wiki/å·¥å‚æ–¹æ³•#å·¥å‚'" tppabs="https://zh.wikipedia.org/wiki/å·¥å‚æ–¹æ³•#å·¥å‚" target="_blank" rel="noopener">å·¥å‚å‡½æ•° (factory function)</a> ä½¿å¾—æˆ‘ä»¬çš„æµ‹è¯•æ›´ç®€æ´æ›´æ˜“è¯»ã€‚è¿™ä¸ªç»„ä»¶åº”è¯¥ï¼š</p>
+<ul>
+<li>å±•ç¤ºä¸€ä¸ªâ€œWelcome to the Vue.js cookbookâ€çš„é—®å€™è¯­</li>
+<li>æç¤ºç”¨æˆ·è¾“å…¥ç”¨æˆ·å</li>
+<li>å¦‚æœè¾“å…¥çš„ç”¨æˆ·åå°‘äºä¸ƒä¸ªå­—ç¬¦åˆ™å±•ç¤ºé”™è¯¯ä¿¡æ¯</li>
+</ul>
+<p>è®©æˆ‘ä»¬å…ˆçœ‹ä¸€ä¸‹ç»„ä»¶ä»£ç ï¼š</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"message"</span>&gt;</span>
+      &#123;&#123; message &#125;&#125;
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    Enter your username: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">v-model</span>=<span class="hljs-string">"username"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span>
+      <span class="hljs-attr">v-if</span>=<span class="hljs-string">"error"</span>
+      <span class="hljs-attr">class</span>=<span class="hljs-string">"error"</span>
+    &gt;</span>
+      Please enter a username with at least seven letters.
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;
+  <span class="hljs-attr">name</span>: <span class="hljs-string">'Foo'</span>,
+
+  data () &#123;
+    <span class="hljs-keyword">return</span> &#123;
+      <span class="hljs-attr">message</span>: <span class="hljs-string">'Welcome to the Vue.js cookbook'</span>,
+      <span class="hljs-attr">username</span>: <span class="hljs-string">''</span>
+    &#125;
+  &#125;,
+
+  <span class="hljs-attr">computed</span>: &#123;
+    error () &#123;
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.username.trim().length &lt; <span class="hljs-number">7</span>
+    &#125;
+  &#125;
+&#125;
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+<p>æˆ‘ä»¬åº”è¯¥æµ‹è¯•çš„å†…å®¹æœ‰ï¼š</p>
+<ul>
+<li><code>message</code> æ˜¯å¦è¢«æ¸²æŸ“</li>
+<li>å¦‚æœ <code>error</code> æ˜¯ <code>true</code>ï¼Œåˆ™ <code>&lt;div class=&quot;error&quot;&gt;</code> åº”è¯¥å±•ç¤º</li>
+<li>å¦‚æœ <code>error</code> æ˜¯ <code>false</code>ï¼Œåˆ™ <code>&lt;div class=&quot;error&quot;&gt;</code> ä¸åº”è¯¥å±•ç¤º</li>
+</ul>
+<p>æˆ‘ä»¬çš„ç¬¬ä¸€æ¬¡æµ‹è¯•å°è¯•ï¼š</p>
+<pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; shallowMount &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'@vue/test-utils'</span>
+<span class="hljs-keyword">import</span> Foo <span class="hljs-keyword">from</span> <span class="hljs-string">'./Foo.vue'</span>
+
+describe(<span class="hljs-string">'Foo'</span>, () =&gt; &#123;
+  it(<span class="hljs-string">'renders a message and responds correctly to user input'</span>, () =&gt; &#123;
+    <span class="hljs-keyword">const</span> wrapper = shallowMount(Foo, &#123;
+      data() &#123;
+        <span class="hljs-keyword">return</span> &#123;
+          <span class="hljs-attr">message</span>: <span class="hljs-string">'Hello World'</span>,
+          <span class="hljs-attr">username</span>: <span class="hljs-string">''</span>
+        &#125;
+      &#125;
+    &#125;)
+
+    <span class="hljs-comment">// ç¡®è®¤æ˜¯å¦æ¸²æŸ“äº† `message`</span>
+    expect(wrapper.find(<span class="hljs-string">'.message'</span>).text()).toEqual(<span class="hljs-string">'Hello World'</span>)
+
+    <span class="hljs-comment">// æ–­è¨€æ¸²æŸ“äº†é”™è¯¯ä¿¡æ¯</span>
+    expect(wrapper.find(<span class="hljs-string">'.error'</span>).exists()).toBeTruthy()
+
+    <span class="hljs-comment">// æ›´æ–° `username` å¹¶æ–­è¨€é”™è¯¯ä¿¡æ¯ä¸å†è¢«æ¸²æŸ“</span>
+    wrapper.setData(&#123; <span class="hljs-attr">username</span>: <span class="hljs-string">'Lachlan'</span> &#125;)
+    expect(wrapper.find(<span class="hljs-string">'.error'</span>).exists()).toBeFalsy()
+  &#125;)
+&#125;)</code></pre>
+<p>ä¸Šè¿°ä»£ç æœ‰ä¸€äº›é—®é¢˜ï¼š</p>
+<ul>
+<li>å•ä¸ªæµ‹è¯•æ–­è¨€äº†ä¸åŒçš„äº‹æƒ…</li>
+<li>å¾ˆéš¾é˜è¿°ç»„ä»¶å¯ä»¥å¤„äºå“ªäº›ä¸åŒçš„çŠ¶æ€ï¼Œä»¥åŠå®ƒè¯¥è¢«æ¸²æŸ“æˆä»€ä¹ˆæ ·å­</li>
+</ul>
+<p>æ¥ä¸‹æ¥çš„ç¤ºä¾‹ä»è¿™å‡ ä¸ªæ–¹é¢æ”¹å–„äº†æµ‹è¯•ï¼š</p>
+<ul>
+<li>æ¯ä¸ª <code>it</code> å—åªåšä¸€ä¸ªæ–­è¨€</li>
+<li>è®©æµ‹è¯•æè¿°æ›´ç®€çŸ­æ¸…æ™°</li>
+<li>åªæä¾›æµ‹è¯•éœ€è¦çš„æœ€å°åŒ–æ•°æ®</li>
+<li>æŠŠé‡å¤çš„é€»è¾‘é‡æ„åˆ°äº†ä¸€ä¸ªå·¥å‚å‡½æ•°ä¸­ (åˆ›å»º <code>wrapper</code> å’Œè®¾ç½® <code>username</code> å˜é‡)</li>
+</ul>
+<p><em>æ›´æ–°åçš„æµ‹è¯•</em>ï¼š</p>
+<pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; shallowMount &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'@vue/test-utils'</span>
+<span class="hljs-keyword">import</span> Foo <span class="hljs-keyword">from</span> <span class="hljs-string">'./Foo'</span>
+
+<span class="hljs-keyword">const</span> factory = <span class="hljs-function">(<span class="hljs-params">values = &#123;&#125;</span>) =&gt;</span> &#123;
+  <span class="hljs-keyword">return</span> shallowMount(Foo, &#123;
+    data () &#123;
+      <span class="hljs-keyword">return</span> &#123;
+        ...values
+      &#125;
+    &#125;
+  &#125;)
+&#125;
+
+describe(<span class="hljs-string">'Foo'</span>, () =&gt; &#123;
+  it(<span class="hljs-string">'renders a welcome message'</span>, () =&gt; &#123;
+    <span class="hljs-keyword">const</span> wrapper = factory()
+
+    expect(wrapper.find(<span class="hljs-string">'.message'</span>).text()).toEqual(<span class="hljs-string">"Welcome to the Vue.js cookbook"</span>)
+  &#125;)
+
+  it(<span class="hljs-string">'renders an error when username is less than 7 characters'</span>, () =&gt; &#123;
+    <span class="hljs-keyword">const</span> wrapper = factory(&#123; <span class="hljs-attr">username</span>: <span class="hljs-string">''</span>  &#125;)
+
+    expect(wrapper.find(<span class="hljs-string">'.error'</span>).exists()).toBeTruthy()
+  &#125;)
+
+  it(<span class="hljs-string">'renders an error when username is whitespace'</span>, () =&gt; &#123;
+    <span class="hljs-keyword">const</span> wrapper = factory(&#123; <span class="hljs-attr">username</span>: <span class="hljs-string">' '</span>.repeat(<span class="hljs-number">7</span>)  &#125;)
+
+    expect(wrapper.find(<span class="hljs-string">'.error'</span>).exists()).toBeTruthy()
+  &#125;)
+
+  it(<span class="hljs-string">'does not render an error when username is 7 characters or more'</span>, () =&gt; &#123;
+    <span class="hljs-keyword">const</span> wrapper = factory(&#123; <span class="hljs-attr">username</span>: <span class="hljs-string">'Lachlan'</span>  &#125;)
+
+    expect(wrapper.find(<span class="hljs-string">'.error'</span>).exists()).toBeFalsy()
+  &#125;)
+&#125;)</code></pre>
+<p>æ³¨æ„äº‹é¡¹ï¼š</p>
+<p>åœ¨ä¸€å¼€å§‹ï¼Œå·¥å‚å‡½æ•°å°† <code>values</code> å¯¹è±¡åˆå¹¶åˆ°äº† <code>data</code> å¹¶è¿”å›äº†ä¸€ä¸ªæ–°çš„ <code>wrapper</code> å®ä¾‹ã€‚è¿™æ ·ï¼Œæˆ‘ä»¬å°±ä¸éœ€è¦åœ¨æ¯ä¸ªæµ‹è¯•ä¸­é‡å¤ <code>const wrapper = shallowMount(Foo)</code>ã€‚å¦ä¸€ä¸ªå¥½å¤„æ˜¯å½“ä½ æƒ³ä¸ºæ›´å¤æ‚çš„ç»„ä»¶åœ¨æ¯ä¸ªæµ‹è¯•ä¸­ä¼ªé€ æˆ–å­˜æ ¹ä¸€ä¸ªæ–¹æ³•æˆ–è®¡ç®—å±æ€§æ—¶ï¼Œä½ åªéœ€è¦å£°æ˜ä¸€æ¬¡å³å¯ã€‚</p>
+<h2 id="é¢å¤–çš„ä¸Šä¸‹æ–‡"><a href="#é¢å¤–çš„ä¸Šä¸‹æ–‡" class="headerlink" title="é¢å¤–çš„ä¸Šä¸‹æ–‡"></a>é¢å¤–çš„ä¸Šä¸‹æ–‡</h2><p>ä¸Šè¿°çš„æµ‹è¯•æ˜¯éå¸¸ç®€å•çš„ï¼Œä½†æ˜¯åœ¨å®é™…æƒ…å†µä¸‹ Vue ç»„ä»¶å¸¸å¸¸å…·æœ‰å…¶å®ƒä½ æƒ³è¦æµ‹è¯•çš„è¡Œä¸ºï¼Œè¯¸å¦‚ï¼š</p>
+<ul>
+<li>è°ƒç”¨ API</li>
+<li>ä¸º <code>Vuex</code> çš„ storeï¼Œcommit æˆ– dispatch ä¸€äº›å˜æ›´æˆ– action</li>
+<li>æµ‹è¯•ç”¨æˆ·äº¤äº’</li>
+</ul>
+<p>æˆ‘ä»¬åœ¨ Vue Test Utils çš„<a href="javascript:if(confirm('https://vue-test-utils.vuejs.org/zh/guides/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://vue-test-utils.vuejs.org/zh/guides/'" tppabs="https://vue-test-utils.vuejs.org/zh/guides/" target="_blank" rel="noopener">æ•™ç¨‹</a>ä¸­æä¾›äº†æ›´å®Œæ•´çš„ç¤ºä¾‹å±•ç¤ºè¿™äº›æµ‹è¯•ã€‚</p>
+<p>Vue Test Utils åŠåºå¤§çš„ JavaScript ç”Ÿæ€ç³»ç»Ÿæä¾›äº†å¤§é‡çš„å·¥å…·ä¿ƒè¿› 100% çš„æµ‹è¯•è¦†ç›–ç‡ã€‚å•å…ƒæµ‹è¯•åªæ˜¯æ•´ä¸ªæµ‹è¯•é‡‘å­—å¡”ä¸­çš„ä¸€éƒ¨åˆ†ã€‚å…¶å®ƒç±»å‹çš„æµ‹è¯•è¿˜åŒ…æ‹¬ e2e (ç«¯åˆ°ç«¯) æµ‹è¯•ã€å¿«ç…§æ¯”å¯¹æµ‹è¯•ç­‰ã€‚å•å…ƒæµ‹è¯•æ˜¯æœ€å°å·§ä¹Ÿæ˜¯æœ€ç®€å•çš„æµ‹è¯•â€”â€”å®ƒä»¬é€šè¿‡éš”ç¦»å•ä¸ªç»„ä»¶çš„æ¯ä¸€ä¸ªéƒ¨åˆ†ï¼Œæ¥åœ¨æœ€å°å·¥ä½œå•å…ƒä¸Šè¿›è¡Œæ–­è¨€ã€‚</p>
+<p>å¿«ç…§æ¯”å¯¹æµ‹è¯•ä¼šä¿å­˜ä½ çš„ Vue ç»„ä»¶çš„æ ‡è®°ï¼Œç„¶åæ¯”è¾ƒæ¯æ¬¡æ–°ç”Ÿæˆçš„æµ‹è¯•è¿è¡Œç»“æœã€‚å¦‚æœæœ‰äº›ä¸œè¥¿æ”¹å˜äº†ï¼Œå¼€å‘è€…å°±ä¼šå¾—åˆ°é€šçŸ¥ï¼Œå¹¶å†³å®šè¿™ä¸ªæ”¹å˜æ˜¯åˆ»æ„ä¸ºä¹‹ (ç»„ä»¶æ›´æ–°æ—¶) è¿˜æ˜¯æ„å¤–å‘ç”Ÿçš„ (ç»„ä»¶è¡Œä¸ºä¸æ­£ç¡®)ã€‚</p>
+<p>ç«¯åˆ°ç«¯æµ‹è¯•è‡´åŠ›äºç¡®ä¿ç»„ä»¶çš„ä¸€ç³»åˆ—äº¤äº’æ˜¯æ­£ç¡®çš„ã€‚å®ƒä»¬æ˜¯æ›´é«˜çº§åˆ«çš„æµ‹è¯•ï¼Œä¾‹å¦‚å¯èƒ½ä¼šæµ‹è¯•ç”¨æˆ·æ˜¯å¦æ³¨å†Œã€ç™»å½•ä»¥åŠæ›´æ–°ä»–ä»¬çš„ç”¨æˆ·åã€‚è¿™ç§æµ‹è¯•è¿è¡Œèµ·æ¥ä¼šæ¯”å•å…ƒæµ‹è¯•å’Œå¿«ç…§æ¯”å¯¹æµ‹è¯•æ…¢ä¸€äº›ã€‚</p>
+<p>å•å…ƒæµ‹è¯•ä¸­å¼€å‘çš„æ—¶å€™æ˜¯æœ€æœ‰ç”¨çš„ï¼Œå³èƒ½å¸®åŠ©å¼€å‘è€…æ€è€ƒå¦‚ä½•è®¾è®¡ä¸€ä¸ªç»„ä»¶æˆ–é‡æ„ä¸€ä¸ªç°æœ‰ç»„ä»¶ã€‚é€šå¸¸æ¯æ¬¡ä»£ç å‘ç”Ÿå˜åŒ–çš„æ—¶å€™å®ƒä»¬éƒ½ä¼šè¢«è¿è¡Œã€‚</p>
+<p>é«˜çº§åˆ«çš„æµ‹è¯•ï¼Œè¯¸å¦‚ç«¯åˆ°ç«¯æµ‹è¯•ï¼Œè¿è¡Œèµ·æ¥ä¼šæ›´æ…¢å¾ˆå¤šã€‚è¿™äº›æµ‹è¯•é€šå¸¸åªåœ¨éƒ¨ç½²å‰è¿è¡Œï¼Œæ¥ç¡®ä¿ç³»ç»Ÿçš„æ¯ä¸ªéƒ¨åˆ†éƒ½èƒ½å¤Ÿæ­£å¸¸çš„ååŒå·¥ä½œã€‚</p>
+<p>æ›´å¤šæµ‹è¯• Vue ç»„ä»¶çš„çŸ¥è¯†å¯ç¿»é˜…æ ¸å¿ƒå›¢å‘˜ <a href="javascript:if(confirm('https://eddyerburgh.me/  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://eddyerburgh.me/'" tppabs="https://eddyerburgh.me/" target="_blank" rel="noopener">Edd Yerburgh</a> çš„ä¹¦<a href="javascript:if(confirm('https://www.manning.com/books/testing-vuejs-applications  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://www.manning.com/books/testing-vuejs-applications'" tppabs="https://www.manning.com/books/testing-vuejs-applications" target="_blank" rel="noopener">ã€Šæµ‹è¯• Vue.js åº”ç”¨ã€‹</a>ã€‚</p>
+<h2 id="ä½•æ—¶é¿å…è¿™ä¸ªæ¨¡å¼"><a href="#ä½•æ—¶é¿å…è¿™ä¸ªæ¨¡å¼" class="headerlink" title="ä½•æ—¶é¿å…è¿™ä¸ªæ¨¡å¼"></a>ä½•æ—¶é¿å…è¿™ä¸ªæ¨¡å¼</h2><p>å•å…ƒæµ‹è¯•æ˜¯ä»»ä½•æ­£ç»çš„åº”ç”¨çš„é‡è¦éƒ¨åˆ†ã€‚ä¸€å¼€å§‹ï¼Œå½“ä½ å¯¹ä¸€ä¸ªåº”ç”¨çš„æ„¿æ™¯è¿˜ä¸å¤Ÿæ¸…æ™°çš„æ—¶å€™ï¼Œå•å…ƒæµ‹è¯•å¯èƒ½ä¼šæ‹–æ…¢å¼€å‘è¿›åº¦ï¼Œä½†æ˜¯ä¸€æ—¦ä½ çš„æ„¿æ™¯å»ºç«‹èµ·æ¥å¹¶ä¸”æœ‰çœŸå®çš„ç”¨æˆ·å¯¹è¿™ä¸ªåº”ç”¨äº§ç”Ÿå…´è¶£ï¼Œé‚£ä¹ˆå•å…ƒæµ‹è¯• (ä»¥åŠå…¶å®ƒç±»å‹çš„è‡ªåŠ¨åŒ–æµ‹è¯•) å°±æ˜¯ç»å¯¹æœ‰å¿…è¦çš„äº†ï¼Œå®ƒä»¬ä¼šç¡®ä¿åŸºç¡€ä»£ç çš„å¯ç»´æŠ¤æ€§å’Œå¯æ‰©å±•æ€§ã€‚</p>
+
+  
+  
+  <div class="footer">
+      <script src="../../../m.servedby-buysellads.com/monetization.js" tppabs="https://m.servedby-buysellads.com/monetization.js" type="text/javascript"></script>
+<div id="bsa-native"></div>
+<script>
+_bsa.init('custom', 'CKYD62QM', 'placement:vuejsorg',
+  {
+    target: '#bsa-native',
+    template: '<a class="native-box" href="##statlink##"><div class="native-sponsor">Sponsor</div><div class="native-text"><strong>##company##</strong> â€” ##description##</div></a>'
+  }
+);
+</script>
+
+
+    å‘ç°é”™è¯¯ï¼Ÿæƒ³å‚ä¸ç¼–è¾‘ï¼Ÿ
+    <a href="javascript:if(confirm('https://github.com/vuejs/cn.vuejs.org/blob/master/src/v2/cookbook/unit-testing-vue-components.md  \n\n¸ÃÎÄ¼şÎŞ·¨ÓÃ Teleport Ultra ÏÂÔØ, ÒòÎª ËüÊÇÒ»¸öÓò»òÂ·¾¶Íâ²¿±»ÉèÖÃÎªËüµÄÆôÊ¼µØÖ·µÄµØÖ·¡£  \n\nÄãÏëÔÚ·şÎñÆ÷ÉÏ´ò¿ªËü?'))window.location='https://github.com/vuejs/cn.vuejs.org/blob/master/src/v2/cookbook/unit-testing-vue-components.md'" tppabs="https://github.com/vuejs/cn.vuejs.org/blob/master/src/v2/cookbook/unit-testing-vue-components.md" rel="noopener" target="_blank">
+      åœ¨ GitHub ä¸Šç¼–è¾‘æ­¤é¡µï¼
+    </a>
+  </div>
+</div>
+
+      </div>
+      <script src="../../js/smooth-scroll.min.js" tppabs="https://cn.vuejs.org/js/smooth-scroll.min.js"></script>
+    
+
+    <!-- main custom script for sidebars, version selects etc. -->
+    <script src="../../js/css.escape.js" tppabs="https://cn.vuejs.org/js/css.escape.js"></script>
+    <script src="../../js/common.js" tppabs="https://cn.vuejs.org/js/common.js"></script>
+
+    <!-- search -->
+    <link href="../../../code.bdstatic.com/npm/docsearch.js@1.5.0/dist/cdn/docsearch.min.css" tppabs="https://code.bdstatic.com/npm/docsearch.js@1.5.0/dist/cdn/docsearch.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../../css/search.css" tppabs="https://cn.vuejs.org/css/search.css">
+    <script src="../../../code.bdstatic.com/npm/docsearch.js@1.5.0/dist/cdn/docsearch.min.js" tppabs="https://code.bdstatic.com/npm/docsearch.js@1.5.0/dist/cdn/docsearch.min.js"></script>
+    <script>
+    [
+      '#search-query-nav',
+      '#search-query-sidebar',
+      '#search-query-menu'
+    ].forEach(function (selector) {
+      if (!document.querySelector(selector)) return
+      // search index defaults to v2
+      var match = window.location.pathname.match(/^\/(v\d+)/)
+      var version = match ? match[1] : 'v2'
+      docsearch({
+      appId: 'BH4D9OD16A',
+      apiKey: '5638280abff9d207417bb03be05f0b25',
+      indexName: 'vuejs_cn2',
+      inputSelector: selector,
+      algoliaOptions: { facetFilters: ["version:" + version] },
+      autocompleteOptions: { hint: false, appendTo: 'body'}
+      })
+    })
+    </script>
+  </body>
+</html>
