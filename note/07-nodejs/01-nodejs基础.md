@@ -1219,7 +1219,7 @@ console.log(Object.getPrototypeOf(child) === parent);	// true
     * end <integer> 读取到索引为end的字节（包含），默认值: Infinity。
     * highWaterMark <integer> 内部缓冲区最多能容纳的字节数，如果超过这个大小，就停止读取资源文件。默认值: 64 * 1024。
       * 就是每次读取的数据大小，读完一次会触发data事件
-    * fs <Object> | <null> 默认值: null。
+    * fs \<Object> | \<null> 默认值: null。
   * 返回值：<fs.ReadStream> 可读流**Readable**。
 * 可读流常见事件：
   * 'close'事件：当流或其底层资源（比如文件描述符）被关闭时触发 `'close'` 事件。 该事件表明不会再触发其他事件，也不会再发生操作。
@@ -1251,7 +1251,7 @@ console.log(Object.getPrototypeOf(child) === parent);	// true
     - autoClose <boolean> 是否自动关闭文件描述符，默认值: true。
     - emitClose <boolean> 默认值: false。
     - start <integer> 从目标文件的索引为start的字节开始写入（包含）。若要修改文件而不是覆盖文件，则需要 `flags` 选项被设置为 `r+` 而不是默认的 `w`。
-    - fs <Object> | <null> 默认值: null。
+    - fs \<Object> | \<null> 默认值: null。
   - 返回值：<fs.WriteStream> 可读流。
 - 写入流常见事件：
   - 'close'事件：当流或其底层资源（比如文件描述符）被关闭时触发 `'close'` 事件。 该事件表明不会再触发其他事件，也不会再发生操作。
