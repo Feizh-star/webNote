@@ -457,7 +457,7 @@ ul无序列表的默认表现形式如下：
 </table>
 ```
 
-![](./image/html/biaoge.jpg)
+![](../../image/html/biaoge.jpg)
 
 #### 8.4 合并单元格
 
@@ -493,7 +493,7 @@ ul无序列表的默认表现形式如下：
 </table>
 ```
 
-![](./image/html/hebing.jpg)
+![](../../image/html/hebing.jpg)
 
 ### 9.表单
 
@@ -511,7 +511,7 @@ ul无序列表的默认表现形式如下：
 
 * checkbox类型的value是一个布尔值，选中时为true，反之为false
 
-![](./image/html/input.png)
+![](../../image/html/input.png)
 
 ##### (1) H5新增type属性值
 
@@ -685,7 +685,7 @@ ul无序列表的默认表现形式如下：
 
 效果是：在input里面输入内容后，输入栏下方会以下拉菜单的形式**预测完整内容**
 
-![](./image/html/datalist.jpg)
+![](../../image/html/datalist.jpg)
 
 ##### (2)fieldset 主题框
 
@@ -702,7 +702,7 @@ ul无序列表的默认表现形式如下：
 
 效果如下（宽度可用css设置）：
 
-![](./image/html/fieldset.jpg)
+![](../../image/html/fieldset.jpg)
 
 ### 10. 多媒体标签(H5新增)
 

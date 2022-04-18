@@ -37,7 +37,7 @@
  + MVVM是前端视图层的概念，主要关注于 视图层分离，也就是说：MVVM把前端的视图层，分为了 三部分 Model, View , VM ViewModel
  + 为什么有了MVC还要有MVVM
 
-![MVC和MVVM的关系图解](./image/vue/MVC和MVVM的关系图解.png)
+![MVC和MVVM的关系图解](../../image/vue/MVC和MVVM的关系图解.png)
 
 ### 5. 第一个Vue页面
 
@@ -709,7 +709,7 @@ var vm2 = new Vue({
   * updated()
 * Vue实例（就是vm）从创建到销毁的流程如下图所示
 
-![Vue实例的生命周期](./image/vue/Vue生命周期.png)
+![Vue实例的生命周期](../../image/vue/Vue生命周期.png)
 
 #### 9.1 Vue实例的创建阶段
 
@@ -795,7 +795,7 @@ var vm2 = new Vue({
 
 5. 以上6个CSS类均不需要手动添加给元素，会由Vue在[合适的时机](https://www.runoob.com/vue2/vue-transitions.html)添加到其控制的元素（即transition组件包裹的元素）
 
-   ![Vue过渡过程](./image/vue/Vue过渡过程.png)
+   ![Vue过渡过程](../../image/vue/Vue过渡过程.png)
 
 #### 10.3 自定义过渡的类名和时长
 
@@ -3329,7 +3329,7 @@ options 参数说明:
 
 Vue的双向数据绑定是 通过 ==数据劫持== 和 ==发布者-订阅者== 的方式实现的，下方是原理图：
 
-![](./image/vue/vue响应式原理.png)
+![](../../image/vue/vue响应式原理.png)
 
 1. observer：监听者（对每一个data中的属性设置setter和getter）。负责监听数据的变化，把变化告知dependence
 2. dependence：依赖（保存着 data中的属性 和 与之对应的watchers）。遍历变化的属性对应的watcher，把消息传递给每一个依赖此属性的watcher

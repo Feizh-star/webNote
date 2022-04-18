@@ -176,7 +176,7 @@ cdbde67 HEAD@{1}: commit: 去除git add命令章节第三个区块的多显示�
 * 第一步是用`git add`把文件添加进去，实际上就是把文件修改添加到暂存区；
 * 第二步是用`git commit`提交更改，实际上就是把暂存区的所有内容提交到当前分支。
 
-![工作区和暂存区](./image/GitNotesImage/workingdir_stage.jpg)
+![工作区和暂存区](../../image/GitNotesImage/workingdir_stage.jpg)
 
 
 
@@ -351,7 +351,7 @@ $ git checkout -b dev origin/dev
 
   `HEAD` 指向分支（如master），`master` 也是一个指针，指向提交。创建分支就是创建了一个新的`指向提交的指针` ，切换分支就是把`HEAD` 指向目标分支的指针。详见[Git分支的基本原理](https://www.liaoxuefeng.com/wiki/896043488029600/900003767775424)。
 
-![](./image/GitNotesImage/branch.png)
+![](../../image/GitNotesImage/branch.png)
 
 Tips：在工作区修改文件后，在git中将此修改提交到分支（如dev），那么主分支中将不再有此修改，主分支的状态是修改前的最新一次提交（显示工作区未修改）。
 

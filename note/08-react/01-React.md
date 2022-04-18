@@ -36,7 +36,7 @@
    * 当排序一个表格时，即使只有两条数据的位置发生交换，使用原生DOM API也会导致整个表格重新渲染
 4. react和vue都有虚拟DOM的概念
 
-![](./image/react/React中虚拟DOM的概念.png)
+![](../../image/react/React中虚拟DOM的概念.png)
 
 #### 3.2 Diff算法
 
@@ -48,7 +48,7 @@
 
 4. key：key这个属性，可以把 页面上的 DOM节点 和 虚拟DOM中的对象，做一层关联关系；
 
-![](./image/react/Diff.png)
+![](../../image/react/Diff.png)
 
 ## 二、React基本使用
 
@@ -786,7 +786,7 @@
 
 **下图是旧版本，仅做参考：**
 
-![](./image/react/React中组件的生命周期.png)
+![](../../image/react/React中组件的生命周期.png)
 
 ##### (1) 创建阶段
 
@@ -898,7 +898,7 @@
 
 #### 7.2  新版本
 
-![](./image/react/react生命周期-新版.png)
+![](../../image/react/react生命周期-新版.png)
 
 ##### (1) 创建阶段
 
@@ -1043,7 +1043,7 @@
 
 #### 7.3 常用的生命周期钩子
 
-![](./image/react/react常用的生命周期钩子.jpg)
+![](../../image/react/react常用的生命周期钩子.jpg)
 
 ### 8. refs
 

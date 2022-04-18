@@ -746,7 +746,7 @@ B.prototype.__proto__ === A.prototype // true
 * 作为一个对象，子类（`B`）的原型（`__proto__`属性）是父类（`A`），**这样可以继承父类的静态方法**
 * 作为一个构造函数，子类（`B`）的原型（`prototype`属性）是父类的实例。
 
-![](./image/nodejs/extends继承的原型链.jpg)
+![](../../image/nodejs/extends继承的原型链.jpg)
 
 > 这样的结果是因为，类的继承是按照下面的模式实现的。
 >

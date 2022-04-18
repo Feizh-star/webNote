@@ -1561,7 +1561,7 @@ backface-visibility 属性定义当元素不面向屏幕时是否可见。
 
   `cubic-bezier(x1,y1,x2,y2)`是三次贝塞尔函数，根据设定的两个点P1(x1, y1)和P2(x2, y2)来决定曲线的速度变化（即导数/斜率），x1，x2 ∈ [0, 1]，y1，y2的值没有限制。其实P1规定了起始点P0处贝塞尔函数的斜率`(y1/x1)`，P2规定了结束点P3处贝塞尔函数的斜率`(1-y2)/(1-x2)` 。[三次贝塞尔函数曲线网站](https://cubic-bezier.com/#.15,-0.35,.67,-0.06)
 
-![贝塞尔函数](./image/css/贝塞尔函数.jpg)
+![贝塞尔函数](../../image/css/贝塞尔函数.jpg)
 
   (3)animation-fill-mode 不播放时样式
 
@@ -1742,7 +1742,7 @@ backface-visibility 属性定义当元素不面向屏幕时是否可见。
 
   下图是`flex-direction: column;` ：
 
-![flex-direction: column;](./image/css/flexdirection.jpg)
+![flex-direction: column;](../../image/css/flexdirection.jpg)
 
 #### 3.3 justify-content 主轴对齐
 
@@ -1758,7 +1758,7 @@ backface-visibility 属性定义当元素不面向屏幕时是否可见。
 
   下图是`justify-content: space-around;` ：
 
-![justify-content: space-around;](./image/css/justifycontent.jpg)
+![justify-content: space-around;](../../image/css/justifycontent.jpg)
 
 #### 3.4 align-items 侧轴对齐
 
@@ -1773,7 +1773,7 @@ backface-visibility 属性定义当元素不面向屏幕时是否可见。
 
   下图是`align-items: center;` ：
 
-![align-items: center;](./image/css/alignitems.jpg)
+![align-items: center;](../../image/css/alignitems.jpg)
 
 * align-self：用于flex的子元素，控制单个元素的侧轴布局，取值与align-item一样
 
@@ -1789,7 +1789,7 @@ backface-visibility 属性定义当元素不面向屏幕时是否可见。
 
   若子盒子高度较小（不能占满父盒子的高度，下图盒子正常顺序是红、紫、粉），换行后子盒子在垂直方向上会呈现（下图是wrap顶对齐，wrap-reverse则是底对齐），可用`align-content`设置：
 
-![](./image/css/flexwrap.jpg)
+![](../../image/css/flexwrap.jpg)
 
 #### 3.6 flex-flow
 
@@ -1819,7 +1819,7 @@ flex-flow: flex-direction  flex-wrap;
 
   下图是`align-content: space-around;` ：
 
-![align-content: space-around;](./image/css/aligncontent.jpg)
+![align-content: space-around;](../../image/css/aligncontent.jpg)
 
 #### 3.8 order
 
@@ -1996,7 +1996,7 @@ align-items: center;
 
 属于同一个BFC的两个相邻盒子的margin会发生重叠，那么我们创建不属于同一个BFC（绿色创建BFC，红色没有BFC），就不会发生margin重叠了。
 
-![](./image/css/ma.png)
+![](../../image/css/ma.png)
 
 #### 4.2 清除浮动
 
@@ -2008,7 +2008,7 @@ align-items: center;
 计算BFC的高度时，自然也会检测浮动或者定位的盒子高度。
 ```
 
-![](./image/css/fu.jpg)
+![](../../image/css/fu.jpg)
 
 #### 4.3 左右自适应两栏布局
 
@@ -2019,7 +2019,7 @@ align-items: center;
 2.BFC的区域不会与float box重叠
 ```
 
-![](./image/css/rgbfc.jpg)
+![](../../image/css/rgbfc.jpg)
 
 ## 十九、 层叠上下文
 

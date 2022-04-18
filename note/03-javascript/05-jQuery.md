@@ -1113,7 +1113,7 @@ $("p").css("background-color");
 
 ### 5. jQuery尺寸
 
-![](./image/jQuery/img_size.gif)
+![](../../image/jQuery/img_size.gif)
 
 * 唯一需要注意的地方，设置了 box-sizing 后，width() 获取的是 css 设置的 width 减去 padding 和 border 的值。（此时css中的width和height是包括padding和border的）
 
