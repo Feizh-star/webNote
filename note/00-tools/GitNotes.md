@@ -519,7 +519,8 @@ stash@{0}: WIP on dev: f52c633 add merge
 > `git stash apply stash@{0}` 可以恢复指定的现场
 
 ```
-$ git stash apply stash@{0}
+// 0来自stash@{0}
+$ git stash apply 0
 ```
 
 ##### (3) git stash pop 恢复现场
@@ -529,6 +530,10 @@ $ git stash apply stash@{0}
 ##### (4) git stash drop 删除现场
 
   对于`git stash apply` 恢复的现场，可以使用`git stash drop` 手动删除。
+```
+// 0来自stash@{0}
+$ git stash drop 0
+```
 
 #### 2.3 git cherry-pick 复制修改
 

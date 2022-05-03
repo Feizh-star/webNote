@@ -1234,9 +1234,9 @@ afterEnter(el) {	// 动画结束后调用
 
 &emsp;&emsp;要控制多个元素的过渡，需要使用<transition-group>组件，组件内部使用v-for循环创建元素，注意事项：
 
-1. <transition-group>会被渲染为一个真实的HTML标签，默认是span，可以使用tag属性控制
-   * <transition-group tag="ul">，使此组件作为  ul  标签渲染
-2. <transition-group>内部的列表元素必须指定唯一的key
+1. \<transition-group\>会被渲染为一个真实的HTML标签，默认是span，可以使用tag属性控制
+   * \<transition-group tag="ul"\>，使此组件作为  ul  标签渲染
+2. \<transition-group\>内部的列表元素必须指定唯一的key
 3. 过渡模式mode不可用
 4. CSS 过渡的类将会应用在内部的元素中，而不是这个组/容器本身。
 5. 可以使用appear属性实现初始渲染的过渡
