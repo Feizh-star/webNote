@@ -183,7 +183,7 @@
 
 ##### (2)span
 
-  span是行内块标签：
+  span是行内标签：
 
 ```html
 <span></span>
@@ -308,7 +308,7 @@
 
 * \&emsp; 汉字（宽度）空白
 
-<img src="./image/html/zifu.png" />
+<img src="../../image/html/zifu.png" />
 
 ### 7. 列表标签
 
@@ -407,7 +407,7 @@ ul无序列表的默认表现形式如下：
 
 #### 8.1 表格属性
 
-<img src="./image/html/tt.png"/>
+<img src="../../image/html/tt.png"/>
 
 * width和height是整个表格（不包括caption）的尺寸，不要单位
 * align是整个表格在页面中的对齐方式，不是内容在表格中的对齐方式

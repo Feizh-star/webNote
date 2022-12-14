@@ -726,7 +726,7 @@ img {	/*这里用图片代表行内块元素*/
 
 ### 3. css函数
 
-#### (1) rbg()、rgba()
+#### (1) rgb()、rgba()
 
 * 用于设置颜色/半透明颜色
 
@@ -846,6 +846,31 @@ img {	/*这里用图片代表行内块元素*/
 </body>
 </html>
 ```
+
+```ts
+// 终极方案
+function setEllipsis(h: number, n: number, e: HTMLElement) {
+  var text = e.innerHTML
+  var t = h * n
+  if (e.offsetHeight > t) {
+      // 每次去掉4个字符，加上... ，相当于每次缩短1个字符
+      e.innerHTML = text.substring(0, text.length - 4) + "..."
+      setEllipsis(h , n, e)     
+  }else{
+    return
+  }
+}
+function resetEllipsis() {
+  let els = document.getElementsByClassName('omit-detail')
+  if (els.length === 0) return
+  itemRefs = [...els] as Array<HTMLElement>
+  itemRefs.forEach((item: HTMLElement) => {
+    setEllipsis(24, 2, item)
+  })
+}
+```
+
+
 
 ## 十三、CSS精灵技术（sprite）
 
@@ -1708,6 +1733,7 @@ backface-visibility 属性定义当元素不面向屏幕时是否可见。
 
 1. flex布局的子元素也是用flex的话，会导致，小屏幕下，外层flex不能保证其子元素（也使用了flex）能够伸缩，可能会出现，此子元素宽度不正常，导致总宽度大于容器
    * 此现象的原因是子元素的子元素（孙元素）使用了百分比宽度，使用 px宽度即可
+   * 使用`flex: 1`的元素都加上`min-width: 0`或`min-height: 0`就行了
 
 ### 2. 部分固定宽度
 
