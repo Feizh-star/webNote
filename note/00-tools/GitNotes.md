@@ -4,7 +4,7 @@
 
 ### 1. Git简易原理图
 
-<img src="./image/GitNotesImage/gitTheory.png">
+<img src="../../image/GitNotesImage/gitTheory.png">
 
 ### 2. 只能跟踪文本文件
 

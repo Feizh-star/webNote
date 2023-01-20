@@ -241,546 +241,9 @@ console.log(rlt);	// 8
 5. 如果指定的模块文件没有发现，`Node`会尝试为文件名添加`.js、.json、.node`后，再去搜索。.js件会以文本格式的JavaScript脚本文件解析，.json文件会以JSON格式的文本文件解析，.node文件会以编译后的二进制文件解析。
 6. 如果想得到`require`命令加载的确切文件名，使用`require.resolve()`方法。
 
+* 总结：绝对路径和相对路径直接找到目标模块；不是绝对路径或相对路径，则先搜索内置模块，再搜索node_modules目录；如果还没找到就依次添加.js、.json、.node后缀去查找
 
-## 一、ES6语法
-
-* ES6指的是ECMAScript2015之后的版本
-
-### 1. let与const
-
-#### 1.1 let声明变量
-
-1. let声明的变量不存在预解析
-
-2. let不允许（在同一个作用域）重复声明同名变量
-
-   ```javascript
-   // 同样报错
-   var a = 2;
-   let a = 2;
-   ```
-
-3. let声明的变量存在块级作用域
-
-   * 花括号括起来的代码
-   * if语句
-   * for循环，包括括号中let声明的循环变量
-   * while
-
-4. 暂时性死区：当前作用域中的let变量声明之前不能使用
-
-   * 本质：一进入当前作用域let变量就存在了，但不能使用，直到变量声明语句
-   * 所以typeof不再安全，`typeof 上下文中均未声明的变量` 返回undefined
-   * `typeof 下文中声明的let变量` ，直接报错
-
-5. let与全局对象
-
-   * 在**浏览器**环境下，全局作用域中的let变量**不是**window的属性
-   * 在**node**环境下，全局（模块）作用域中的var和let变量都**不是**global的属性
-
-#### 1.2 const常量
-
-1. const常量不参与预解析
-
-2. const不能重复声明同名常量
-
-3. const声明的常量量存在块级作用域
-
-4. const声明的常量同样存在暂时性死区
-
-5. **const常量不能重新赋值**
-
-6. **const常量必须在声明时初始化**
-
-7. const常量指向复杂类型时，仅代表其指向的引用不变，复杂类型的属性可以改变
-
-   ```
-   const a = {};
-   a.name = 'zhangsan';	// 可以
-   a = {name: 'lisi'};	// 报错
-   ```
-
-#### 1.3 块级作用域与函数声明
-
-* es6中允许在块级作用域声明函数，且函数声明具有类似于let的特性
-* 但是为了保持兼容以前的代码，es6又允许浏览器不遵守上述规定，于是在node环境、Chrome环境中块级作用域中的函数声明还是会被提升到外面（即函数声明实际上没有块级作用域）
-* 不同的环境可能结果不一样，因为浏览器可以自己决定实现方式
-* 结论：**最好不要在块级作用域中使用函数声明，如有需要可以使用函数表达式**
-* **主流浏览器和nodejs都没有遵循ES6（函数声明具有块级作用域）的规定，会将块里面的函数声明提升到外面**
-
-### 2. 解构赋值
-
-1. 数组解构赋值
-
-   ```javascript
-   let [a, b, c] = [1, 2, 3];
-   console.log(a, b, c);	// 1 2 3
-   ```
-
-   ```javascript
-   // 可以不为某个变量赋值
-   let [d, e, f] = [, 123, ];
-   console.log(d, e, f);	// undefined 123 undefined
-   ```
-
-   ```javascript
-   // 可以为某个变量设置默认值
-   let [g=111, h, i] = [, 123, ];
-   console.log(g, h, i);	// 111 123 undefined
-   ```
-
-   ```javascript
-   // 可以不为后续变量赋值
-   let [j, k, l] = [1];
-   console.log(j, k, l);	// 1 undefined undefined
-   ```
-
-2. 对象解构赋值：就是根据{}里面的变量名，把对象的同名属性的值赋值给变量
-
-   ```javascript
-   let {foo, bar} = {foo : 'hello', bar : 'hi'};
-   ```
-
-   ```javascript
-   // 可以在{变量名}中为变量设置别名，设置了别名，原名称就失效了
-   let {foo:abc, bar} = {foo : 'nihao', bar : 'hi'};
-   console.log(abc, bar);	// nihao hi
-   console.log(foo, bar);	// 报错
-   ```
-
-   ```javascript
-   // 对象的解构赋值指定默认值
-   let {foo='hello', bar} = {bar : 'hi'};
-   console.log(foo, bar);	// hello hi
-   ```
-
-   * 应用：取出对象中的属性，可以将类的静态方法（下方代码）或实例方法（类名.prototype）取出
-
-     ```javascript
-     let {cos,sin,random} = Math;
-     // 四舍五入
-     console.log(Math.round(cos(3.1415926)));	// -1 （cos(π)）
-     console.log(Math.round(sin(3.1415926)));	// 0 （sin(π)）
-     console.log(random());	// 一个随机数
-     ```
-
-   * 应用：获取字符串的长度
-
-     ```javascript
-     let {length} = 'hello';
-     console.log(length);	// 5
-     ```
-
-3. 字符串的解构赋值：类似于数组的解构赋值，将字符一个一个对应的赋值给[变量]中的变量
-
-   ```javascript
-   // 变量数 > 字符数，多出来的变量是undefined
-   let [a, b, c, d, e, f] = 'hello';
-   console.log(a, b, c, d, e, f);	// h e l l o undefined
-   ```
-
-### 3. 字符串扩展
-
-#### 3.1 includes()
-
-* string.includes(str)：检查字符串中是否包含指定的子串
-* 参数1：指定的子串
-* 参数2：搜索的起始索引（从0开始，包括索引位置的字符）
-* 返回值：找到指定子串，返回true；未找到指定子串，返回false
-
-#### 3.2 startsWith()
-
-* string.startsWith(str)：检查字符串是否以指定的子串开头
-* 参数1：指定的子串
-* 返回值：以指定子串开头，返回true；否则返回false
-
-#### 3.3 endsWith()
-
-- string.endsWith(str)：检查字符串是否以指定的子串结束
-- 参数1：指定的子串
-- 返回值：以指定子串结束，返回true；否则返回false
-
-#### 3.4 模板字符串
-
-* 反引号表示模板，其中可以写具有一定格式的字符串
-* 通过${obj.attribute}可以填充数据
-* ${}里面可以进行算数运算，可以调用函数
-
-```javascript
-let fn = function(info){
-    return info;
-}
-let tpl = `
-    <div>
-        <span>${obj.username}</span>
-        <span>${obj.age}</span>
-        <span>${obj.gender}</span>
-        <span>${1+1}</span>
-        <span>${fn('nihao')}</span>
-    </div>
-`;
-console.log(tpl);
-// 
-//     <div>
-//         <span>lisi</span>
-//         <span>12</span>
-//         <span>male</span>
-//         <span>2</span>
-//         <span>nihao</span>
-//     </div>
-// 
-```
-
-#### 4.5 字符串填充方法
-
-1. `string.padStart(maxLength, 填充的字符)`：在字符串开头填充指定的字符，直至字符串长度满足要求
-   * 参数1：填充后的最大长度
-   * 参数2：要填充的字符（串）
-2. `string.padEnd(maxLength, 填充的字符)`：在字符串末尾填充指定的字符，直至字符串长度满足要求
-   * 参数1：填充后的最大长度
-   * 参数2：要填充的字符（串）
-
-### 4. 函数扩展
-
-#### 4.1 参数默认值
-
-* 可以在函数声明中为形参设置默认值，函数表达式同样适用
-
-```javascript
-function foo(name = 'zhangsan') {
-  	console.log(name);
-}
-foo();	// zhangsan
-```
-
-#### 4.2 参数解构赋值
-
-* 类似于数组和对象的解构赋值，把[形参1, 形参2, ...]或{形参1, 形参2, ...}作为形参列表
-* 对应的在函数调用时传入[实参1, 实参2, ...]或{形参1: 实参1, 形参2: 实参2, ...}
-* []和{}不可混用，解构赋值与一般的参数传递也不可混用
-* 字符串解构赋值也可以：形参[]，调用时传入字符串
-
-```javascript
-let foo = function ({name, age}) {
-  	console.log(name);
-  	console.log(age);
-}
-foo({name: 'zhangsan', age: 22});
-
-let bar = function ([name, age]) {
-  	console.log(name);
-  	console.log(age);
-}
-bar(['zhangsan', 18]);
-
-let bar1 = function ([name, age]) {
-  	console.log(name);
-  	console.log(age);
-}
-bar1('hello');
-// h
-// e
-```
-
-#### 4.3 rest剩余参数
-
-* 在函数的形参列表中可以使用(arg1, arg2, ...parameter)来把多于2（依据具体情况）个的实参放进数组parameter中
-* 若实参个数比设定的形参数还少，则parameter是一个空数组，没给实参的形参是undefined
-
-```javascript
-function foo(a,b,...param){
-    console.log(a);
-    console.log(b);
-    console.log(param);
-}
-foo(1,2,3,4,5);
-// 1
-// 2
-// [ 3, 4, 5 ]
-```
-
-#### 4.4 扩展运算符"..."
-
-* 扩展运算符"..."的作用是将其后面跟的数组分解成用", "分隔的值列表
-
-* 应用：将数组分解成形参列表
-
-  ```javascript
-  function foo(a,b,c,d,e,f,g){
-      console.log(a + b + c + d + e + f + g);
-  }
-  let arr = [1,2,3,4,5,6,7];
-  foo(...arr);	// 相当于foo(1,2,3,4,5,6,7);
-  ```
-
-* 应用：合并数组
-
-  ```javascript
-  let arr1 = [1,2,3];
-  let arr2 = [4,5,6];
-  let arr3 = [...arr1,...arr2];
-  console.log(arr3);	// [1,2,3,4,5,6]
-  ```
-
-### 5. 箭头函数
-
-* 箭头函数一般用在需要匿名函数的地方，简洁
-* 格式：`(parameters list) => {function body}`
-* 若只有一个形参，可以不带()：`e => {function body}`
-* 若直接返回参数，可以不用return：`e => e` ,等价于`function (e) {return e;}`
-
-1. 箭头函数中的this
-   * 箭头函数中的this指向取决于**箭头函数定义所在的（函数）作用域中的this指向**，而非调用时决定
-2. 箭头函数不能用作构造函数
-   * 即箭头函数不能new fun()
-3. 箭头函数中的不能使用arguments获取实参列表
-   * arguments另有他用
-   * 要获取箭头函数的实参列表，可以使用rest剩余参数来实现
-
-```javascript
-let arrowfun = (a, b) => {
-	console.log(a, b);
-	console.log(arguments);	// 并非参数列表
-}
-arrowfun(1, 2);
-// 1 2
-// [Arguments] {
-//   '0': {},
-//   '1': [Function: require] {
-//     内容省略...
-//   },
-//   '2': Module {
-//     id: '.',
-//     path: 'F:\\SublimeProjects\\11-nodejsProject1\\01-module',
-//     exports: {},
-//     内容省略...
-//   },
-//   '3': 'F:\\SublimeProjects\\11-nodejsProject1\\01-module\\实验.js',
-//   '4': 'F:\\SublimeProjects\\11-nodejsProject1\\01-module'
-// }
-```
-
-### 6. 类与继承
-
-#### 6.1 class关键字
-
-##### (1) 基本使用
-
-* class关键字用于声明一个类，**class类型本身其实就是函数类型**
-
-  * 类名不使用new是无法调用的，`myClass()` 会报错
-  * 不存在变量提升，即class类型的数据不会变量提升
-  * **类和模块的内部，都是严格模式**
-
-* constructor()是类的**构造函数**，创建实例的时候会自动调用constructor()
-
-* **实例方法**可以直接声明，不需要function关键字
-
-* 使用**new** classname()就可以创建一个实例
-
-* 类myClass也有prototype属性，即原型对象，实例方法都定义在prototype对象中
-
-* `prototype`对象的`constructor`属性，直接指向“类”的本身，这与ES5的行为是一致的。
-
-  ```javascript
-  myClass.prototype.constructor === myClass // true
-  ```
-
-```javascript
-class myClass {
-	constructor() {
-		console.log('构造函数被调用');
-		this.name = 'zhangsan';
-	}
-	showName() {
-		console.log(this.name);
-	}
-}
-console.log(typeof myClass);	// function
-let aClass = new myClass();		// 自动调用constructor
-aClass.showName();				// 调用方法
-```
-
-##### (2) constructor方法
-
-* constructor方法是类的默认方法，在new一个实例时会自动调用该方法
-  * constructor()可以传参数，通过`new 类名(实参列表)`
-  * constructor()不能被实例对象调用（实际上只能在new语句中调用）
-* 一个类必须有`constructor`方法，如果没有显式定义，一个空的`constructor`方法会被默认添加。
-* constructor方法默认返回创建的实例对象
-
-##### (3) static静态方法
-
-* 在类的定义中使用static关键字声明一个方法，就是此类的静态方法
-
-* 静态方法是类（对象）本身的的一个属性
-
-* **静态方法中的this指向类（对象）本身**
-
-* **静态方法只能通过类名调用**
-
-  ```javascript
-  class HelloWorld {
-    constructor() {
-    }
-    static fun() {
-      console.log('这是静态方法')
-    }
-  }
-  ```
-
-##### (4) static静态属性
-
-* ES6+支持静态属性
-
-  ```javascript
-  class HelloWorld {
-    constructor() {
-    }
-    static msg = '静态属性'
-  }
-  ```
-
-##### (5) class表达式
-
-* 与函数一样，类也可以使用表达式的形式定义。
-
-  ```
-  const MyClass = class Me {
-    getClassName() {
-      return Me.name;
-    }
-  };
-  ```
-
-  上面代码使用表达式定义了一个类。需要注意的是，**这个类的名字是`MyClass`而不是`Me`，`Me`只在Class的内部代码可用，指代当前类。**
-
-##### (6) this指向
-
-* **类的方法内部的this默认指向类的实例**
-
-> 如果使用对象的解构赋值把类的实例的方法取出，其中的this指向会有问题（此时方法变成了普通函数，不再指向实例）
->
-> ```javascript
-> let {printName} = instance;	// 变量printName就指向实例instance的printName()方法
-> ```
->
-> 若要让解构的实例方法依然指向实例，可以：
->
-> 1.在构造方法中绑定`this`，这样就不会找不到`print`方法了。
->
-> ```javascript
-> class Logger {
->   constructor() {
->     this.printName = this.printName.bind(this);
->   }
->   printName() {
->     console.log(this.name);
->   }
->   // ...
-> }
-> ```
->
-> 2.另一种解决方法是使用箭头函数。
->
-> ```javascript
-> class Logger {
->   constructor() {
->     this.printName = (name = 'there') => {
->       this.print(`Hello ${name}`);
->     };
->   }
->
->   // ...
-> }
-> ```
->
-> 3.还有一种解决方法是使用`Proxy`，获取方法的时候，自动绑定`this`。（还没学，先了解）http://caibaojian.com/es6/let.html
-
-#### 6.2 类的继承
-
-##### (1) extends关键字
-
-* Class之间可以通过`extends`关键字实现继承
-  * `extends`关键字后面可以跟多种类型的值。只要是一个有`prototype`属性的函数，就能被继承。由于函数都有`prototype`属性（除了`Function.prototype`函数），因此任意函数都可以被继承。
-  * 可以继承原生类型，例如Array，可以对数组类进行扩展
-* 子类必须在构造函数中调用super
-  * 子类没有自己的`this`对象，而是继承父类的`this`对象，然后对其进行加工。如果不调用`super`方法，子类就得不到`this`对象。
-  * ES6的继承机制实质是**先创造父类的实例对象**`this`（所以必须先调用`super`方法），然后再用子类的构造函数修改`this`。
-  * 子类的构造函数constructor中中调用super()之后才能使用this，否则报错
-
-```javascript
-class Dog extends Animal{
-    constructor(name,color){
-        super(name);	//super用来调用父类的构造函数
-        this.color = color;
-    }
-    showColor(){
-        console.log(this.color);
-    }
-}
-```
-
-##### (2) super关键字
-
-1. 作为函数调用`super()`，代表调用了父类的构造函数，但是返回的是子类的实例
-   * 相当于把父类构造函数的`this`指向了子类的实例，然后调用父类的构造函数
-   * 作为函数时，`super()`只能用在子类的构造函数之中，用在其他地方就会报错。
-   * **super()可以传参数进去，会作为父类构造函数的实参**
-2. super作为对象时，指向父类的原型对象，即`super = A.prototype`
-   * 可以在子类的构造函数或方法中通过super.fun()调用父类的实例方法（定义在父类的原型对象`prototype`上）
-   * 通过`super`调用父类的方法时，`super`会绑定子类的`this`。（即此时父类方法中的this指向子类的实例）
-   * 由于对象总是继承其他对象的，所以可以在任意一个对象中，使用`super`关键字（作为对象）。
-
-##### (3) 类的prototype属性和\__proto__属性
-
-```javascript
-class A {
-}
-class B extends A {
-}
-B.__proto__ === A // true
-B.prototype.__proto__ === A.prototype // true
-```
-
-* 作为一个对象，子类（`B`）的原型（`__proto__`属性）是父类（`A`），**这样可以继承父类的静态方法**
-* 作为一个构造函数，子类（`B`）的原型（`prototype`属性）是父类的实例。
-
-![](../../image/nodejs/extends继承的原型链.jpg)
-
-> 这样的结果是因为，类的继承是按照下面的模式实现的。
->
-> ```javascript
-> class A {
-> }
-> class B {
-> }
-> // B的实例继承A的实例
-> Object.setPrototypeOf(B.prototype, A.prototype);
-> // B继承A的静态属性
-> Object.setPrototypeOf(B, A);
-> ```
->
-> `Object.setPrototypeOf`方法的实现。
->
-> ```javascript
-> Object.setPrototypeOf = function (obj, proto) {
->   obj.__proto__ = proto;
->   return obj;
-> }
-> ```
->
-> 因此，就得到了上面的结果。
-
-##### (4) 判断继承关系
-
-* `Object.getPrototypeOf(child)` 会返回child的父类
-
-```javascript
-console.log(Object.getPrototypeOf(child) === parent);	// true
-```
-
-## 二、Node基本操作
+## 一、Node基本操作
 
 ### 1. Buffer（缓冲器）
 
@@ -972,10 +435,10 @@ console.log(Object.getPrototypeOf(child) === parent);	// true
    // 第3个参数的.就是目录2
    path.resolve('/目录1/目录2', './目录3');
    // 返回: '/目录1/目录2/目录3'
-
+   
    path.resolve('/目录1/目录2', '/目录3/目录4/');
    // 返回: '/目录3/目录4'
-
+   
    // 第3个参数中的..就是目录2
    path.resolve('目录1', '目录2/目录3/', '../目录4/文件.gif');
    // 如果当前工作目录是 /目录A/目录B，
@@ -1057,11 +520,16 @@ console.log(Object.getPrototypeOf(child) === parent);	// true
 
 **对于Node.js**，当 `flag` （文件系统标志）选项采用字符串时，则以下标志均可用：
 
+- `'r'`: 打开文件用于读取。 如果文件不存在，则会发生异常。
+- `'r+'`: 打开文件用于读取和写入（**修改而非覆盖**）。 如果文件不存在，则会发生异常。
+- `'w'`: 打开文件用于写入。 如果文件不存在则创建文件，如果文件存在则截断文件。
+- `'w+'`: 打开文件用于读取和写入。 如果文件不存在则创建文件，如果文件存在则截断文件。
 - `'a'`: 打开文件用于追加。 如果文件不存在，则创建该文件。
+- `'a+'`: 打开文件用于读取和追加。 如果文件不存在，则创建该文件。
+
+
 
 - `'ax'`: 类似于 `'a'`，但如果路径存在，则失败。
-
-- `'a+'`: 打开文件用于读取和追加。 如果文件不存在，则创建该文件。
 
 - `'ax+'`: 类似于 `'a+'`，但如果路径存在，则失败。
 
@@ -1069,21 +537,13 @@ console.log(Object.getPrototypeOf(child) === parent);	// true
 
 - `'as+'`: 打开文件用于读取和追加（在同步模式中）。 如果文件不存在，则创建该文件。
 
-- `'r'`: 打开文件用于读取。 如果文件不存在，则会发生异常。
-
-- `'r+'`: 打开文件用于读取和写入（**修改而非覆盖**）。 如果文件不存在，则会发生异常。
-
 - `'rs+'`: 打开文件用于读取和写入（在同步模式中）。 指示操作系统绕过本地的文件系统缓存。
 
   这对于在 NFS 挂载上打开文件时非常有用，因为它可以跳过可能过时的本地缓存。 它对 I/O 性能有非常实际的影响，因此不建议使用此标志（除非真的需要）。
 
   这不会把 `fs.open()` 或 `fsPromises.open()` 变成同步的阻塞调用。 如果需要同步的操作，则应使用 `fs.openSync()` 之类的。
 
-- `'w'`: 打开文件用于写入。 如果文件不存在则创建文件，如果文件存在则截断文件。
-
 - `'wx'`: 类似于 `'w'`，但如果路径存在，则失败。
-
-- `'w+'`: 打开文件用于读取和写入。 如果文件不存在则创建文件，如果文件存在则截断文件。
 
 - `'wx+'`: 类似于 `'w+'`，但如果路径存在，则失败。
 
@@ -1307,7 +767,7 @@ writeStream.on('finish', () => {
 
 - readStream.pipe(writeStream)，可直接将读取流的数据通过写入流，写入目标文件
 
-## 三、包管理工具
+## 二、包管理工具
 
 ### 1. npm
 
@@ -1449,7 +909,7 @@ writeStream.on('finish', () => {
 3. 在需要使用此包的模块（js文件）中require
 4. require的参数要定位到包的目录名，例如`'./mypackage'` 就是当前目录下的mypackage包
 
-## 四、node服务器配置
+## 三、node服务器配置
 
 * node.js使用其核心模块http就可以实现静态和动态网站，不需要借助其他软件
 
@@ -1467,7 +927,7 @@ writeStream.on('finish', () => {
   // 简单服务器功能
   // 引入http模块
   const http = require('http');
-
+  
   // 创建服务器实例，createServer()若传入一个callback，则会作为request事件的回调函数
   let myServer = http.createServer();
   // 为服务器实例绑定事件,当收到请求时触发
@@ -1791,7 +1251,7 @@ myServer.listen(3000);
    * 模板文件（内容一般是html）使用temp.art扩展名
    * 使用模板引擎提供的API，传入**模板文件**和**源数据（对象）** ，就可以得到由模板文件+数据的字符串
 
-## 五、Express框架
+## 四、Express框架
 
 * Express框架是一个基于Node.js的，可以快速构建Web应用程序的框架
 
@@ -1833,7 +1293,7 @@ myServer.listen(3000);
    * 参数2：配置对象
   * maxAge：静态资源缓存时长（客户端）
    * 若有多个静态资源目录，可以使用多次express.static('folder')
-   
+
    ```javascript
    // 导入Express模块
    const express = require('express');
@@ -1842,7 +1302,7 @@ myServer.listen(3000);
    app.use(express.static('www', { maxAge: 1000 * 3600 }));
    app.use(express.static('public'));
    ```
-   
+
 2. 快速启动一个开发服务器——方式2：使用serve工具
 
    * 全局安装`npm i serve -g`
@@ -2040,9 +1500,9 @@ myServer.listen(3000);
 2. `res.redirect(状态码, '重定向路径')`：将响应重定向到指定的路径（路由，往往已经写好处理程序）
 
    * 例如做完数据修改操作需要重新渲染页面，就重定向到渲染页面的路由，相当于在浏览器地址栏填入URL
-* 参数1（可选）：http状态码，默认是302
-   * 参数2：路径，可以是相对路径（相对于当前主机/域名）；也可以是绝对路径的URL
    
+   * 参数1（可选）：http状态码，默认是302
+   * 参数2：路径，可以是相对路径（相对于当前主机/域名）；也可以是绝对路径的URL
 3. `res.json(data)` ：向客户端返回json形式的数据
 
    * 参数：js对象或数组，也可以是null或undefined
@@ -2233,7 +1693,7 @@ app.get('/', function (req, res) {
 });
 ```
 
-## 六、MySQL数据库操作
+## 五、MySQL数据库操作
 
 ### 1. 使用node.js访问MySQL服务器
 
@@ -2472,7 +1932,7 @@ exports.optdb = queryMysql;
   })
   ```
 
-## 七、接口和前端渲染
+## 六、接口和前端渲染
 
 ### 1.常用接口数据形式
 
@@ -2517,3 +1977,138 @@ exports.optdb = queryMysql;
 前端渲染，重写项目，后台接口先通过postman插件测试
 
 前端请求数据，再根据数据渲染页面，添加和修改使用弹窗
+
+
+
+## \* 附录
+
+### 一、速记总结
+
+#### 1.0 基本
+
+1. 常用全局变量
+   * \_\_dirname
+   * \_\_filename
+   * 定时器
+   * 模块：module，exports，require
+   * process进程对象
+     * process.argv
+     * 
+2. require顺序
+   * 绝对路径和相对路径直接找到目标模块；不是绝对路径或相对路径，则先搜索内置模块，再搜索node_modules目录，再查找NODE_PATH环境变量；*如果还没找到就依次添加.js、.json、.node后缀去查找*
+
+#### 1.1 Buffer
+
+1. 创建buffer
+   * Buffer.alloc(length, value)
+   * Buffer.from(array | string | buffer)
+2. 静态方法
+   * Buffer.isEncoding(编码名称)
+   * Buffer.isBuffer(buffer)
+   * Buffer.byteLength(string | buffer, 编码名称)
+   * Buffer.concat(buffer数组, 合并后的长度)
+3. 实例属性
+   * buffer.length
+4. 实例方法
+   * buffer.write(要写入buffer的字符串, 写入的起始位置, 写入的长度, 编码方式)
+   * buffer.slice(截取的起始位置, 截取的结束位置)
+   * buffer.toString(编码方式, 起始位置, 结束位置)
+   * buffer.copy(anotherBuffer)
+
+#### 1.2 path
+
+* path.seq：获取特定平台上的路径分隔符
+
+1. 常用方法
+
+   * 提取
+
+     * path.basename(目录字符串, [要去掉的扩展名])
+     * path.dirname(目录字符串)
+     * path.extname(目录字符串)
+
+   * 格式化
+
+     * path.parse(目录字符串)
+
+     * path.format(路径对象)
+
+       ```js
+       {
+         root: '/',	// 根路径，windows上是'C:\\'
+         dir: '/foo/bar/baz/asdf',	// 路径，不包括最后一部分basename(如文件名)
+         base: 'quux.html',	// 最后一部分（常是文件名）
+         ext: '.html',		// 扩展名，若没有则是空字符串
+         name: 'quux'	// 最后一部分basename的除去扩展名的部分
+       }
+       ```
+
+   * 合并片段
+
+     * path.join(多个路径片段)
+     * path.resolve(多个路径片段)
+
+   * 其他
+
+     * path.isAbsolute(路径字符串)
+     * path.normalize(不规范的路径字符串)
+     * path.relative(源路径, 目标路径)
+
+#### 1.3 fs
+
+- `'r'`: 打开文件用于读取。 如果文件不存在，则会发生异常。
+- `'r+'`: 打开文件用于读取和写入（**修改而非覆盖**）。 如果文件不存在，则会发生异常。
+- `'w'`: 打开文件用于写入。 如果文件不存在则创建文件，如果文件存在则截断文件。
+- `'w+'`: 打开文件用于读取和写入。 如果文件不存在则创建文件，如果文件存在则截断文件。
+- `'a'`: 打开文件用于追加。 如果文件不存在，则创建该文件。
+- `'a+'`: 打开文件用于读取和追加。 如果文件不存在，则创建该文件。
+
+
+
+* 状态
+  * fs.stat(file[, options], callback)
+* 开关
+  * fs.open(file[, flags[, mode]], callback)
+  * fs.close(fd, callback)
+* 读取
+  * fs.readFile(file[, options], callback)
+* 写入
+  * fs.writeFile(file, data[, options], callback)
+  * fs.write(fd, buffer[, offset[, length[, position]]], callback)
+  * fs.write(fd, string[, position[, encoding]], callback)
+* 删除
+  * fs.rm(file[, options], callback)
+* 目录操作
+  * fs.mkdir(dir[, options], callback)
+  * fs.readdir(dir[, options], callback)
+  * fs.rmdir(dir[, options], callback)
+* 读取流：
+  * readStream.on('event', callback)：事件close、data、end、error
+  * const readStream = fs.createReadStream(file[, options])
+  * readStream.read([size字节数]) => buffer
+* 写入流：
+  * writeStream.on('event', callback)：事件close、error、finish
+  * const writeStream = fs.createWriteStream(file[, options])
+  * writeStream.write(chunk\[, encoding][, callback])
+  * writeStream.end(\[chunk\[, encoding]][, callback])
+* 管道
+  * readStream.pipe(writeStream)
+
+#### 1.5 http模块
+
+* http.createServer(\[options][, requestListener]) => http.Server
+* httpServerInstance.listen(\[port\[, host\[, backlog]]][, callback])
+* httpServerInstance.on('request', callback(request, response))
+  * request.on('data | end', callback)
+* http.request(options[, callback])
+
+#### 1.6 url模块
+
+* const urlInstance = new URL(input[, base])
+* url.format(url类的实例)：url = require('url')
+* urlInstance.searchParams.get(name)
+* urlInstance.searchParams.has(name)
+
+#### 1.7 querystring模块
+
+* querystring.parse(querystring.parse(str\[, sep[, eq[, options]]]))

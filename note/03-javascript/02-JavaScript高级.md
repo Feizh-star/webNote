@@ -485,7 +485,7 @@ console.log(p1.sayName === p1.sayName) // => true
 
 #### 2.1 构造函数、实例、原型对象三者关系
 
-<img src="./image/jsh/构造函数-实例-原型之间的关系.png" alt="">
+<img src="../../image/jsh/构造函数-实例-原型之间的关系.png" alt="">
 
 * **构造函数（其实是所有函数）都具有一个 `prototype` 属性，该属性是一个对象。**
 

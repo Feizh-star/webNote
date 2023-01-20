@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 左中右三栏布局 -->
+  <style>
+    html, * {
+      margin: 0;
+      padding: 0;
+    }
+    section {
+      margin-bottom: 20px;
+    }
+    /* 三栏布局：浮动解决 */
+    .three-float article div {
+      min-height: 100px;
+    }
+    .three-float .left {
+      float: left;
+      width: 300px;
+      background-color: red;
+    }
+    .three-float .center {
+      background-color: yellow;
+    }
+    .three-float .right {
+      float: right;
+      width: 300px;
+      background-color: blue;
+    }
+    /* 三栏布局：绝对定位 */
+    .three-absolute article {
+      position: relative;
+      min-height: 100px;
+    }
+    .three-absolute article div {
+      min-height: 100px;
+      position: absolute;
+    }
+    .three-absolute .left {
+      left: 0;
+      width: 300px;
+      background-color: red;
+    }
+    .three-absolute .center {
+      left: 300px;
+      right: 300px;
+      background-color: yellow;
+    }
+    .three-absolute .right {
+      right: 0;
+      width: 300px;
+      background-color: blue;
+    }
+    /* 三栏布局：表格 */
+    /* 
+      1.table是一个行内块，不是块级元素 
+      2.没有设置宽度的table-cell，会自动占据table的剩余宽度（即自适应，前提是table有宽度）
+    */
+    .three-table .left-center-right {
+      width: 100%;
+      display: table;
+    }
+    .three-table .left-center-right>div {
+      display: table-cell;
+      height: 100px;
+    }
+    .three-table .left {
+      width: 300px;
+      background-color: red;
+    }
+    .three-table .center {
+      background-color: yellow;
+    }
+    .three-table .right {
+      width: 300px;
+      background-color: blue;
+    }
+
+    /* flex解决方式 */
+    .three-flex .left-center-right {
+      display: flex;
+      height: 100px;
+    }
+    .three-flex .left {
+      width: 300px;
+      background-color: red;
+    }
+    .three-flex .center {
+      flex: 1;
+      background-color: yellow;
+    }
+    .three-flex .right {
+      width: 300px;
+      background-color: blue;
+    }
+    /* 网格 */
+    .three-grid .left-center-right {
+      display: grid;
+      /* height: 100px; */
+      /* width: 100%; */
+      grid-template-rows: 100px;
+      grid-template-columns: 300px auto 300px;
+    }
+    .three-grid .left {
+      background-color: red;
+    }
+    .three-grid .center {
+      background-color: yellow;
+    }
+    .three-grid .right {
+      background-color: blue;
+    }
+  </style>
+</head>
+
+<body>
+	<section class="three-float">
+		<article class="left-center-right">
+			<div class="left"></div>
+			<div class="right"></div>
+			<!-- 
+				1.这种解决方式的关键就是：把center放在最后一个盒子，这样，前两个盒子浮动了，第三个就会上移
+				2.其实center的宽度就是浏览器的宽度，只不过左右两边被浮动盒子盖住了，而且center内部的内容也会只在没有被盖住的地方显示
+			-->
+			<div class="center">
+				<h1>这是中间</h1>
+				1.浮动的方式解决
+			</div>
+		</article>
+	</section>
+
+	<section class="three-absolute">
+		<article class="left-center-right">
+			<div class="left"></div>
+			<div class="center">
+				<h1>这是中间</h1>
+				1.绝对定位的解决方式
+			</div>
+			<div class="right"></div>
+		</article>
+	</section>
+
+	<section class="three-table">
+		<article class="left-center-right">
+			<div class="left"></div>
+			<div class="center">
+				<h1>这是中间</h1>
+				1.表格布局的解决方式
+			</div>
+			<div class="right"></div>
+		</article>
+	</section>
+
+	<section class="three-flex">
+		<article class="left-center-right">
+			<div class="left"></div>
+			<div class="center">
+				<h1>这是中间</h1>
+				1.flex的解决方式
+			</div>
+			<div class="right"></div>
+		</article>
+	</section>
+
+	<section class="three-grid">
+		<article class="left-center-right">
+			<div class="left"></div>
+			<div class="center">
+				<h1>这是中间</h1>
+				1.grid（网格）的解决方式
+			</div>
+			<div class="right"></div>
+		</article>
+	</section>
+</body>
+</html>
