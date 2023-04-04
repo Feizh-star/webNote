@@ -1758,14 +1758,14 @@ array.splice(0, array.length);
   	return a - b;	// 若a<b结果为负,顺序不变;若a>b结果为正,顺序颠倒,保证小数在前(反之则保证大数在前)
   });
   console.log(array);
-
+  
   // 2.比较字符串长短，相同长度的不会按照字典排序
   var array = ['abfee', 'adfe', 'vdf', 'cd', 'asdg', 'd'];
   array.sort(function (a, b) {
   	return a.length - b.length;
   });
   console.log(array);
-
+  
   // 3.比较字符串长短，相同长度的按照字典排序
   var array = ['abfee', 'adfe', 'vdf', 'cd', 'asdg', 'd', 'adfd', 'adfc', 'adfb', 'adfe'];
   array.sort(function (a, b) {
@@ -1829,7 +1829,7 @@ array.splice(0, array.length);
 
 * splice()作用：从指定位置start开始，先删除指定个数deleteCount的元素(可选)，再插入指定的元素item1, item2, ...(可选)。会改变原数组
 * splice()参数1：start指定修改的开始位置（从0计数）;
-* splice()参数2：deleteCount整数，表示要移除的数组元素的个数；
+* splice()参数2：deleteCount整数，表示要移除的数组元素的个数，默认就是数组长度；
 * splice()参数3：item1, item2等要添加进数组的元素,从start位置开始
 * splice()返回值：被删除的元素组成的新数组，没有删除则返回空数组
 
