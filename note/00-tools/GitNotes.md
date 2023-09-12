@@ -315,7 +315,27 @@ $ git push origin master
 
 把本地`master`分支的最新修改推送至GitHub！
 
-#### 2.3 SSH警告
+#### 2.3 拉取新分支&关联
+
+​		当远程仓库有一个本地没有的新分支时，可以使用以下命令拉取（远程不会与拉取下来的本地分支关联）
+
+```
+git fetch origin 远程分支名xxx:本地分支名xxx
+```
+
+​		为了将远程分支与本地分支关联一起来，可以运行：
+
+```
+在当前分支输入该命令，就会将当前所在本地分支关联远程dev分支
+git branch -u origin/远程分支
+
+写两个分支名的话远程分支写前面，本地分支写后面
+git branch -u origin/远程分支 本地分支
+```
+
+
+
+#### 2.4 SSH警告
 
   当第一次使用Git的`clone`或者`push`命令连接GitHub时，会得到一个警告。这是因为Git使用SSH连接，而SSH连接在第一次验证GitHub服务器的Key时，需要你确认GitHub的Key的指纹信息是否真的来自GitHub的服务器，输入`yes`回车即可。
 
