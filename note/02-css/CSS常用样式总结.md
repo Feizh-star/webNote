@@ -37,6 +37,33 @@
 user-select:none;
 ```
 
+* 文字渐变色
+
+```css
+/* clip */
+.text-gradient {
+    background-image: linear-gradient(to right, orange, purple);
+    -webkit-background-clip: text; /* IE不支持 */ 
+    color: transparent;
+    font-size: 30px;
+}
+/* mask */
+.text-gradient {
+    position: relative;
+    color: blue;
+    font-size: 30px;
+}
+.text-gradient:before {
+    content: attr(text);
+    position: absolute;
+    z-index: 10;
+    color: orange;
+    -webkit-mask: linear-gradient(to right, transparent, orange);
+}
+```
+
+
+
 ## 三、背景样式（background）
 
 * 背景渐变：
