@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id="webgl" width="500" height="500" style="background-color: #0d72da"></canvas>
+
+  <script id="vertexShader" type="x-shader/x-vertex">
+    //attribute声明vec4类型变量apos
+    attribute vec4 apos;
+    // attribute声明顶点颜色变量
+    attribute vec4 a_color;
+    //varying声明顶点颜色插值后变量
+    varying vec4 v_color;
+    void main() {
+      // 顶点坐标apos赋值给内置变量gl_Position
+      gl_Position = apos;
+      gl_PointSize = 10.0; // 点的大小
+      //顶点颜色插值计算
+      v_color = a_color;
+    }
+  </script>
+  
+  <script id="fragmentShader" type="x-shader/x-fragment">
+    // 所有float类型数据的精度是lowp
+    precision lowp float;
+    // 接收顶点着色器中v_color数据
+    varying vec4 v_color;
+    void main() {
+      vec2 uv = gl_PointCoord * 2.0 - 1.0;
+      // 检查当前片元是否在圆形内
+      if (dot(uv, uv) > 1.0) {
+        discard; // 丢弃片元，使其透明
+      }
+      // 插值后颜色数据赋值给对应的片元
+      gl_FragColor = v_color;
+    }
+  </script>
+  
+  <script>
+    const canvas = document.getElementById('webgl');
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    if (!gl) {
+      console.error("WebGL not supported.");
+    }
+  
+    const vertexShaderSource = document.getElementById('vertexShader').innerText;
+    const fragmentShaderSource = document.getElementById('fragmentShader').innerText;
+    const program = initShader(gl, vertexShaderSource, fragmentShaderSource);
+  
+    /**
+      创建顶点位置数据数组data，存储两个顶点(-0.5,0.5、(0.5,0.5)
+      存储两个顶点对应RGB颜色值(0,0,1)、(1,0,0)
+    **/
+    const data = new Float32Array([
+      0,0,-0.5,
+      0,0,0.5,
+      // 0.75,0.75,0.75,
+      // -0.25,0.75,0.75,
+      // -0.25,-0.25,0.75,
+      // 0.75,-0.25,0.75,
+      // 0.25,0.25,-0.75,
+      // -0.75,0.25,-0.75,
+      // -0.75,-0.75,-0.75,
+      // 0.25,-0.75,-0.75,
+    ]);
+    const color = new Float32Array([
+      0,1,0,
+      1,0,0,
+      // 0,0,0,
+      // 0,0,1,
+      // 0,1,0,
+      // 0,1,1,
+      // 1,0,0,
+      // 1,0,1,
+      // 1,1,0,
+      // 1,1,1,
+    ]);
+
+    const posBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, posBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
+    const aposLocation = gl.getAttribLocation(program, 'apos');
+    gl.vertexAttribPointer(aposLocation,3,gl.FLOAT,false,0,0);
+    gl.enableVertexAttribArray(aposLocation);
+
+    const colorBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, color, gl.STATIC_DRAW);
+    const colorLocation = gl.getAttribLocation(program, 'a_color');
+    gl.vertexAttribPointer(colorLocation, 3, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(colorLocation);
+  
+    gl.clearColor(0.7, 0.7, 0.7, 1);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.enable(gl.DEPTH_TEST);
+
+    // //LINES模式绘制后8个点
+    // gl.drawArrays(gl.LINE_LOOP, 0, 4);
+    // gl.drawArrays(gl.LINE_LOOP, 4, 4);
+    // gl.drawArrays(gl.POINTS, 0, 8);
+    gl.drawArrays(gl.POINTS, 0, 2);
+  
+    function initShader(gl, vsSource, fsSource) {
+      const vertexShader = gl.createShader(gl.VERTEX_SHADER);
+      const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
+  
+      gl.shaderSource(vertexShader, vsSource);
+      gl.compileShader(vertexShader);
+      if (!gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS)) {
+        console.error('Vertex Shader Error:', gl.getShaderInfoLog(vertexShader));
+      }
+  
+      gl.shaderSource(fragmentShader, fsSource);
+      gl.compileShader(fragmentShader);
+      if (!gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS)) {
+        console.error('Fragment Shader Error:', gl.getShaderInfoLog(fragmentShader));
+      }
+  
+      const program = gl.createProgram();
+      gl.attachShader(program, vertexShader);
+      gl.attachShader(program, fragmentShader);
+      gl.linkProgram(program);
+  
+      if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+        console.error('Program Link Error:', gl.getProgramInfoLog(program));
+      }
+  
+      gl.useProgram(program);
+      return program;
+    }
+  </script>
+  
+</body>
+</html>
