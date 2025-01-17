@@ -125,18 +125,25 @@ function initTextures(gl, n) {
 }
 
 function loadTexture(gl, n, texture, u_Sampler, image) {
-  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1); // Flip the image's y axis
-  // Enable texture unit0
+  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1); // 对纹理图像进行y轴反转，详见 WebGL编程指南 194页
+  // 开启0号纹理单元：下方的配置都不能直接操作纹理对象，只能通过激活的纹理单元来操作
   gl.activeTexture(gl.TEXTURE0);
-  // Bind the texture object to the target
+  // 向target绑定纹理对象，同时将纹理对象绑定到 当前激活的纹理单元 上
   gl.bindTexture(gl.TEXTURE_2D, texture);
 
-  // Set the texture parameters
+  // 配置纹理参数：纹理图像映射到图形上的方式，详见 WebGL编程指南 198页
+  // 这里是重置了一下图形小于纹理的情况下使用gl.LINEAR（映射位置附近4个像素的加权平均）方式映射
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-  // Set the texture image
+  // 配置纹理图像：image图片的格式，详见 WebGL编程指南 202页
+  // gl.TEXTURE_2D：目标纹理对象
+  // 0：mipmap等级，0表示基本图像级别（非金字塔纹理固定0即可）
+  // gl.RGB：图像的内部格式，即纹理图片的颜色格式，这里是RGB格式（jpg图像）
+  // gl.RGB：纹理数据的格式，要跟上一个相同
+  // gl.UNSIGNED_BYTE：纹理数据的类型，每个颜色分量占用一个字节
+  // image：包含纹理图像的Image对象
   gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image);
   
-  // Set the texture unit 0 to the sampler
+  // 将0号纹理传递给着色器
   gl.uniform1i(u_Sampler, 0);
   
   gl.clear(gl.COLOR_BUFFER_BIT);   // Clear <canvas>
