@@ -121,6 +121,12 @@ function keydown(ev, gl, n, u_ViewMatrix, viewMatrix) {
     } else 
     if (ev.keyCode == 37) { // The left arrow key was pressed
       g_eyeX -= 0.01;
+    } else 
+    if (ev.keyCode == 38) { // The left arrow key was pressed
+      g_eyeY += 0.01;
+    } else 
+    if (ev.keyCode == 40) { // The left arrow key was pressed
+      g_eyeY -= 0.01;
     } else { return; }
     draw(gl, n, u_ViewMatrix, viewMatrix);    
 }
