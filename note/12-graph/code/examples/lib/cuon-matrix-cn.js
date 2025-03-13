@@ -220,13 +220,13 @@ Matrix4.prototype.invert = function() {
 };
 
 /**
- * Set the orthographic projection matrix.
- * @param left The coordinate of the left of clipping plane.
- * @param right The coordinate of the right of clipping plane.
- * @param bottom The coordinate of the bottom of clipping plane.
- * @param top The coordinate of the top top clipping plane.
- * @param near The distances to the nearer depth clipping plane. This value is minus if the plane is to be behind the viewer.
- * @param far The distances to the farther depth clipping plane. This value is minus if the plane is to be behind the viewer.
+ * 设置正射投影矩阵
+ * @param left 左侧裁剪平面坐标
+ * @param right 右侧裁剪平面坐标
+ * @param bottom 底部裁剪平面坐标
+ * @param top 顶部裁剪平面坐标
+ * @param near 近处裁剪平面到视点的距离
+ * @param far 远处裁剪平面视点的距离
  * @return this
  */
 Matrix4.prototype.setOrtho = function(left, right, bottom, top, near, far) {
@@ -346,11 +346,11 @@ Matrix4.prototype.frustum = function(left, right, bottom, top, near, far) {
 };
 
 /**
- * Set the perspective projection matrix by fovy and aspect.
- * @param fovy The angle between the upper and lower sides of the frustum.
- * @param aspect The aspect ratio of the frustum. (width/height)
- * @param near The distances to the nearer depth clipping plane. This value must be plus value.
- * @param far The distances to the farther depth clipping plane. This value must be plus value.
+ * 生成透视投影矩阵
+ * @param fovy 截头锥体（frustum）上斜面和下斜面形成的垂直夹角
+ * @param aspect 截头锥体截面的宽高比 (width/height)
+ * @param near 近裁剪平面到视点的距离
+ * @param far 远裁剪平面到视点的距离
  * @return this
  */
 Matrix4.prototype.setPerspective = function(fovy, aspect, near, far) {
@@ -373,28 +373,28 @@ Matrix4.prototype.setPerspective = function(fovy, aspect, near, far) {
   }
 
   rd = 1 / (far - near);
-  ct = Math.cos(fovy) / s;
+  ct = Math.cos(fovy) / s; // 1/tan(fovy/2)
 
   e = this.elements;
 
-  e[0]  = ct / aspect;
+  e[0]  = ct / aspect; // 1/(aspect*tan(fovy/2))
   e[1]  = 0;
   e[2]  = 0;
   e[3]  = 0;
 
   e[4]  = 0;
-  e[5]  = ct;
+  e[5]  = ct; // 1/tan(fovy/2)
   e[6]  = 0;
   e[7]  = 0;
 
   e[8]  = 0;
   e[9]  = 0;
-  e[10] = -(far + near) * rd;
-  e[11] = -1;
+  e[10] = -(far + near) * rd; // 和p34、透视除法一起构造z轴反比例映射关系
+  e[11] = -1; // 构造齐次分量w=-z，用于GPU透视除法
 
   e[12] = 0;
   e[13] = 0;
-  e[14] = -2 * near * far * rd;
+  e[14] = -2 * near * far * rd; // 和p33、透视除法一起构造z轴反比例映射关系
   e[15] = 0;
 
   return this;
@@ -576,7 +576,7 @@ Matrix4.prototype.rotate = function(angle, x, y, z) {
 };
 
 /**
- * Set the viewing matrix.
+ * 初始化一个视图矩阵
  * @param eyeX, eyeY, eyeZ 视点坐标，即摄像机在世界坐标系中的位置
  * @param centerX, centerY, centerZ 视线方向上的一个点坐标，视线从摄像机看向这个点并无限延伸
  * @param upX, upY, upZ 向上的方向向量，用于确定 视线×向上方向 组成的平面
@@ -612,15 +612,16 @@ Matrix4.prototype.setLookAt = function(eyeX, eyeY, eyeZ, centerX, centerY, cente
   uy = sz * fx - sx * fz;
   uz = sx * fy - sy * fx;
   // 至此，摄像机坐标系的三个坐标轴全部使用单位向量表示完毕
-  // 世界坐标系 变换到 摄像机坐标系 的 旋转矩阵：
-  // sx ux -fx 0
-  // sy us -fy 0
-  // sz uz -fz 0
-  // 0  0   0  1
+  // 将世界坐标 变换到 摄像机坐标，相当于先将世界坐标系与摄像机坐标系重合，然后摄像机不动，旋转世界坐标系
+  // 以下就是在摄像机坐标系中 旋转世界坐标系的 旋转矩阵（只考虑一个维度就很好理解，一个点与一个单位向量的点积就是它在单位向量上的投影，即坐标）
+  //  sx  sy  sz  0
+  //  ux  uy  uz  0
+  // -fx -fy -fz  0
+  //   0   0   0  1
 
-  // 得到世界坐标系 变换到 摄像机坐标系 的 旋转矩阵的逆矩阵（由于上述旋转矩阵是正交矩阵，所以它的逆矩阵等于它的转置）
+  // 这个函数是初始化一个视图矩阵，而不是把已有矩阵左乘视图矩阵
   e = this.elements;
-  // 这是旋转矩阵的逆矩阵的第一列，在数组中顺序排列时因为webgl的矩阵是列主序的，即数组的前4项是第一列
+  // 这是旋转矩阵的第一列，在数组中顺序排列时因为webgl的矩阵是列主序的，即数组的前4项是第一列
   e[0] = sx;
   e[1] = ux;
   e[2] = -fx;
@@ -644,7 +645,7 @@ Matrix4.prototype.setLookAt = function(eyeX, eyeY, eyeZ, centerX, centerY, cente
   e[14] = 0;
   e[15] = 1;
 
-  // Translate.
+  // 先平移世界坐标系，然后才旋转，详见translate的定义
   return this.translate(-eyeX, -eyeY, -eyeZ);
 };
 
