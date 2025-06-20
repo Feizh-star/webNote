@@ -73,11 +73,11 @@ function main() {
 　draw(gl, n, viewProjMatrix, u_MvpMatrix, u_NormalMatrix); // Draw the robot arm
 }
 
-var ANGLE_STEP = 3.0;     // The increments of rotation angle (degrees)
-var g_arm1Angle = 90.0;   // The rotation angle of arm1 (degrees)
-var g_joint1Angle = 45.0; // The rotation angle of joint1 (degrees)
-var g_joint2Angle = 0.0;  // The rotation angle of joint2 (degrees)
-var g_joint3Angle = 0.0;  // The rotation angle of joint3 (degrees)
+var ANGLE_STEP = 3.0;     // The increments of rotation angle (degrees) 逆时针
+var g_arm1Angle = 90.0;   // The rotation angle of arm1 (degrees)逆时针
+var g_joint1Angle = 45.0; // The rotation angle of joint1 (degrees) 逆时针
+var g_joint2Angle = 0.0;  // The rotation angle of joint2 (degrees) 逆时针
+var g_joint3Angle = 0.0;  // The rotation angle of joint3 (degrees) 逆时针
 
 function keydown(ev, gl, n, viewProjMatrix, u_MvpMatrix, u_NormalMatrix) {
   switch (ev.keyCode) {
@@ -112,7 +112,7 @@ function keydown(ev, gl, n, viewProjMatrix, u_MvpMatrix, u_NormalMatrix) {
 }
 
 function initVertexBuffers(gl) {
-  // Coordinates（Cube which length of one side is 1 with the origin on the center of the bottom)
+  // 顶点坐标（这是一个单位立方体，棱长为1，底部中心位于坐标系原点（能够使用scale控制大小并定位的关键），各个面垂直于穿过它的坐标轴
   var vertices = new Float32Array([
     0.5, 1.0, 0.5, -0.5, 1.0, 0.5, -0.5, 0.0, 0.5,  0.5, 0.0, 0.5, // v0-v1-v2-v3 front
     0.5, 1.0, 0.5,  0.5, 0.0, 0.5,  0.5, 0.0,-0.5,  0.5, 1.0,-0.5, // v0-v3-v4-v5 right
@@ -122,7 +122,7 @@ function initVertexBuffers(gl) {
     0.5, 0.0,-0.5, -0.5, 0.0,-0.5, -0.5, 1.0,-0.5,  0.5, 1.0,-0.5  // v4-v7-v6-v5 back
   ]);
 
-  // Normal
+  // 顶点法向量，与上面的顶点一一对应
   var normals = new Float32Array([
     0.0, 0.0, 1.0,  0.0, 0.0, 1.0,  0.0, 0.0, 1.0,  0.0, 0.0, 1.0, // v0-v1-v2-v3 front
     1.0, 0.0, 0.0,  1.0, 0.0, 0.0,  1.0, 0.0, 0.0,  1.0, 0.0, 0.0, // v0-v3-v4-v5 right
@@ -185,79 +185,103 @@ function initArrayBuffer(gl, attribute, data, type, num) {
   return true;
 }
 
-// Coordinate transformation matrix
+// g_modelMatrix存放模型矩阵；g_mvpMatrix用来设置模型视图投影矩阵
 var g_modelMatrix = new Matrix4(), g_mvpMatrix = new Matrix4();
 
+/**
+ * 逐个绘制部件，且逐个积累部件的模型矩阵（旋转，平移）
+ * 原始单位立方体长宽高都为1，且其底面中心刚好在原点，这是进行平移（上一个部件高度/长度）时不需要考虑缩放后的尺寸就可以使各个部件刚好收尾相连的基础
+ * @param {*} gl 
+ * @param {*} n 
+ * @param {*} viewProjMatrix 
+ * @param {*} u_MvpMatrix 
+ * @param {*} u_NormalMatrix 
+ */
 function draw(gl, n, viewProjMatrix, u_MvpMatrix, u_NormalMatrix) {
-  // Clear color and depth buffer
+  // 清除颜色和深度缓冲区
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-  // Draw a base
-  var baseHeight = 2.0;
-  g_modelMatrix.setTranslate(0.0, -12.0, 0.0);
+  // 绘制底座
+  var baseHeight = 2.0; // 底座高度
+  g_modelMatrix.setTranslate(0.0, -12.0, 0.0); // 底座：1-2.再平移-12.0（将单位阵设置为沿y轴向下平移12的平移矩阵）
+  // 底座：1-1.单位立方体缩放到合适尺寸【在drawBox会copy后调用scale 右乘 缩放矩阵（xyz缩放10.0, baseHeight, 10.0），然后得到底座的完整模型矩阵】
   drawBox(gl, n, 10.0, baseHeight, 10.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix);
  
-  // Arm1
-  var arm1Length = 10.0;
-  g_modelMatrix.translate(0.0, baseHeight, 0.0);     // Move onto the base
-  g_modelMatrix.rotate(g_arm1Angle, 0.0, 1.0, 0.0);  // Rotate around the y-axis
-  drawBox(gl, n, 3.0, arm1Length, 3.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix); // Draw
+  // 从下向上，第一段手臂
+  var arm1Length = 10.0; // 第一段手臂长度
+  g_modelMatrix.translate(0.0, baseHeight, 0.0);     // 第一段手臂：2-3.再平移 底座高度，1-2.再平移-12.0，它的底面刚好位于底座的顶面
+  g_modelMatrix.rotate(g_arm1Angle, 0.0, 1.0, 0.0);  // 第一段手臂：2-2.再绕 y 轴旋转
+  // 第一段手臂：2-1.单位立方体缩放到合适尺寸
+  drawBox(gl, n, 3.0, arm1Length, 3.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix); // 绘制
 
-  // Arm2
-  var arm2Length = 10.0;
-  g_modelMatrix.translate(0.0, arm1Length, 0.0);       // Move to joint1
-  g_modelMatrix.rotate(g_joint1Angle, 0.0, 0.0, 1.0);  // Rotate around the z-axis
-  drawBox(gl, n, 4.0, arm2Length, 4.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix); // Draw
+  // 从下向上，第二段手臂
+  var arm2Length = 10.0; // 第二段手臂长度
+  g_modelMatrix.translate(0.0, arm1Length, 0.0);       // 第二段手臂：3-3.再平移 第一段手臂高度，2-2.再绕 y 轴旋转（第一段手臂旋转，想象一个透明的第一段手臂），2-3.再平移 底座高度，1-2.再平移-12.0
+  g_modelMatrix.rotate(g_joint1Angle, 0.0, 0.0, 1.0);  // 第二段手臂：3-2.再绕 z 轴旋转（自身旋转）
+  // 第二段手臂：3-1.单位立方体缩放到合适尺寸
+  drawBox(gl, n, 4.0, arm2Length, 4.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix); // 绘制
 
-  // A palm
-  var palmLength = 2.0;
-  g_modelMatrix.translate(0.0, arm2Length, 0.0);       // Move to palm
-  g_modelMatrix.rotate(g_joint2Angle, 0.0, 1.0, 0.0);  // Rotate around the y-axis
-  drawBox(gl, n, 2.0, palmLength, 6.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix);  // Draw
+  // 手掌
+  var palmLength = 2.0; // 手掌长度（y轴/上下方向的高度）
+  g_modelMatrix.translate(0.0, arm2Length, 0.0);       // 手掌：4-3.再平移 第二段手臂高度，3-2.再绕 z 轴旋转（第二段手臂旋转），3-3.再平移 第一段手臂高度，2-2.再绕 y 轴旋转（第一段手臂旋转），2-3.再平移 底座高度，1-2.再平移-12.0
+  g_modelMatrix.rotate(g_joint2Angle, 0.0, 1.0, 0.0);  // 手掌：4-2.再绕 y 轴旋转（自身旋转）
+  // 手掌：4-1.单位立方体缩放到合适尺寸，手掌的宽是沿着z轴的（由于第一段手臂初始逆时针旋转了90度，才使得手掌的宽看起来像沿着x轴）
+  drawBox(gl, n, 2.0, palmLength, 6.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix);  // 绘制
 
-  // Move to the center of the tip of the palm
+  // 让手指在进行它自己的变换后，连接到手掌上
   g_modelMatrix.translate(0.0, palmLength, 0.0);
 
-  // Draw finger1
-  pushMatrix(g_modelMatrix);
+  // 第一根手指，初始位置位于z轴正半轴
+  pushMatrix(g_modelMatrix); // 保证第二根手指的变换也是基于手掌的
     g_modelMatrix.translate(0.0, 0.0, 2.0);
-    g_modelMatrix.rotate(g_joint3Angle, 1.0, 0.0, 0.0);  // Rotate around the x-axis
+    g_modelMatrix.rotate(g_joint3Angle, 1.0, 0.0, 0.0);  // 手指沿着x轴旋转
     drawBox(gl, n, 1.0, 2.0, 1.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix);
   g_modelMatrix = popMatrix();
 
-  // Draw finger2
+  // 第二根手指，初始位置位于z轴负半轴
   g_modelMatrix.translate(0.0, 0.0, -2.0);
-  g_modelMatrix.rotate(-g_joint3Angle, 1.0, 0.0, 0.0);  // Rotate around the x-axis
+  g_modelMatrix.rotate(-g_joint3Angle, 1.0, 0.0, 0.0);  // 手指沿着x轴旋转
   drawBox(gl, n, 1.0, 2.0, 1.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix);
 }
 
-var g_matrixStack = []; // Array for storing a matrix
-function pushMatrix(m) { // Store the specified matrix to the array
+var g_matrixStack = []; // 一个用于暂存模型矩阵的栈
+function pushMatrix(m) { // 入栈，拷贝原来的矩阵
   var m2 = new Matrix4(m);
   g_matrixStack.push(m2);
 }
 
-function popMatrix() { // Retrieve the matrix from the array
+function popMatrix() { // 弹出最后一个入栈的模型矩阵
   return g_matrixStack.pop();
 }
 
-var g_normalMatrix = new Matrix4();  // Coordinate transformation matrix for normals
+var g_normalMatrix = new Matrix4();  // 暂存顶点法向量的变换矩阵
 
-// Draw rectangular solid
+/**
+ * 绘制 长方体 形状的立方体
+ * 所有部件都基于顶点缓冲区中的顶点坐标 左乘 模型矩阵（缩放，旋转，平移）得到
+ * 巧妙利用了栈，使得每次绘制都只积累部件的旋转和平移，而不会让缩放影响到角度和位置
+ * @param {*} gl 
+ * @param {*} n 要绘制的box立方体顶点个数
+ * @param {*} width 
+ * @param {*} height 
+ * @param {*} depth 
+ * @param {*} viewProjMatrix 
+ * @param {*} u_MvpMatrix 着色器程序中的模型视图投影矩阵指针
+ * @param {*} u_NormalMatrix  着色器程序中的法向量变换矩阵指针
+ */
 function drawBox(gl, n, width, height, depth, viewProjMatrix, u_MvpMatrix, u_NormalMatrix) {
-  pushMatrix(g_modelMatrix);   // Save the model matrix
-    // Scale a cube and draw
+  pushMatrix(g_modelMatrix);   // 暂存包含了前置部件非缩放变换的模型矩阵
+    // 将单位立方体以它的底面中心为中心缩放至指定的大小
     g_modelMatrix.scale(width, height, depth);
-    // Calculate the model view project matrix and pass it to u_MvpMatrix
-    console.log(JSON.stringify(g_mvpMatrix, null, 2))
+    // 设置视图投影矩阵，并右乘部件的模型矩阵，得到其模型视图投影矩阵，写入uniform变量
     g_mvpMatrix.set(viewProjMatrix);
     g_mvpMatrix.multiply(g_modelMatrix);
     gl.uniformMatrix4fv(u_MvpMatrix, false, g_mvpMatrix.elements);
-    // Calculate the normal transformation matrix and pass it to u_NormalMatrix
+    // 根据部件当前的模型矩阵，计算其逆转置矩阵，得到顶点法向量变换矩阵，写入uniform变量
     g_normalMatrix.setInverseOf(g_modelMatrix);
     g_normalMatrix.transpose();
     gl.uniformMatrix4fv(u_NormalMatrix, false, g_normalMatrix.elements);
-    // Draw
+    // 根据索引绘制图形
     gl.drawElements(gl.TRIANGLES, n, gl.UNSIGNED_BYTE, 0);
-  g_modelMatrix = popMatrix();   // Retrieve the model matrix
+  g_modelMatrix = popMatrix();   // 恢复包含了前置部件非缩放变换的模型矩阵
 }
