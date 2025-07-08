@@ -302,17 +302,17 @@ webgl的坐标系是右手系：右手大拇指指向z轴方向,其余四指由x
 
 计算旋转时，是针对3个坐标轴分别旋转，且旋转的顺序不同，结果也不同，多次旋转可以多个旋转矩阵相乘后再左乘顶点坐标。假设绕各个轴旋转角度都是α，三个轴的旋转矩阵分别是：
 
-1. 绕z轴旋转：
+1. 绕z轴旋转（右手系正角逆旋）：
    $$
    \left[\begin{matrix} cosα & -sinα & 0 & 0 \\ sinα & cosα & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1\end{matrix}\right]\left[\begin{matrix}x \\ y \\ z \\ 1\end{matrix}\right]=\left[\begin{matrix}xcosα-ysinα \\ xsinα+ycosα \\ z \\ 1\end{matrix}\right]
    $$
    
-2. 绕x轴旋转：
+2. 绕x轴旋转（右手系正角逆旋）：
    $$
    \left[\begin{matrix} 1 & 0 & 0 & 0 \\ 0 & cosα & -sinα & 0 \\ 0 & sinα & cosα & 0 \\ 0 & 0 & 0 & 1\end{matrix}\right]\left[\begin{matrix}x \\ y \\ z \\ 1\end{matrix}\right]=\left[\begin{matrix}x \\ ycosα-zsinα \\ ysinα+zcosα \\ 1\end{matrix}\right]
    $$
    
-3. 绕y轴旋转：
+3. 绕y轴旋转（右手系正角逆旋）：
    $$
    \left[\begin{matrix} cosα & 0 & sinα & 0 \\ 0 & 1 & 0 & 0 \\ -sinα & 0 & cosα & 0 \\ 0 & 0 & 0 & 1\end{matrix}\right]\left[\begin{matrix}x \\ y \\ z \\ 1\end{matrix}\right]=\left[\begin{matrix}xcosα+zsinα \\ y \\ -xsinα+zcosα \\ 1\end{matrix}\right]
    $$
@@ -758,6 +758,48 @@ Matrix4.prototype.setPerspective = function(fovy, aspect, near, far) {
   return this;
 };
 ```
+
+#### 8. 变换案例
+
+在maplibrejs地图中展示threejs场景。把threejs世界（由坐标系和内部的点构成）看成是maplibre球面墨卡托坐标系中的一个物体，关键：1.顶点坐标虽然是threejs世界坐标，但变换前是在墨卡托坐标系中(两个坐标系重合)；2.在归一化墨卡托左手系中，旋转矩阵描述的旋转方向是相反的，即 $Math.PI / 2$ 为顺时针旋转 $90$ 度；
+
+* 变换过程类比
+  * 地图变换过程(暂不考虑局部模型矩阵变换)：$mainMatrix(透视投影矩阵 × 视图矩阵) × (墨卡托)顶点坐标(可视作(0,0,0)平移得到)$
+  * 整体变换过程：$mainMatrix(透视投影矩阵 × 视图矩阵) × (threejs世界模型在墨卡托坐标系中的,下同)平移矩阵 × 旋转矩阵 × 缩放矩阵 × (three)顶点坐标$
+* 以threejs坐标$(0, 0, 1m)$为例，先缩放后旋转
+  1. 此时threejs坐标系与墨卡托坐标系重合，x轴向东，y轴向南，z轴向上（左手系），点在竖直轴正半轴1的位置；
+  2. 缩放坐标系，使threejs坐标系单位变成同墨卡托的归一化单位，这样three中的1米在地图上的长度就等于墨卡托投影下的1米在地图上的长度，重点是**翻转z坐标**，使z轴朝下，threejs坐标系变成右手系，墨卡托坐标系不变；
+  3. 在墨卡托坐标系中旋转threejs世界中的点，相当于拿着threejs坐标系把内部顶点和坐标轴看作整体(threejs世界模型)，**在墨卡托坐标系中**旋转（绕x轴**顺**时针90度），threejs坐标系x轴指向东方，y轴指向上方，z轴指向南方
+  4. 拿着threejs世界模型平移到墨卡托坐标系中的指定位置(墨卡托坐标描述sceneOriginMercator)
+* 如果先旋转后缩放
+  2. 在墨卡托坐标系中旋转threejs世界中的点，相当于拿着threejs坐标系把内部顶点和坐标轴看作整体(threejs世界模型)，**在墨卡托坐标系中**旋转（绕x轴**顺**时针90度），threejs坐标系x轴指向东方，y轴指向上方，z轴指向北方（threejs坐标系仍然是左手系）
+  3. 缩放坐标系，使threejs坐标系单位变成同墨卡托的归一化单位，这样three中的1米在地图上的长度就等于墨卡托投影下的1米在地图上的长度，重点是翻转，**此时three的z轴坐标其实是墨卡托坐标系的y轴坐标，且方向相反**，所以缩放时要在墨卡托坐标系中的y轴进行翻转，这样对于threejs来说，就是z轴翻转了
+
+```ts
+const offsetFromCenterElevation = this.map.queryTerrainElevation(this.layerOption.origin) || 0
+const sceneOriginMercator = maplibregl.MercatorCoordinate.fromLngLat(
+  this.layerOption.origin,
+  offsetFromCenterElevation
+)
+const rotationX = new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(1, 0, 0), Math.PI / 2)
+
+const scale = sceneOriginMercator.meterInMercatorCoordinateUnits()
+
+const m = new THREE.Matrix4().fromArray(args.defaultProjectionData.mainMatrix)
+const lsr = new THREE.Matrix4()
+  .makeTranslation(sceneOriginMercator.x, sceneOriginMercator.y, sceneOriginMercator.z)
+  .multiply(rotationX)
+  .scale(new THREE.Vector3(scale, scale, -scale))
+// 以下是先旋转后缩放
+const lrs = new THREE.Matrix4()
+  .makeTranslation(sceneOriginMercator.x, sceneOriginMercator.y, sceneOriginMercator.z)
+  .scale(new THREE.Vector3(scale, -scale, scale))
+  .multiply(rotationX)
+
+this.camera.projectionMatrix = m.multiply(lsr)
+```
+
+
 
 ### 二、基本渲染过程（代码）
 
