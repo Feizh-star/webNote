@@ -1259,7 +1259,7 @@ console.log(s1.name, s1.age) // => human 张三 18
    }
    // 原型继承
    Student.prototype = new Person();
-   Student.ptototype.constructor = Student;
+   Student.prototype.constructor = Student;
    ```
 
 ### 5. 组合继承后的原型链
@@ -1269,6 +1269,46 @@ console.log(s1.name, s1.age) // => human 张三 18
 * 利用这种继承方式可以将原型链继续向下延伸
 
 ![](../../image/jsh/原型链-继承.jpg)
+
+### 6. 组合继承优化
+
+1. 借用构造函数：即在子类的构造函数中调用父类的构造函数（当然要通过call修改this指向）
+   * 优点：可以继承父类的实例属性，这些属性会作为子类的实例属性（在子类实例自己身上）
+   * 缺点：无法继承父类的实例方法，因为实例方法一般会放在原型上
+2. 原型继承：即修改子类构造函数的prototype属性，使之为 父类的1个实例
+   * 优点：解决了父类实例方法的继承问题，因为子类实例调用方法时，会沿着原型链向上找
+   * 缺点：每创建1个子类的实例，父类构造函数就要被调用两次；且父类的实例属性会残留在子类的prototype上，其实并没有什么作用
+3. 优化1：子类构造函数.prototype = Object.create(父类构造函数.prototype)
+   * 利用Object.create()，创建1个新的空对象，作为子类的 prototype；由于此方法的特点，这个空对象的\__proto__就是父类的prototype
+   * 优点：解决了 以父类实例作为子类原型的问题（构造函数重复调用；父类属性残留在子类原型）
+   * 缺点：无法判断一个子类的实例 是父类还是子类的实例（instanceof 和 实例.constructor 都不行）
+4. 优化2：修改 子类构造函数.prototype.constructor = 子类构造函数
+   * 优点：解决了 子类的类型判断问题
+   * 缺点：其实没啥了，非要说缺点的话，就是不够优雅，所以可以用ES6
+
+```js
+// 父类型
+function Person (name, age) {
+  	this.name = name
+  	this.age = age
+}
+// 父类型的方法
+Person.prototype.sayHi = function () {
+  	console.log('大家好，我是' + this.name);
+}
+// 子类型
+function Student (name, age) {
+  	// 借用父构造函数继承属性成员 
+  	Person.call(this, name, age)
+}
+// 原型继承
+Student.prototype = Object.create(Person.prototype); // 替代了父类实例，避免残留的父类属性
+Student.prototype.constructor = Student; // 保证 子类实例 instanceof Student时可以得到true
+// 子类型的方法
+Student.prototype.study = function () {
+    console.log(this.name + '正在学习...');
+}
+```
 
 ## 五、函数进阶
 
@@ -1604,14 +1644,14 @@ btn.onclick = function () {
    // fn1
    // Arguments(3) [1, 2, 3, ...
    // null
-
+   
    console.dir(fn1);// fn1没有被调用，读取fn1对象如下（默认值）
    // fn1()
    // length: 2
    // name: "fn1"
    // arguments: null
    // caller: null
-
+   
    console.log(fn1.length);	// 2（默认值）
    console.log(fn1.name);		// fn1（默认值）
    console.log(fn1.arguments);	// null（默认值）

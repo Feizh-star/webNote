@@ -62,7 +62,7 @@ Matrix4.prototype.set = function(src) {
 };
 
 /**
- * Multiply the matrix from the right.
+ * 当前矩阵（this）右乘参数矩阵（other）
  * @param other The multiply matrix
  * @return this
  */
@@ -563,7 +563,7 @@ Matrix4.prototype.setRotate = function(angle, x, y, z) {
 };
 
 /**
- * Multiply the matrix for rotation from the right.
+ * 拿this矩阵 右乘 参数描述的旋转矩阵
  * The vector of rotation axis may not be normalized.
  * @param angle The angle of rotation (degrees)
  * @param x The X coordinate of vector of rotation axis.
