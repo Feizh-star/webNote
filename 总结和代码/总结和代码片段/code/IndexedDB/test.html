@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cache Uint8Array Demo</title>
+  </head>
+  <body>
+    <button id="cache">放入缓存</button>
+    <button id="load">加载图片</button>
+    <br />
+    <img id="img" width="200" />
+
+    <!-- <script>
+      // 注册 Service Worker
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./test.sw.js').then(() => {
+          console.log('Service Worker 已注册')
+        })
+      }
+
+      // 示例 Uint8Array（这里用一张网络图片来模拟下载到内存的情况）
+      async function getUint8Array() {
+        const resp = await fetch('http://localhost:8085/testimage/R1.png')
+        const buf = await resp.arrayBuffer()
+        return new Uint8Array(buf)
+      }
+
+      // 放入缓存
+      document.getElementById('cache').onclick = async () => {
+        const uint8 = await getUint8Array()
+        const blob = new Blob([uint8], { type: 'image/png' })
+        const resp = new Response(blob, {
+          headers: { 'Content-Type': 'image/png' },
+        })
+
+        const cache = await caches.open('my-cache')
+        await cache.put('//localhost:8085/testimage/R1.png', resp)
+
+        console.log('图片已写入 CacheStorage')
+      }
+
+      // 加载缓存图片
+      document.getElementById('load').onclick = () => {
+        document.getElementById('img').src = '//localhost:8085/testimage/R1.png'
+      }
+    </script> -->
+    <script>
+      class ImageCacheDB {
+        constructor(dbName = 'ImageCacheDB', storeName = 'images') {
+          this.dbName = dbName
+          this.storeName = storeName
+          this.db = null
+        }
+
+        async init() {
+          return new Promise((resolve, reject) => {
+            const req = indexedDB.open(this.dbName, 1)
+
+            req.onupgradeneeded = (e) => {
+              const db = e.target.result
+              if (!db.objectStoreNames.contains(this.storeName)) {
+                const store = db.createObjectStore(this.storeName, { keyPath: 'key' })
+                store.createIndex('timestamp', 'timestamp', { unique: false })
+              }
+            }
+
+            req.onsuccess = (e) => {
+              this.db = e.target.result
+              resolve()
+            }
+            req.onerror = (e) => reject(e)
+          })
+        }
+
+        async put(key, uint8Arrays) {
+          const blob = new Blob(uint8Arrays, { type: 'image/png' })
+          const tx = this.db.transaction(this.storeName, 'readwrite')
+          const store = tx.objectStore(this.storeName)
+
+          return new Promise((resolve, reject) => {
+            const req = store.put({
+              key,
+              data: blob,
+              timestamp: Date.now(),
+            })
+            req.onsuccess = () => resolve()
+            req.onerror = (e) => reject(e)
+          })
+        }
+
+        async get(key) {
+          const tx = this.db.transaction(this.storeName, 'readonly')
+          const store = tx.objectStore(this.storeName)
+
+          return new Promise((resolve, reject) => {
+            const req = store.get(key)
+            req.onsuccess = () => {
+              if (req.result) {
+                resolve(req.result.data)
+              } else {
+                resolve(null)
+              }
+            }
+            req.onerror = (e) => reject(e)
+          })
+        }
+
+        async delete(key) {
+          const tx = this.db.transaction(this.storeName, 'readwrite')
+          const store = tx.objectStore(this.storeName)
+          store.delete(key)
+        }
+
+        async clearOld(maxAgeMs) {
+          const tx = this.db.transaction(this.storeName, 'readwrite')
+          const store = tx.objectStore(this.storeName)
+          const index = store.index('timestamp')
+
+          return new Promise((resolve, reject) => {
+            const now = Date.now()
+            const req = index.openCursor()
+            req.onsuccess = (e) => {
+              const cursor = e.target.result
+              if (cursor) {
+                const { key, timestamp } = cursor.value
+                if (now - timestamp > maxAgeMs) {
+                  store.delete(key)
+                }
+                cursor.continue()
+              } else {
+                resolve()
+              }
+            }
+            req.onerror = (e) => reject(e)
+          })
+        }
+
+        async enforceMaxSize(maxBytes) {
+          return new Promise((resolve, reject) => {
+            const tx = this.db.transaction(this.storeName, 'readwrite')
+            const store = tx.objectStore(this.storeName)
+            const index = store.index('timestamp')
+
+            let items = []
+            const req = index.openCursor()
+            req.onsuccess = (e) => {
+              const cursor = e.target.result
+              if (cursor) {
+                items.push(cursor.value)
+                cursor.continue()
+              } else {
+                // 计算总大小
+                let total = items.reduce((sum, item) => sum + item.data.size, 0)
+                items.sort((a, b) => a.timestamp - b.timestamp) // 老的在前
+                while (total > maxBytes && items.length > 0) {
+                  const removed = items.shift()
+                  store.delete(removed.key)
+                  total -= removed.data.size
+                }
+                resolve()
+              }
+            }
+            req.onerror = (e) => reject(e)
+          })
+        }
+      }
+      ;(async () => {
+        const cache = new ImageCacheDB()
+        await cache.init()
+
+        // 模拟一份 Uint8Array 图片
+        const testUrl = 'http://localhost:8085/testimage/R1.png'
+
+        // 取出缓存
+        const blob = await cache.get(testUrl)
+        if (blob) {
+          document.querySelector('img').src = URL.createObjectURL(blob)
+        } else {
+          const resp = await fetch(testUrl)
+          const buf = await resp.arrayBuffer()
+          const uint8 = new Uint8Array(buf)
+
+          // 存入缓存
+          await cache.put(testUrl, [uint8])
+          document.querySelector('img').src = URL.createObjectURL(
+            new Blob([uint8], { type: 'image/png' })
+          )
+        }
+
+        // 清理：超过 7 天的条目
+        await cache.clearOld(7 * 24 * 3600 * 1000)
+
+        // 清理：限制总容量 20 MB
+        await cache.enforceMaxSize(20 * 1024 * 1024)
+      })()
+    </script>
+  </body>
+</html>

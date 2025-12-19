@@ -1,0 +1,89 @@
+[
+  {
+    "path": "/testmenu",
+    "name": "testmenu",
+    "component": "TestMenu/Index.vue",
+    "meta": {
+      "title": "测试菜单",
+      "hidden": false,
+      "icon": {
+        "type": "class",
+        "value": "iconfont icon-yuandianxiao-copy"
+      }
+    }
+  },
+  {
+    "path": "/test3",
+    "name": "test3",
+    "component": "Layout",
+    "meta": {
+      "title": "Test3",
+      "hidden": false,
+      "alwaysShow": false,
+      "icon": {
+        "type": "class",
+        "value": "iconfont icon-yitihuajiankong"
+      }
+    },
+    "children": [
+      {
+        "path": "test31",
+        "name": "test31",
+        "component": "RouterSocket",
+        "meta": {
+          "title": "Test31",
+          "hidden": false,
+          "alwaysShow": true,
+          "icon": {
+            "type": "class",
+            "value": "iconfont icon-yuandianxiao-copy"
+          }
+        },
+        "children": [
+          {
+            "path": "test311",
+            "name": "test311",
+            "component": "TestMenu/Test311.vue",
+            "meta": {
+              "title": "Test311",
+              "hidden": false,
+              "icon": {
+                "type": "class",
+                "value": "iconfont icon-yuandianxiao-copy"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "path": "test32",
+        "name": "test32",
+        "component": "RouterSocket",
+        "meta": {
+          "title": "Test32",
+          "hidden": false,
+          "alwaysShow": true,
+          "icon": {
+            "type": "class",
+            "value": "iconfont icon-yuandianxiao-copy"
+          }
+        },
+        "children": [
+          {
+            "path": "test321",
+            "name": "test321",
+            "component": "TestMenu/Test321.vue",
+            "meta": {
+              "title": "Test321",
+              "hidden": false,
+              "icon": {
+                "type": "class",
+                "value": "iconfont icon-yuandianxiao-copy"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
