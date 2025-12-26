@@ -99,3 +99,20 @@ class RangeRegulator(
 }
 ```
 
+使用（普通变量也可以使用）：
+
+```kotlin
+class SmartTvDevice(deviceName: String, deviceCategory: String) :
+    SmartDevice(name = deviceName, category = deviceCategory) {
+
+    override val deviceType = "Smart TV"
+
+    private var speakerVolume by RangeRegulator(initialValue = 2, minValue = 0, maxValue = 100)
+
+    private var channelNumber by RangeRegulator(initialValue = 1, minValue = 0, maxValue = 200)
+
+    //...
+
+}
+```
+
