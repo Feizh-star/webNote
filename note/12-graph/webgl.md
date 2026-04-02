@@ -515,11 +515,19 @@ $$
 7. 为什么 $S$ （ $S$ 只负责旋转，原点是 $o$ ）由摄像机坐标系的三个轴的正方向单位向量作为行？
 
    * 先只考虑 $x$（$\vec{s}$） 轴，其单位向量$\vec{os}$ $(s_x,s_y,s_z)$，假设点坐标是 $p$ ，那么向量 $\vec{op}$ 在向量 $\vec{os}$ 上的投影就是 $\vec{op}·\vec{os}$ （点积的几何意义），那么这个投影就是点 $p$ 在摄像机 $x$ 轴上的分量坐标，由于点积满足交换律，可以写成 $\vec{os}·\vec{op}$ ，写成矩阵形式就是 $\left[\begin{matrix} s_x & s_y & s_z & 0 \end{matrix}\right]\left[\begin{matrix} p_x \\ p_y \\ p_z \\ 1 \end{matrix}\right]$，$y$（$\vec{u}$）、$z$（$-\vec{f}$） 轴同理，最终得到 $\left[\begin{matrix} s_x & s_y & s_z & 0 \\ u_x & u_y & u_z & 0 \\ -f_x & -f_y & -f_z & 0 \\ 0 & 0 & 0 & 1\end{matrix}\right]\left[\begin{matrix}  p_x \\ p_y \\ p_z \\ 1 \end{matrix}\right]$。
+   * 模型矩阵记忆：<span style="color: red;">原始点坐标在谁里面，就用谁的基向量作为列构建模型矩阵，把局部坐标变换为世界坐标</span>。视图矩阵相反：<span style="color: red;">原始点坐标在对方里面，就用自己的基向量作为行构建视图矩阵，把世界坐标变换为视图坐标</span> 
    * 另一个角度：**局部坐标系的标准正交基按 列 构成的矩阵，就是局部坐标系在世界坐标系中变换到指定角度所需的旋转矩阵**
      * 单位向量$\vec{os}$ $(s_x,s_y,s_z)$、$\vec{ou}$ $(u_x,u_y,u_z)$、$\vec{of}$ $(-f_x,-f_y,-f_z)$ 是摄像机坐标系在世界坐标系下描述的**标准正交基**，以它们为**列**组成的矩阵，称为**从相机基到世界基的基变换矩阵**，可以把摄像机坐标系下的坐标变换到世界坐标系（不考虑平移）。
      * **从相机基到世界基的基变换矩阵**的 逆矩阵 就是**从世界基到相机基的基变换矩阵**，可以把世界坐标系下的坐标变换到摄像机坐标系（不考虑平移）。
      * 而正交矩阵的逆矩阵就是它的转置，所以在$S$中，摄像机坐标系在世界坐标系下描述的**标准正交基**放在了**行**而不是列，它的列是世界坐标系在摄像机坐标系下描述的**标准正交基**，也就是说它其实是**从世界基到相机基的基变换矩阵**
-     * **投影解释**：以二维为例，$\left[\begin{matrix} s_x & u_x \\ s_y & u_y \end{matrix}\right]\left[\begin{matrix}  p_x \\ p_y \end{matrix}\right]$，$\left[\begin{matrix}  p_x \\ p_y \end{matrix}\right]$是局部坐标系中的一点，$\left[\begin{matrix}  s_x \\ s_y \end{matrix}\right]$是局部坐标系的 $x$ 轴在世界坐标系中的基向量（单位向量），$\left[\begin{matrix}  u_x \\ u_y \end{matrix}\right]$是局部坐标系的 $y$ 轴在世界坐标系中的基向量（单位向量），那么**行向量$\left[\begin{matrix} s_x & u_x \end{matrix}\right]$就是世界坐标系的 $x$ 轴在局部坐标系中的基向量（单位向量）**，$\left[\begin{matrix} s_x & u_x \end{matrix}\right]\left[\begin{matrix}  p_x \\ p_y \end{matrix}\right]$就是局部坐标系中的向量（点）与世界坐标系的 $x$ 轴的点积，即局部坐标系中的向量在世界坐标系的$x$轴（使用局部坐标系中的坐标描述）上的投影，自然就是点在世界坐标系中的$x$分量，$y$轴同理
+     * **投影解释**：以二维为例，$\left[\begin{matrix} s_x & u_x \\ s_y & u_y \end{matrix}\right]\left[\begin{matrix}  p_x \\ p_y \end{matrix}\right]$，$\left[\begin{matrix}  p_x \\ p_y \end{matrix}\right]$是局部坐标系中的一点，$\left[\begin{matrix}  s_x \\ s_y \end{matrix}\right]$是局部坐标系的 $x$ 轴在世界坐标系中的基向量（单位向量），$\left[\begin{matrix}  u_x \\ u_y \end{matrix}\right]$是局部坐标系的 $y$ 轴在世界坐标系中的基向量（单位向量），那么**行向量$\left[\begin{matrix} s_x & u_x \end{matrix}\right]$就是世界坐标系的 $x$ 轴在局部坐标系中的基向量（单位向量）**，$\left[\begin{matrix} s_x & u_x \end{matrix}\right]\left[\begin{matrix}  p_x \\ p_y \end{matrix}\right]$就是局部坐标系中的向量（点）与世界坐标系的 $x$ 轴的点积，即局部坐标系中的向量在世界坐标系的$x$轴（使用局部坐标系中的坐标描述）上的投影，自然就是点在世界坐标系中的$x$分量，$y$轴同理，如下图所示
+       * *局部坐标系：我；世界坐标系：你；我的基向量自然是用你的坐标描述的*
+       * 我的基向量作为**列**向量，可以作为**我**在**你的世界**里的**模型矩阵**（旋转部分），下图绿色作为我（模型），把我内部坐标变换成你的
+       * 我的基向量作为**行**向量，可以作为**你**在**我的眼睛**里的**视图矩阵**（旋转部分），下图红色作为我（相机），把你内部坐标变换成我的
+       * 注意：以上两句话的相对关系不一样，所以并不是互为逆矩阵，而是同一个矩阵在不同视角下的两种作用。只有在相同视角下（比如相机的模型矩阵和视图矩阵）才能说模型矩阵和视图矩阵互为逆矩阵
+
+![](F:\frontend\webNote\note\12-graph\images\transfer.png)
+
 * ！！！这段描述有点乱：**坐标系 $W$（世界坐标系，向量空间）在坐标系 $V$ （摄像机坐标系，子空间）中旋转，旋转矩阵 $S$ 是坐标系 $V$ 在 $W$ 中的标准正交基作为行向量组成的正交矩阵，可以将 $W$ 中的坐标变换到 $V$ 中**，反之，**矩阵 $S^{-1}$ 就是坐标系 $W$ 在 $V$ 中的标准正交基作为行向量组成的旋转矩阵，描述 $V$ 在 $W$ 中的旋转，可以将 $V$ 中的坐标变换到 $W$ 中**。即：要将一个坐标系中的坐标变换到另一个坐标系，用的是对方的标准正交基作为行向量组成的正交矩阵。
 
 ```js
