@@ -122,3 +122,67 @@ grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto 1fr;
 }
 ```
+
+## 五、行列合并
+
+### 1️⃣ 列合并
+
+```html
+<div class="container">
+  <div class="item1">第一行（占满）</div>
+  <div>第二行1</div>
+  <div>第二行2</div>
+  <div>第三行1</div>
+  <div>第三行2</div>
+</div>
+```
+
+```css
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 两列基础网格 */
+  gap: 10px;
+}
+
+.item1 {
+  /* 第一行列合并 */
+  grid-column: span 2; /* 第一行占两列 */
+  grid-column: 1 / -1; /* 同上，另一种写法：表示从第1列到最后一列（更通用） */
+}
+/* 效果
+[   第一行（占满）   ]
+[ 第二行1 ][ 第二行2 ]
+[ 第三行1 ][ 第三行2 ]
+*/
+```
+
+### 2️⃣ 行合并
+
+```html
+<div class="container">
+  <div class="item1">占两行</div>
+  <div>2</div>
+  <div>3</div>
+  <div>4</div>
+</div>
+```
+
+```css
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 100px; /* 每一行高度 */
+  gap: 10px;
+}
+
+.item1 {
+  grid-row: span 2; /* 占两行 */
+  grid-row: 1 / 3; /* 同上，另一种写法：从第1行开始, 到第3行结束（不包含第3行） */
+}
+/* 效果
+[ div1 ][ div2 ]
+[ div1 ][ div3 ]
+[ div4 ][      ]
+*/
+```
+
