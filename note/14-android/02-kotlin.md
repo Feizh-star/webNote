@@ -1,4 +1,19 @@
-#### 99. 临时记录
+#### 简化版教程链接
+
+1. [您的首个 Kotlin 程序](https://developer.android.com/codelabs/basic-android-kotlin-compose-first-program?hl=zh-cn&continue=https%3A%2F%2Fdeveloper.android.com%2Fcourses%2Fpathways%2Fandroid-basics-compose-unit-1-pathway-1%3Fhl%3Dzh-cn%23codelab-https%3A%2F%2Fdeveloper.android.com%2Fcodelabs%2Fbasic-android-kotlin-compose-first-program#0)
+2. [在 Kotlin 中创建和使用变量](https://developer.android.com/codelabs/basic-android-kotlin-compose-variables?hl=zh-cn&continue=https%3A%2F%2Fdeveloper.android.com%2Fcourses%2Fpathways%2Fandroid-basics-compose-unit-1-pathway-1%3Fhl%3Dzh-cn%23codelab-https%3A%2F%2Fdeveloper.android.com%2Fcodelabs%2Fbasic-android-kotlin-compose-variables#0)
+3. [在 Kotlin 中创建和使用变量](https://developer.android.com/codelabs/basic-android-kotlin-compose-variables?hl=zh-cn&continue=https%3A%2F%2Fdeveloper.android.com%2Fcourses%2Fpathways%2Fandroid-basics-compose-unit-1-pathway-1%3Fhl%3Dzh-cn%23codelab-https%3A%2F%2Fdeveloper.android.com%2Fcodelabs%2Fbasic-android-kotlin-compose-variables#0)
+4. [在 Kotlin 中编写条件](https://developer.android.com/codelabs/basic-android-kotlin-compose-conditionals?hl=zh-cn&continue=https%3A%2F%2Fdeveloper.android.com%2Fcourses%2Fpathways%2Fandroid-basics-compose-unit-2-pathway-1%3Fhl%3Dzh-cn%23codelab-https%3A%2F%2Fdeveloper.android.com%2Fcodelabs%2Fbasic-android-kotlin-compose-conditionals#0)
+5. [在 Kotlin 中使用可为 null 性](https://developer.android.com/codelabs/basic-android-kotlin-compose-nullability?hl=zh-cn&continue=https%3A%2F%2Fdeveloper.android.com%2Fcourses%2Fpathways%2Fandroid-basics-compose-unit-2-pathway-1%3Fhl%3Dzh-cn%23codelab-https%3A%2F%2Fdeveloper.android.com%2Fcodelabs%2Fbasic-android-kotlin-compose-nullability#0)
+6. [在 Kotlin 中使用类和对象](https://developer.android.com/codelabs/basic-android-kotlin-compose-classes-and-objects?hl=zh-cn&continue=https%3A%2F%2Fdeveloper.android.com%2Fcourses%2Fpathways%2Fandroid-basics-compose-unit-2-pathway-1%3Fhl%3Dzh-cn%23codelab-https%3A%2F%2Fdeveloper.android.com%2Fcodelabs%2Fbasic-android-kotlin-compose-classes-and-objects#0)
+7. [在 Kotlin 中使用函数类型和 lambda 表达式](https://developer.android.com/codelabs/basic-android-kotlin-compose-function-types-and-lambda?hl=zh-cn&continue=https%3A%2F%2Fdeveloper.android.com%2Fcourses%2Fpathways%2Fandroid-basics-compose-unit-2-pathway-1%3Fhl%3Dzh-cn%23codelab-https%3A%2F%2Fdeveloper.android.com%2Fcodelabs%2Fbasic-android-kotlin-compose-function-types-and-lambda#0)
+8. [泛型、对象和扩展](https://developer.android.com/codelabs/basic-android-kotlin-compose-generics?hl=zh-cn&continue=https%3A%2F%2Fdeveloper.android.com%2Fcourses%2Fpathways%2Fandroid-basics-compose-unit-3-pathway-1%3Fhl%3Dzh-cn%23codelab-https%3A%2F%2Fdeveloper.android.com%2Fcodelabs%2Fbasic-android-kotlin-compose-generics#0)
+9. [在 Kotlin 中使用集合](https://developer.android.com/codelabs/basic-android-kotlin-compose-collections?hl=zh-cn&continue=https%3A%2F%2Fdeveloper.android.com%2Fcourses%2Fpathways%2Fandroid-basics-compose-unit-3-pathway-1%3Fhl%3Dzh-cn%23codelab-https%3A%2F%2Fdeveloper.android.com%2Fcodelabs%2Fbasic-android-kotlin-compose-collections#0)
+10. [将常用高阶函数与集合结合使用](https://developer.android.com/codelabs/basic-android-kotlin-compose-higher-order-functions?hl=zh-cn&continue=https%3A%2F%2Fdeveloper.android.com%2Fcourses%2Fpathways%2Fandroid-basics-compose-unit-3-pathway-1%3Fhl%3Dzh-cn%23codelab-https%3A%2F%2Fdeveloper.android.com%2Fcodelabs%2Fbasic-android-kotlin-compose-higher-order-functions#0)
+
+
+
+#### 高级特性笔记
 
 ##### 1. class构造函数
 
@@ -116,3 +131,6 @@ class SmartTvDevice(deviceName: String, deviceCategory: String) :
 }
 ```
 
+#### 
+
+#### 99. 临时记录
