@@ -115,7 +115,7 @@
      const positionData = new Float32Array(positions); // 主存中
      ```
 
-2. **生成缓冲区对象**
+2. **生成缓冲区对象VBO**
 
    - 调用 
 
@@ -127,6 +127,12 @@
 
      ```
      const positionBuffer = gl.createBuffer(); // 显存中的缓冲区对象
+     ```
+     
+     删除：
+     
+     ```
+     gl.deleteBuffer(positionBuffer)
      ```
 
 3. **绑定缓冲区到绑定点**
@@ -147,15 +153,71 @@
      gl.bufferData(gl.ARRAY_BUFFER, positionData, gl.STATIC_DRAW)
      ```
 
-     WebGL 将 `positionData` 从主存传输到绑定的缓冲区（`positionBuffer`）所在的显存区域。
+     WebGL 将 `positionData` 从主存传输到绑定的缓冲区（`positionBuffer`）所在的显存区域。注意：“上传数据” 跟 “配置顶点着色器属性如何读取数据” 是两码事，即使没有“配置顶点着色器属性如何读取数据”，也可以先上传数据；
 
 5. **配置属性**
 
-   - 调用 `gl.vertexAttribPointer` 配置属性（如 `a_position`的索引），将显存中的缓冲区数据与顶点着色器的属性关联。
+   - 调用 `gl.vertexAttribPointer` 配置属性（如 `a_position`的索引），并将显存中的**缓冲区数据**与顶点着色器的属性关联。
 
 6. **GPU 读取显存数据**
 
    - 当调用 `gl.drawArrays` 或类似绘制命令时，GPU 会根据属性配置，从显存中的缓冲区读取数据，传递到顶点着色器中。
+
+7. **使用顶点数组对象VAO**
+
+   - 虽然名叫顶点数组对象，但实际上它是一个记录（顶点着色器）**属性** 和 **顶点缓冲区配置** 的对象：
+
+     WebGL 上下文中可以创建多个 VAO。每个 VAO 是一组可修改的顶点数组状态，保存顶点属性如何从 Buffer 中读取的配置。任意时刻上下文只有一个当前 VAO。`bindVertexArray(this.vao)` 并不是重新创建配置，而是把某个已经保存的 VAO 选为当前 VAO，后续绘制就使用它的配置。**即使没有调用 `createVertexArray()`，WebGL2 也存在一个默认的“当前 VAO”，并且 `drawArrays()` 会使用当前绑定的 VAO**
+
+   - 创建并绑定 VAO：
+   
+     ```ts
+     this.vao = gl.createVertexArray()
+     gl.bindVertexArray(this.vao)
+     ```
+
+   - 然后执行（可以认为“当前VAO”就是这一坨代码形成的一种配置）：
+
+     ```ts
+     gl.bindBuffer(gl.ARRAY_BUFFER, this.vbuffer)
+     gl.enableVertexAttribArray(posLoc)
+     gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0)
+     ```
+   
+   - 删除
+   
+     ```ts
+     (gl as WebGL2RenderingContext).deleteVertexArray(this.vao)
+     ```
+   
+   - 这些顶点属性配置就会记录到当前 VAO 中，主要包括：
+   
+     ```text
+     1. posLoc 是否启用
+     2. 每个顶点有几个分量
+     3. 数据类型是什么
+     4. stride 和 offset 是多少
+     5. 这个属性使用哪个 Buffer
+     ```
+   
+   - 因此，VAO 可以看作一份配置记录：
+   
+     ```text
+     this.vao：
+     
+     posLoc 对应的 a_position：
+       - 已启用
+       - 每次读 2 个 float
+       - stride = 0
+       - offset = 0
+       - 数据来源是 this.vbuffer
+     ```
+
+   - 这里有一个重要细节：
+   
+     > `vertexAttribPointer` 执行时，会把当前绑定的 `ARRAY_BUFFER`（这里是 `this.vbuffer`）记录到该顶点属性配置中。
+   
+     所以之后即使 `ARRAY_BUFFER` 绑定到别的 Buffer，已经配置好的 `a_position` 仍然知道自己原来使用 `this.vbuffer`。
 
 ##### 3.2 存储位置一览表
 
