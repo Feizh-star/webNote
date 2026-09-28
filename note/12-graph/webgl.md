@@ -102,6 +102,8 @@
   - 属性与缓冲区的关联（通过 `gl.vertexAttribPointer`）是存储在 WebGL 的状态机中。
 - 作用：GPU 在运行着色器时，根据属性的配置，从显存中的缓冲区读取数据并传递到着色器。
 
+![](D:\workspace-hx\tjh\note\webNote\note\12-graph\images\webgl-vertex-buffer-model.png)
+
 ##### 3.1 数据的流转过程
 
 以下是数据如何从主存转移到显存，并供 GPU 使用的流程：
@@ -1146,6 +1148,8 @@ gl.drawArrays(gl.TRIANGLES, 0, 6 * 50)
 详见`./基础示例代码.md`
 
 ### 三、加载纹理
+
+![](D:\workspace-hx\tjh\note\webNote\note\12-graph\images\webgl-texture-model-corrected.png)
 
 ```glsl
 // TexturedQuad.js (c) 2012 matsuda and kanda
