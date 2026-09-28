@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1080" viewBox="0 0 1600 1080" role="img" aria-labelledby="title desc">
+  <title id="title">WebGL texture binding model</title>
+  <desc id="desc">Sampler uniforms select texture units by integer index. The sampler type determines which target-specific binding in that unit is used, and that binding references a texture object.</desc>
+  <defs>
+    <style>
+      .bg { fill: #111417; }
+      .panel { fill: #181d22; stroke: #3b4650; stroke-width: 2; }
+      .unit { fill: #20272d; stroke: #73808b; stroke-width: 2; }
+      .slot { fill: #151a1e; stroke: #56616b; stroke-width: 2; }
+      .object { fill: #202924; stroke: #69a97b; stroke-width: 2; }
+      .shader { fill: #28221b; stroke: #d5a64a; stroke-width: 2; }
+      .api { fill: #1c2228; stroke: #6f8fa9; stroke-width: 2; }
+      .title { fill: #f3f5f7; font: 700 32px 'Segoe UI', Arial, sans-serif; }
+      .section { fill: #f3f5f7; font: 700 24px 'Segoe UI', Arial, sans-serif; }
+      .label { fill: #e4e9ed; font: 600 20px 'Segoe UI', Arial, sans-serif; }
+      .body { fill: #d5dce1; font: 18px 'Segoe UI', Arial, sans-serif; }
+      .small { fill: #aeb9c2; font: 16px 'Segoe UI', Arial, sans-serif; }
+      .code { fill: #e8edf0; font: 18px Consolas, 'Courier New', monospace; }
+      .accent { fill: #f0c66b; }
+      .green { fill: #8fd49f; }
+      .blue { fill: #8fc3e7; }
+      .muted { fill: #7e8a93; }
+      .arrow { fill: none; stroke: #d6dde2; stroke-width: 3; marker-end: url(#arrow); }
+      .bind { fill: none; stroke: #75bd88; stroke-width: 3; marker-end: url(#arrow-green); }
+      .select { fill: none; stroke: #e2b65d; stroke-width: 3; marker-end: url(#arrow-gold); }
+      .state { fill: none; stroke: #7aa5c4; stroke-width: 2.5; stroke-dasharray: 9 7; marker-end: url(#arrow-blue); }
+      .guide { fill: none; stroke: #65717b; stroke-width: 2; stroke-dasharray: 6 6; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#d6dde2"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#75bd88"/>
+    </marker>
+    <marker id="arrow-gold" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#e2b65d"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#7aa5c4"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1600" height="1080"/>
+  <text x="60" y="62" class="title">WebGL 纹理绑定与采样关系（修正版）</text>
+  <text x="60" y="96" class="body">核心链路：sampler uniform 的整数值 → 纹理单元 → 与 sampler 类型匹配的 target 绑定槽 → texture object</text>
+
+  <rect x="38" y="125" width="1524" height="910" rx="8" class="panel"/>
+  <text x="70" y="168" class="section">WebGLRenderingContext / GPU 状态</text>
+
+  <!-- Shader sampler uniforms -->
+  <rect x="75" y="215" width="390" height="330" rx="8" class="shader"/>
+  <text x="105" y="258" class="section">Shader sampler uniforms</text>
+  <text x="105" y="295" class="code">uniform sampler2D uColor;</text>
+  <text x="105" y="325" class="code">uniform sampler2D uNormal;</text>
+
+  <rect x="105" y="362" width="330" height="62" rx="5" class="slot"/>
+  <text x="125" y="389" class="code">uColor = 0</text>
+  <text x="125" y="413" class="small">gl.uniform1i(..., 0)</text>
+
+  <rect x="105" y="447" width="330" height="62" rx="5" class="slot"/>
+  <text x="125" y="474" class="code">uNormal = 1</text>
+  <text x="125" y="498" class="small">gl.uniform1i(..., 1)</text>
+
+  <text x="105" y="531" class="small">整数值是纹理单元索引，不是 texture object ID。</text>
+
+  <!-- Texture units -->
+  <text x="555" y="205" class="section">Texture units（上下文中的绑定状态）</text>
+
+  <rect x="545" y="235" width="420" height="235" rx="8" class="unit"/>
+  <text x="575" y="275" class="label">Texture Unit 0</text>
+  <rect x="575" y="300" width="360" height="58" rx="5" class="slot"/>
+  <text x="595" y="335" class="code">TEXTURE_2D binding</text>
+  <rect x="575" y="378" width="360" height="58" rx="5" class="slot"/>
+  <text x="595" y="413" class="code">TEXTURE_CUBE_MAP binding</text>
+
+  <rect x="545" y="500" width="420" height="235" rx="8" class="unit"/>
+  <text x="575" y="540" class="label">Texture Unit 1</text>
+  <rect x="575" y="565" width="360" height="58" rx="5" class="slot"/>
+  <text x="595" y="600" class="code">TEXTURE_2D binding</text>
+  <rect x="575" y="643" width="360" height="58" rx="5" class="slot"/>
+  <text x="595" y="678" class="code">TEXTURE_CUBE_MAP binding</text>
+
+  <rect x="545" y="765" width="420" height="175" rx="8" class="unit"/>
+  <text x="575" y="805" class="label">Texture Unit 2 ...</text>
+  <rect x="575" y="830" width="360" height="58" rx="5" class="slot"/>
+  <text x="595" y="865" class="code">TEXTURE_2D binding</text>
+  <text x="575" y="918" class="small">每个单元按 target 分别保存一个绑定。</text>
+
+  <!-- Texture objects -->
+  <text x="1090" y="205" class="section">Texture objects（上下文资源）</text>
+
+  <rect x="1080" y="265" width="400" height="210" rx="8" class="object"/>
+  <text x="1110" y="307" class="label green">Texture A</text>
+  <text x="1110" y="342" class="code">target: TEXTURE_2D</text>
+  <text x="1110" y="377" class="body">图像 / mip levels</text>
+  <text x="1110" y="410" class="body">过滤、wrap 等 texture 参数</text>
+  <text x="1110" y="446" class="small">同一对象可以同时绑定到多个 unit。</text>
+
+  <rect x="1080" y="530" width="400" height="190" rx="8" class="object"/>
+  <text x="1110" y="572" class="label green">Texture B</text>
+  <text x="1110" y="607" class="code">target: TEXTURE_2D</text>
+  <text x="1110" y="642" class="body">图像 / mip levels</text>
+  <text x="1110" y="675" class="body">过滤、wrap 等 texture 参数</text>
+
+  <rect x="1080" y="770" width="400" height="170" rx="8" class="api"/>
+  <text x="1110" y="810" class="label blue">WebGL 2 可选层</text>
+  <text x="1110" y="846" class="code">Sampler object</text>
+  <text x="1110" y="878" class="body">按 unit 绑定，可覆盖 texture 的</text>
+  <text x="1110" y="907" class="body">过滤与 wrap 采样参数。</text>
+
+  <!-- sampler values select units -->
+  <path d="M 435 393 C 500 393, 495 330, 545 330" class="select"/>
+  <path d="M 435 478 C 505 478, 495 595, 545 595" class="select"/>
+  <text x="465" y="360" class="small accent">选择 unit 0</text>
+  <text x="465" y="535" class="small accent">选择 unit 1</text>
+
+  <!-- target bindings reference texture objects -->
+  <path d="M 935 329 C 1010 329, 1015 330, 1080 330" class="bind"/>
+  <path d="M 935 594 C 1010 594, 1015 595, 1080 595" class="bind"/>
+  <path d="M 935 859 C 1010 859, 1010 430, 1080 430" class="bind"/>
+  <text x="976" y="311" class="small green">引用 A</text>
+  <text x="976" y="576" class="small green">引用 B</text>
+  <text x="982" y="836" class="small green">也可引用 A</text>
+
+  <!-- API state note -->
+  <rect x="75" y="585" width="390" height="355" rx="8" class="api"/>
+  <text x="105" y="627" class="section">绑定操作（CPU / WebGL API）</text>
+  <text x="105" y="675" class="code">gl.activeTexture(TEXTURE1);</text>
+  <text x="105" y="709" class="code">gl.bindTexture(TEXTURE_2D, B);</text>
+  <text x="105" y="753" class="body">结果：把 Unit 1 的 TEXTURE_2D</text>
+  <text x="105" y="783" class="body">绑定槽设置为 Texture B。</text>
+  <line x1="105" y1="814" x2="435" y2="814" stroke="#51606c" stroke-width="2"/>
+  <text x="105" y="850" class="body blue">ACTIVE_TEXTURE 只影响后续绑定命令</text>
+  <text x="105" y="881" class="body blue">修改哪个 unit；它不决定 shader</text>
+  <text x="105" y="912" class="body blue">采样哪个 unit。</text>
+  <path d="M 465 690 C 510 690, 505 650, 545 650" class="state"/>
+
+  <!-- Footer note -->
+  <text x="75" y="992" class="small">WebGL 2 另有 TEXTURE_3D / TEXTURE_2D_ARRAY 槽；samplerCube、sampler3D 等同理选择与类型匹配的槽。实际采样还必须满足纹理完整性、格式与 sampler 类型的兼容性约束。</text>
+</svg>
